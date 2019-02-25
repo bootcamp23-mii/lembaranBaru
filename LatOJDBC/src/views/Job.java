@@ -5,11 +5,18 @@
  */
 package views;
 
+import controllers.JobController;
+import tools.DBConnection;
+
 /**
  *
  * @author Lusiana
  */
 public class Job extends javax.swing.JInternalFrame {
+
+    DBConnection connection = new DBConnection();
+
+    JobController jc = new JobController(connection.getConnection());
 
     /**
      * Creates new form Job
@@ -229,24 +236,24 @@ public class Job extends javax.swing.JInternalFrame {
         //        myTable.addColumn("Maximal Salary");
         if (t_search != "" && search.getSelectedItem() == "Search By Id") {
             //            for (Job job : jc.getById(t_search)) {
-                //                myTable.addRow(new Object[]{
-                    //                    job.getId(),
-                    //                    job.getName(),
-                    //                    job.getMin_salary(),
-                    //                    job.getMax_salary()
-                    //                });
+            //                myTable.addRow(new Object[]{
+            //                    job.getId(),
+            //                    job.getName(),
+            //                    job.getMin_salary(),
+            //                    job.getMax_salary()
+            //                });
             //            }
-        tableData(jc.getById(t_search));
+            tableData(jc.getById(t_search));
         } else if (t_search != "" && search.getSelectedItem() == "Search") {
             //            for (Job job : jc.searchBy(t_search)) {
-                //                myTable.addRow(new Object[]{
-                    //                    job.getId(),
-                    //                    job.getName(),
-                    //                    job.getMin_salary(),
-                    //                    job.getMax_salary()
-                    //                });
+            //                myTable.addRow(new Object[]{
+            //                    job.getId(),
+            //                    job.getName(),
+            //                    job.getMin_salary(),
+            //                    job.getMax_salary()
+            //                });
             //            }
-        tableData(jc.searchBy(t_search));
+            tableData(jc.searchBy(t_search));
         } else {
             tableData(jc.getAll());
         }
@@ -283,7 +290,7 @@ public class Job extends javax.swing.JInternalFrame {
             } else {
                 try {
                     int reply = JOptionPane.showConfirmDialog(null,
-                        "Anda yakin akan melakukan perubahan data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
+                            "Anda yakin akan melakukan perubahan data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
                     );
                     if (reply == JOptionPane.YES_OPTION) {
                         JOptionPane.showMessageDialog(null, jc.update(tf_id.getText(), tf_title.getText(), tf_minsal.getText(), tf_maxsal.getText()));
@@ -309,7 +316,7 @@ public class Job extends javax.swing.JInternalFrame {
         if (konfirmasi()) {
             try {
                 int reply = JOptionPane.showConfirmDialog(null,
-                    "Anda yakin akan melakukan perubahan data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
+                        "Anda yakin akan melakukan perubahan data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
                 );
                 if (reply == JOptionPane.YES_OPTION) {
                     JOptionPane.showMessageDialog(null, jc.update(tf_id.getText(), tf_title.getText(), tf_minsal.getText(), tf_maxsal.getText()));
@@ -330,7 +337,7 @@ public class Job extends javax.swing.JInternalFrame {
         } else {
             try {
                 int reply = JOptionPane.showConfirmDialog(null,
-                    "Anda yakin akan menghapus data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
+                        "Anda yakin akan menghapus data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
                 );
                 if (reply == JOptionPane.YES_OPTION) {
                     JOptionPane.showMessageDialog(null, jc.delete(id));
