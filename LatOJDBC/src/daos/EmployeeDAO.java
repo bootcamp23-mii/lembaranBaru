@@ -69,7 +69,7 @@ public class EmployeeDAO {
                     + ",PHONE_NUMBER,HIRE_DATE,JOB_ID,SALARY,COMMISSION_PCT,"
                     + "MANAGER_ID,DEPARTMENT_ID) VALUES("+e.getEmployeeId()+
                     ",'"+ e.getFirst_name()+"','"+ e.getLast_name()+"','"+ 
-                    e.getEmail()+"',"+e.getPhone_number()+",TO_DATE('"+e.getHire_date()+"','yyyy-mm-dd'),'"+e.getJob_id()+"',"+e.getSalary()+","+
+                    e.getEmail()+"','"+e.getPhone_number()+"',TO_DATE('"+e.getHire_date()+"','yyyy-mm-dd'),'"+e.getJob_id()+"',"+e.getSalary()+","+
                     e.getCommission_pct()+","+e.getManager_id()+","+e.getDepartment_id()+")";
         } else {
             query = "UPDATE EMPLOYEES SET FIRST_NAME='"+e.getFirst_name()+"',LAST_NAME='"+e.getLast_name()+
