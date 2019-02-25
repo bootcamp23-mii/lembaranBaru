@@ -35,39 +35,26 @@ public class LocationView extends javax.swing.JFrame {
      */
     public LocationView() {
         initComponents();
-        tableData();
-        showData("", false);
     }
 
-    private void tableData() {
-        model = new DefaultTableModel();
-        model.addColumn("No");
-        model.addColumn("Id");
-        model.addColumn("Address");
-        model.addColumn("Postal");
-        model.addColumn("City");
-        model.addColumn("Province");
-        model.addColumn("Country");
+    private void tableData(List<models.Location> locs) {
+//        jobs = jc.getAll();
+        Object[] columnNames = {"Nomor", "Job Id", "Job Title", "Minimal Salary", "Maximal Salary"};
+        Object[][] data = new Object[locs.size()][columnNames.length];
+        
+        for (int i = 0; i < data.length; i++) {
+            data[i][0] = (i + 1);
+            data[i][1] = locs.get(i).getId();
+            data[i][2] = locs.get(i).getAddress();
+            data[i][3] = locs.get(i).getPostal();
+            data[i][4] = locs.get(i).getCity();
+            data[i][5] = locs.get(i).getProvince();
+            data[i][6] = locs.get(i).getCountry();
+        }
+        model = new DefaultTableModel(data, columnNames);
         contentTable.setModel(model);
     }
 
-    private void showData(String string, boolean b) {
-        model.setRowCount(0);
-        listdata = lc.getAll(string, true);
-
-        for (x = 0; x < listdata.size(); x++) {
-            Object[] data = new Object[3];
-            data[0] = x + 1;
-            data[1] = listdata.get(x).getId();
-            data[2] = listdata.get(x).getAddress();
-            data[2] = listdata.get(x).getPostal();
-            data[2] = listdata.get(x).getCity();
-            data[2] = listdata.get(x).getProvince();
-            data[2] = listdata.get(x).getCountry();
-            model.addRow(data);
-
-        }
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -642,39 +629,39 @@ public class LocationView extends javax.swing.JFrame {
 
     /**
      * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HRView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HRView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HRView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HRView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new HRView().setVisible(true);
-            }
-        });
-    }
+//     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(HRView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(HRView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(HRView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(HRView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new HRView().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable contentTable;

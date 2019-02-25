@@ -177,10 +177,10 @@ public class HRView extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        locationMenu = new javax.swing.JMenuItem();
         jobsframe = new javax.swing.JMenuItem();
         regionMenuItem = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        locationMenu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -542,6 +542,14 @@ public class HRView extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
+        locationMenu.setText("Location");
+        locationMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                locationMenuActionPerformed(evt);
+            }
+        });
+        jMenu1.add(locationMenu);
+
         jobsframe.setText("Jobs");
         jobsframe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -565,14 +573,6 @@ public class HRView extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem2);
-
-        locationMenu.setText("Location");
-        locationMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                locationMenuActionPerformed(evt);
-            }
-        });
-        jMenu1.add(locationMenu);
 
         jMenuBar1.add(jMenu1);
 
