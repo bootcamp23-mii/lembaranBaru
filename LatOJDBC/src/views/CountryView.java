@@ -152,6 +152,11 @@ public class CountryView extends javax.swing.JInternalFrame {
         jPanelKanan.add(jButtonDeleteId);
 
         jButtonSearch.setText("Search");
+        jButtonSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSearchActionPerformed(evt);
+            }
+        });
         jPanelKanan.add(jButtonSearch);
 
         jCheckById.setText("Get by ID");
@@ -218,6 +223,10 @@ public class CountryView extends javax.swing.JInternalFrame {
     private void jButtonDeleteIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteIdActionPerformed
         
     }//GEN-LAST:event_jButtonDeleteIdActionPerformed
+
+    private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonSearchActionPerformed
     
     
     private void tampilTabelCountries() {

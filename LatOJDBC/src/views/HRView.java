@@ -14,6 +14,7 @@ import java.awt.Component;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -180,6 +181,7 @@ public class HRView extends javax.swing.JFrame {
         jobsframe = new javax.swing.JMenuItem();
         regionMenuItem = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        deptMenuItem = new javax.swing.JMenuItem();
         locationMenu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -566,6 +568,14 @@ public class HRView extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem2);
 
+        deptMenuItem.setText("Department");
+        deptMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deptMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(deptMenuItem);
+
         locationMenu.setText("Location");
         locationMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -812,6 +822,14 @@ public class HRView extends javax.swing.JFrame {
         lv.setVisible(true);
     }//GEN-LAST:event_locationMenuActionPerformed
 
+    private void deptMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deptMenuItemActionPerformed
+        // TODO add your handling code here:
+                deptMenuItem.setVisible(true);
+//        jIFEmployee.setBounds(5, 5, 200, 300);
+        jIFJob.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        jIFJob.revalidate();
+    }//GEN-LAST:event_deptMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -852,6 +870,7 @@ public class HRView extends javax.swing.JFrame {
     private javax.swing.JButton bt_delete;
     private javax.swing.JButton bt_insert;
     private javax.swing.JButton bt_update;
+    private javax.swing.JMenuItem deptMenuItem;
     private javax.swing.JButton jBEmployeeDelete;
     private javax.swing.JButton jBEmployeeGetAll;
     private javax.swing.JButton jBEmployeeInsert;
