@@ -148,6 +148,11 @@ public class LocationView extends javax.swing.JPanel {
         });
 
         searchButton.setText("SEARCH");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
 
         contentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -348,6 +353,32 @@ public class LocationView extends javax.swing.JPanel {
         fieldId.setEnabled(true);
         clean();
     }//GEN-LAST:event_resetButtonActionPerformed
+
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        // TODO add your handling code here:
+        String searchString = fieldId.getText();
+        String keyword = "";
+        if (searchString != "") {
+            tableData(lc.getById(""));
+        } else if (searchString != "") {
+            keyword = searchString;
+            tableData(lc.getAll(searchString));
+        } else if(fieldAddress.getText() != ""){
+            keyword = fieldAddress.getText();
+            tableData(lc.getAll(keyword));
+        } else if(fieldPostal.getText() != ""){
+            keyword = fieldPostal.getText();
+            tableData(lc.getAll(keyword));
+        } else if(fieldCity.getText() != ""){
+            keyword = fieldCity.getText();
+            tableData(lc.getAll(keyword));
+        } else if(fieldProvince.getText() != ""){
+            keyword = fieldProvince.getText();
+            tableData(lc.getAll(keyword));
+        } else {
+            tableData(lc.getAll(""));
+        }
+    }//GEN-LAST:event_searchButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
