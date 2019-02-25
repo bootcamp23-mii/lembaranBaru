@@ -6,6 +6,10 @@
 package views;
 
 import controllers.JobController;
+import java.awt.event.KeyEvent;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import tools.DBConnection;
 
 /**
@@ -14,6 +18,7 @@ import tools.DBConnection;
  */
 public class Job extends javax.swing.JInternalFrame {
 
+    DefaultTableModel myTable = new DefaultTableModel();
     DBConnection connection = new DBConnection();
 
     JobController jc = new JobController(connection.getConnection());
@@ -23,6 +28,65 @@ public class Job extends javax.swing.JInternalFrame {
      */
     public Job() {
         initComponents();
+    }
+
+    private boolean konfirmasi() {
+        if (tf_id.getText().equals("") || tf_title.getText().equals("") || tf_minsal.getText().equals("") || tf_maxsal.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Data tidak boleh kosong");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isEmpty() {
+        if (jc.getById(tf_id.getText()).isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+    private void tableData(List<models.Job> jobs) {
+//        jobs = jc.getAll();
+        Object[] columnNames = {"Nomor", "Job Id", "Job Title", "Minimal Salary", "Maximal Salary"};
+        Object[][] data = new Object[jobs.size()][columnNames.length];
+//        jTable1.setModel(myTable);
+//        myTable.addColumn("Job Id");
+//        myTable.addColumn("Job Title");
+//        myTable.addColumn("Minimal Salary");
+//        myTable.addColumn("Maximal Salary");
+//        for (Job job : jc.searchBy("")) {
+//            myTable.addRow(new Object[]{
+//                job.getId(),
+//                job.getName(),
+//                job.getMin_salary(),
+//                job.getMax_salary()
+//            });
+//        }
+
+        for (int i = 0; i < data.length; i++) {
+            data[i][0] = (i + 1);
+            data[i][1] = jobs.get(i).getId();
+            data[i][2] = jobs.get(i).getName();
+            data[i][3] = jobs.get(i).getMin_salary();
+            data[i][4] = jobs.get(i).getMax_salary();
+        }
+        myTable = new DefaultTableModel(data, columnNames);
+        jTable1.setModel(myTable);
+    }
+
+    private void clean() {
+        tf_id.setEnabled(true);
+        tf_id.setText("");
+        tf_title.setText("");
+        tf_minsal.setText("");
+        tf_maxsal.setText("");
+    }
+
+    void filterhuruf(KeyEvent a) {
+        if (Character.isAlphabetic(a.getKeyChar())) {
+            a.consume();
+            JOptionPane.showMessageDialog(null, "Pada Kolom Jumlah Hanya Bisa Memasukan Karakter Angka");
+        }
     }
 
     /**
