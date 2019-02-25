@@ -37,6 +37,7 @@ public class LocationView extends javax.swing.JPanel {
         tableData(lc.getAll(""));
     }
     
+    
     private boolean confirm() {
         if (fieldId.getText().equals("") 
                 || fieldAddress.getText().equals("") 
