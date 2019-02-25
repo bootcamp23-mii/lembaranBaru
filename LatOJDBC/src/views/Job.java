@@ -142,6 +142,12 @@ public class Job extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        tf_title.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_titleActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("Minimal Salary");
 
         search.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Search", "Search By Id", "Show All" }));
@@ -417,6 +423,10 @@ public class Job extends javax.swing.JInternalFrame {
     private void tf_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_idActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_idActionPerformed
+
+    private void tf_titleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_titleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_titleActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
