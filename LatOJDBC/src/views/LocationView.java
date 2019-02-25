@@ -5,11 +5,28 @@
  */
 package views;
 
+import controllers.EmployeeController;
+import controllers.LocationController;
+import daos.LocationDAO;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import models.Location;
+import tools.DBConnection;
+
 /**
  *
  * @author Pandu
  */
 public class LocationView extends javax.swing.JPanel {
+
+    
+    List<Location> listdata         = new ArrayList<Location>();
+    DBConnection connection         = new DBConnection();
+    private DefaultTableModel model = new DefaultTableModel();
+    int x = 0;
+    LocationDAO ldao        = new LocationDAO(connection.getConnection());
+    LocationController lc   = new LocationController(connection.getConnection());
 
     /**
      * Creates new form LocationView
@@ -17,7 +34,24 @@ public class LocationView extends javax.swing.JPanel {
     public LocationView() {
         initComponents();
     }
-
+    
+    private void tableData(List<models.Location> locs) {
+//        jobs = jc.getAll();
+        Object[] columnNames = {"Nomor", "Job Id", "Job Title", "Minimal Salary", "Maximal Salary"};
+        Object[][] data = new Object[locs.size()][columnNames.length];
+        
+        for (int i = 0; i < data.length; i++) {
+            data[i][0] = (i + 1);
+            data[i][1] = locs.get(i).getId();
+            data[i][2] = locs.get(i).getAddress();
+            data[i][3] = locs.get(i).getPostal();
+            data[i][4] = locs.get(i).getCity();
+            data[i][5] = locs.get(i).getProvince();
+            data[i][6] = locs.get(i).getCountry();
+        }
+        model = new DefaultTableModel(data, columnNames);
+        contentTable.setModel(model);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,7 +68,7 @@ public class LocationView extends javax.swing.JPanel {
         cityLabel = new javax.swing.JLabel();
         provinceLabel = new javax.swing.JLabel();
         countryLabel = new javax.swing.JLabel();
-        fierldId = new javax.swing.JTextField();
+        fieldId = new javax.swing.JTextField();
         fieldPostal = new javax.swing.JTextField();
         fieldAddress = new javax.swing.JTextField();
         fieldProvince = new javax.swing.JTextField();
@@ -111,7 +145,7 @@ public class LocationView extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)))
                         .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(fieldPostal, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fierldId, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(fieldAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jInternalFrame1Layout.createSequentialGroup()
@@ -145,7 +179,7 @@ public class LocationView extends javax.swing.JPanel {
                         .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jInternalFrame1Layout.createSequentialGroup()
                                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(fierldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(fieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(idLabel))
                                 .addGap(28, 28, 28)
                                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -193,7 +227,13 @@ public class LocationView extends javax.swing.JPanel {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
-        
+        String id           = fieldId.getText();
+        String address      = fieldAddress.getText();
+        String postalCode   = fieldPostal.getText();
+        String city         = fieldCity.getText();
+        String state        = fieldProvince.getText();
+        String countryId    = fieldCountry.getText();
+        lc.insert(id, address, postalCode, city, state, countryId);
         
     }//GEN-LAST:event_saveButtonActionPerformed
 
@@ -211,9 +251,9 @@ public class LocationView extends javax.swing.JPanel {
     private javax.swing.JTextField fieldAddress;
     private javax.swing.JTextField fieldCity;
     private javax.swing.JTextField fieldCountry;
+    private javax.swing.JTextField fieldId;
     private javax.swing.JTextField fieldPostal;
     private javax.swing.JTextField fieldProvince;
-    private javax.swing.JTextField fierldId;
     private javax.swing.JLabel idLabel;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JScrollPane jScrollPane1;
