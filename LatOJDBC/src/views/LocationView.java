@@ -282,7 +282,6 @@ public class LocationView extends javax.swing.JPanel {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
-        
         if (confirm()) {
             if (isEmpty()) {
                 JOptionPane.showMessageDialog(null, lc.insert(
@@ -339,7 +338,7 @@ public class LocationView extends javax.swing.JPanel {
 
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
         // TODO add your handling code here:
-        
+        clean();
         fieldId.setEnabled(true);
         clean();
     }//GEN-LAST:event_resetButtonActionPerformed
