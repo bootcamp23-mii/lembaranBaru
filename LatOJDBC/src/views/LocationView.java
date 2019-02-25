@@ -8,8 +8,10 @@ package views;
 import controllers.EmployeeController;
 import controllers.LocationController;
 import daos.LocationDAO;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.Location;
 import tools.DBConnection;
@@ -33,10 +35,31 @@ public class LocationView extends javax.swing.JPanel {
      */
     public LocationView() {
         initComponents();
+        tableData(lc.getAll(""));
+    }
+    
+    private boolean confirm() {
+        if (fieldId.getText().equals("") 
+                || fieldAddress.getText().equals("") 
+                || fieldPostal.getText().equals("") 
+                || fieldCity.getText().equals("") 
+                || fieldProvince.getText().equals("") 
+                || fieldCountry.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Data cannot be empty !");
+            return false;
+        }
+        return true;
+    }
+    
+    private boolean isEmpty() {
+        if (lc.getAll(fieldId.getText()).isEmpty()) {
+            return true;
+        }
+        return false;
     }
     
     private void tableData(List<models.Location> locs) {
-//        jobs = jc.getAll();
+        
         Object[] columnNames = {"Nomor", "Job Id", "Job Title", "Minimal Salary", "Maximal Salary"};
         Object[][] data = new Object[locs.size()][columnNames.length];
         
@@ -51,6 +74,22 @@ public class LocationView extends javax.swing.JPanel {
         }
         model = new DefaultTableModel(data, columnNames);
         contentTable.setModel(model);
+    }
+    
+    private void clean() {
+        fieldId.setEnabled(true);
+        fieldAddress.setText("");
+        fieldPostal.setText("");
+        fieldCity.setText("");
+        fieldProvince.setText("");
+        fieldCountry.setText("");
+    }
+
+    void filterhuruf(KeyEvent a) {
+        if (Character.isAlphabetic(a.getKeyChar())) {
+            a.consume();
+            JOptionPane.showMessageDialog(null, "Pada Kolom Jumlah Hanya Bisa Memasukan Karakter Angka");
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
