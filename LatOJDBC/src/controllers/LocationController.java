@@ -32,10 +32,20 @@ public class LocationController {
         }
         return result;
     }
+    
+    public String update(String id, String address, String postal, String city, String province, String country) {
+        String result = "";
+        if (ldao.save(new Location(Integer.parseInt(id), address, postal, city, province,country), false)) {
+            result = "Data berhasil disimpan";
+        } else {
+            result = "Maaf, data gagal disimpan";
+        }
+        return result;
+    }
 
-    public List<Location> getAll(String keyword, boolean con) {
+    public List<Location> getAll(String keyword) {
         List result;
-        result = ldao.getData(keyword, con);
+        result = ldao.getData(keyword, true);
         return result;
     }
 }
