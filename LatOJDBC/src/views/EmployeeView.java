@@ -5,10 +5,15 @@
  */
 package views;
 
+import controllers.DepartmentController;
 import controllers.EmployeeController;
 import controllers.JobController;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import models.Employee;
 import tools.DBConnection;
 
 /**
@@ -20,6 +25,10 @@ public class EmployeeView extends javax.swing.JInternalFrame {
     DBConnection connection = new DBConnection();
     EmployeeController ec = new EmployeeController(connection.getConnection());
     JobController jc = new JobController(connection.getConnection());
+    DepartmentController dc = new DepartmentController(connection.getConnection());
+    List<Employee> employeeList = new ArrayList<>();
+    List<models.Job> jobList = new ArrayList<>();
+    List<models.Department> departmentList = new ArrayList<>();
     
     DefaultTableModel tableModel;
     /**
@@ -27,7 +36,82 @@ public class EmployeeView extends javax.swing.JInternalFrame {
      */
     public EmployeeView() {
         initComponents();
+        showAllEmployeeTable(ec.getAllData());
+        showAllEmployee(ec.getAllData());
+        showAllJob(jc.getAll());
+        showAllDepartment(dc.seachBy(""));
+        setComboBox();
     }
+    
+    private boolean konfirmasi() {
+        if (jTFEmployeeEmployeeId.getText().equals("") || 
+                jTFEmployeeFirstName.getText().equals("") || 
+                jTFEmployeeLastName.getText().equals("") || 
+                jTFEmployeeEmail.getText().equals("") || 
+                jTFEmployeePhoneNumber.getText().equals("") || 
+                jTFEmployeeHireDate.getText().equals("") ||
+                jCBEmployeeJobId.getSelectedIndex()==0 ||
+                jCBEmployeeDepartmentId.getSelectedIndex()==0 ||
+                jCBEmployeeManagerId.getSelectedIndex()==0 ||
+                jTFEmployeeSalary.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Data tidak boleh kosong");
+            return false;
+        }
+        return true;
+    }
+    
+    private boolean isEmpty() {
+        return jc.getById(jTFEmployeeEmployeeId.getText()).isEmpty();
+    }
+    
+    private void setComboBox(){
+        for (models.Job data : jobList) jCBEmployeeJobId.addItem(data.getId()+" - "+data.getName());
+        for (Employee data : employeeList) jCBEmployeeManagerId.addItem(data.getEmployeeId()+" - "+data.getFirst_name()+" "+data.getLast_name());
+        for (models.Department data : departmentList) jCBEmployeeDepartmentId.addItem(data.getId()+" - "+data.getName());
+    }
+    
+    private void showAllEmployeeTable(List<Employee> employees){
+        Object[] columnNames = {"Nomor", "Employee ID", "First Name", "Last Name", "Email", "Phone Number", "Hire Date", "Job ID", "Salary", "Commission PCT", "Manager ID", "Department ID"};
+        Object[][] data = new Object[employees.size()][columnNames.length];
+        for (int i = 0; i < data.length; i++) {
+            data[i][0] = (i + 1);
+            data[i][1] = employees.get(i).getEmployeeId();
+            data[i][2] = employees.get(i).getFirst_name();
+            data[i][3] = employees.get(i).getLast_name();
+            data[i][4] = employees.get(i).getEmail();
+            data[i][5] = employees.get(i).getPhone_number();
+            data[i][6] = employees.get(i).getHire_date();
+            data[i][7] = employees.get(i).getJob_id();
+            data[i][8] = employees.get(i).getSalary();
+            data[i][9] = employees.get(i).getCommission_pct();
+            data[i][10] = employees.get(i).getManager_id();
+            data[i][11] = employees.get(i).getDepartment_id();
+        }
+        tableModel = new DefaultTableModel(data, columnNames);
+        jTEmployee.setModel(tableModel);
+    }
+    
+    private void showAllJob(List<models.Job> jobs){
+        jobList = jobs;
+    }
+    
+    private void showAllDepartment(List<models.Department> departments){
+        departmentList = departments;
+    }
+    
+    private void showAllEmployee (List<Employee> employees){
+        employeeList.clear();
+        employeeList = employees;
+    }
+    
+    private void filterhuruf(KeyEvent a) {
+        if (Character.isAlphabetic(a.getKeyChar())) {
+            a.consume();
+            JOptionPane.showMessageDialog(null, "Hanya Bisa Memasukan Karakter Angka");
+        }
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,14 +146,14 @@ public class EmployeeView extends javax.swing.JInternalFrame {
         jTFEmployeeEmail = new javax.swing.JTextField();
         jTFEmployeePhoneNumber = new javax.swing.JTextField();
         jTFEmployeeHireDate = new javax.swing.JTextField();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        jCBEmployeeJobId = new javax.swing.JComboBox<>();
         jTFEmployeeSalary = new javax.swing.JTextField();
         jTFEmployeeCommissionPct = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jCBEmployeeManagerId = new javax.swing.JComboBox<>();
+        jCBEmployeeDepartmentId = new javax.swing.JComboBox<>();
         jPEmployeeMainCenterContent1 = new javax.swing.JPanel();
         jBEmployeeInsert = new javax.swing.JButton();
-        jBEmployeeUpdate = new javax.swing.JButton();
+        jBEmployeeClear = new javax.swing.JButton();
         jPEmployeeMainCenterContent2 = new javax.swing.JPanel();
         jTFEmployeeSearch = new javax.swing.JTextField();
         jPEmployeeMainCenterContent3 = new javax.swing.JPanel();
@@ -78,7 +162,6 @@ public class EmployeeView extends javax.swing.JInternalFrame {
         jBEmployeeSearch = new javax.swing.JButton();
         jCBEmployeeisGetById = new javax.swing.JCheckBox();
         jSEmployees3 = new javax.swing.JSeparator();
-        jBEmployeeGetAll = new javax.swing.JButton();
         jPEmployeeMainSouth = new javax.swing.JPanel();
         jSPEmployee = new javax.swing.JScrollPane();
         jTEmployee = new javax.swing.JTable();
@@ -148,25 +231,33 @@ public class EmployeeView extends javax.swing.JInternalFrame {
         jPEmployeeMainCenter.add(jTFEmployeePhoneNumber);
         jPEmployeeMainCenter.add(jTFEmployeeHireDate);
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+        jCBEmployeeJobId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+        jCBEmployeeJobId.setToolTipText("");
+        jCBEmployeeJobId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
+                jCBEmployeeJobIdActionPerformed(evt);
             }
         });
-        jPEmployeeMainCenter.add(jComboBox3);
+        jPEmployeeMainCenter.add(jCBEmployeeJobId);
+
+        jTFEmployeeSalary.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFEmployeeSalaryKeyTyped(evt);
+            }
+        });
         jPEmployeeMainCenter.add(jTFEmployeeSalary);
         jPEmployeeMainCenter.add(jTFEmployeeCommissionPct);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPEmployeeMainCenter.add(jComboBox2);
+        jCBEmployeeManagerId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+        jCBEmployeeManagerId.setToolTipText("");
+        jPEmployeeMainCenter.add(jCBEmployeeManagerId);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPEmployeeMainCenter.add(jComboBox1);
+        jCBEmployeeDepartmentId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+        jPEmployeeMainCenter.add(jCBEmployeeDepartmentId);
 
         jPEmployeeMainCenterContent1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        jBEmployeeInsert.setText("Insert");
+        jBEmployeeInsert.setText("Save");
         jBEmployeeInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBEmployeeInsertActionPerformed(evt);
@@ -174,17 +265,17 @@ public class EmployeeView extends javax.swing.JInternalFrame {
         });
         jPEmployeeMainCenterContent1.add(jBEmployeeInsert);
 
-        jBEmployeeUpdate.setText("Update");
-        jBEmployeeUpdate.addActionListener(new java.awt.event.ActionListener() {
+        jBEmployeeClear.setText("Clear");
+        jBEmployeeClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEmployeeUpdateActionPerformed(evt);
+                jBEmployeeClearActionPerformed(evt);
             }
         });
-        jPEmployeeMainCenterContent1.add(jBEmployeeUpdate);
+        jPEmployeeMainCenterContent1.add(jBEmployeeClear);
 
         jPEmployeeMainCenter.add(jPEmployeeMainCenterContent1);
 
-        jPEmployeeMainCenterContent2.setLayout(new java.awt.GridLayout());
+        jPEmployeeMainCenterContent2.setLayout(new java.awt.GridLayout(1, 0));
         jPEmployeeMainCenterContent2.add(jTFEmployeeSearch);
 
         jPEmployeeMainCenter.add(jPEmployeeMainCenterContent2);
@@ -217,14 +308,6 @@ public class EmployeeView extends javax.swing.JInternalFrame {
         jPEmployeeMainCenterContent3.add(jCBEmployeeisGetById);
         jPEmployeeMainCenterContent3.add(jSEmployees3);
 
-        jBEmployeeGetAll.setText("Get All Data");
-        jBEmployeeGetAll.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEmployeeGetAllActionPerformed(evt);
-            }
-        });
-        jPEmployeeMainCenterContent3.add(jBEmployeeGetAll);
-
         jPEmployeeMainCenter.add(jPEmployeeMainCenterContent3);
 
         jPEmployeeMain.add(jPEmployeeMainCenter, java.awt.BorderLayout.CENTER);
@@ -237,15 +320,12 @@ public class EmployeeView extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "No", "Employee ID", "First Name", "Last Name", "Email", "Phone Number", "Hire Date", "Job ID", "Salary", "Commission Pct", "Manager ID", "Department ID"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, true, true, true, true, true, true, true, true, true, true, true
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+            }
+        ));
+        jTEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTEmployeeMouseClicked(evt);
             }
         });
         jSPEmployee.setViewportView(jTEmployee);
@@ -282,74 +362,110 @@ public class EmployeeView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTFEmployeeEmployeeIdActionPerformed
 
     private void jBEmployeeInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEmployeeInsertActionPerformed
-        ec.insert(jTFEmployeeEmployeeId.getText(), jTFEmployeeFirstName.getText(), jTFEmployeeLastName.getText(), jTFEmployeeEmail.getText(), jTFEmployeePhoneNumber.getText(), jTFEmployeeHireDate.getText(), jTFEmployeeJobId.getText(), jTFEmployeeSalary.getText(), jTFEmployeeCommissionPct.getText(), jTFEmployeeManagerId.getText(), jTFEmployeeDepartmentId.getText());
+//        ec.insert(jTFEmployeeEmployeeId.getText(), jTFEmployeeFirstName.getText(), jTFEmployeeLastName.getText(), jTFEmployeeEmail.getText(), jTFEmployeePhoneNumber.getText(), jTFEmployeeHireDate.getText(), jTFEmployeeJobId.getText(), jTFEmployeeSalary.getText(), jTFEmployeeCommissionPct.getText(), jTFEmployeeManagerId.getText(), jTFEmployeeDepartmentId.getText());
+        if (konfirmasi())
+            if (isEmpty())JOptionPane.showMessageDialog(null, ec.insert(jTFEmployeeEmployeeId.getText(), jTFEmployeeFirstName.getText(), jTFEmployeeLastName.getText(), jTFEmployeeEmail.getText(), jTFEmployeePhoneNumber.getText(), jTFEmployeeHireDate.getText(), jCBEmployeeJobId.getSelectedItem().toString(), jTFEmployeeSalary.getText(), jTFEmployeeCommissionPct.getText(), jCBEmployeeManagerId.getSelectedItem().toString(), jCBEmployeeDepartmentId.getSelectedItem().toString()));
+            else 
+            {
+                try {
+                    int reply = JOptionPane.showConfirmDialog(null,
+                            "Anda yakin akan melakukan perubahan data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
+                    );
+                    if (reply == JOptionPane.YES_OPTION) {
+                        JOptionPane.showMessageDialog(null, ec.update(jTFEmployeeEmployeeId.getText(), jTFEmployeeFirstName.getText(), jTFEmployeeLastName.getText(), jTFEmployeeEmail.getText(), jTFEmployeePhoneNumber.getText(), jTFEmployeeHireDate.getText(), jCBEmployeeJobId.getSelectedItem().toString(), jTFEmployeeSalary.getText(), jTFEmployeeCommissionPct.getText(), jCBEmployeeManagerId.getSelectedItem().toString(), jCBEmployeeDepartmentId.getSelectedItem().toString()));
+                        showAllEmployeeTable(ec.getAllData());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
     }//GEN-LAST:event_jBEmployeeInsertActionPerformed
 
-    private void jBEmployeeUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEmployeeUpdateActionPerformed
-        ec.update(jTFEmployeeEmployeeId.getText(), jTFEmployeeFirstName.getText(), jTFEmployeeLastName.getText(), jTFEmployeeEmail.getText(), jTFEmployeePhoneNumber.getText(), jTFEmployeeHireDate.getText(), jTFEmployeeJobId.getText(), jTFEmployeeSalary.getText(), jTFEmployeeCommissionPct.getText(), jTFEmployeeManagerId.getText(), jTFEmployeeDepartmentId.getText());
-    }//GEN-LAST:event_jBEmployeeUpdateActionPerformed
-
     private void jBEmployeeDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEmployeeDeleteActionPerformed
-        ec.delete(jTFEmployeeSearch.getText());
+//        JOptionPane.showConfirmDialog(null, ec.delete(jTFEmployeeSearch.getText()));
+        if (jTFEmployeeSearch.equals("")) JOptionPane.showMessageDialog(null, "Data tidak boleh kosong");
+        else 
+        {
+            try {
+                int reply = JOptionPane.showConfirmDialog(null,
+                        "Anda yakin akan menghapus data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
+                );
+                if (reply == JOptionPane.YES_OPTION) {
+                    JOptionPane.showMessageDialog(null, ec.delete(jTFEmployeeSearch.getText()));
+                    jTFEmployeeSearch.setText("");
+                    showAllEmployeeTable(ec.getAllData());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }//GEN-LAST:event_jBEmployeeDeleteActionPerformed
 
     private void jBEmployeeSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEmployeeSearchActionPerformed
-        DefaultTableModel tableModelEmployee = (DefaultTableModel) jTEmployee.getModel();
-        tableModelEmployee.setRowCount(0);
-        for (EmployeeView value : ec.searchData(jTFEmployeeSearch.getText().toString(), jCBEmployeeisGetById.isSelected())) {
-            Object[] data = {value.getEmployeeId(),value.getFirst_name(),
-                value.getLast_name(),value.getEmail(),value.getPhone_number(),
-                value.getHire_date(),value.getJob_id(),value.getSalary(),
-                value.getCommission_pct(),value.getManager_id(),value.getDepartment_id()
-            };
-            tableModelEmployee.addRow(data);
-        }
 
+        showAllEmployeeTable(ec.searchData(jTFEmployeeSearch.getText(), jCBEmployeeisGetById.isSelected()));
     }//GEN-LAST:event_jBEmployeeSearchActionPerformed
 
     private void jCBEmployeeisGetByIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBEmployeeisGetByIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCBEmployeeisGetByIdActionPerformed
 
-    private void jBEmployeeGetAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEmployeeGetAllActionPerformed
-        DefaultTableModel tableModelEmployee = (DefaultTableModel) jTEmployee.getModel();
-        tableModelEmployee.setRowCount(0);
-        for (EmployeeView value : ec.getAllData()) {
-            Object[] data = {value.getEmployeeId(),value.getFirst_name(),
-                value.getLast_name(),value.getEmail(),value.getPhone_number(),
-                value.getHire_date(),value.getJob_id(),value.getSalary(),
-                value.getCommission_pct(),value.getManager_id(),value.getDepartment_id()
-            };
-            tableModelEmployee.addRow(data);
-        }
-
-    }//GEN-LAST:event_jBEmployeeGetAllActionPerformed
-
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+    private void jCBEmployeeJobIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBEmployeeJobIdActionPerformed
         
-        for (Object object : col) {
-            
-        }
-    }//GEN-LAST:event_jComboBox3ActionPerformed
+    }//GEN-LAST:event_jCBEmployeeJobIdActionPerformed
 
-    private ArrayList<String> getJobId(){
-        ArrayList<String> list = new ArrayList<>();
-        for (models.Job value : jc.getAll()) {
-            list.add(value.getId());
+    private void jTEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTEmployeeMouseClicked
+        jTFEmployeeEmployeeId.setText(jTEmployee.getValueAt(jTEmployee.getSelectedRow(), 1).toString());
+        jTFEmployeeEmployeeId.setEditable(false);
+        jTFEmployeeFirstName.setText(jTEmployee.getValueAt(jTEmployee.getSelectedRow(), 2).toString());
+        jTFEmployeeLastName.setText(jTEmployee.getValueAt(jTEmployee.getSelectedRow(), 3).toString());
+        jTFEmployeeEmail.setText(jTEmployee.getValueAt(jTEmployee.getSelectedRow(), 4).toString());
+        jTFEmployeePhoneNumber.setText(jTEmployee.getValueAt(jTEmployee.getSelectedRow(), 5).toString());
+        jTFEmployeeHireDate.setText(jTEmployee.getValueAt(jTEmployee.getSelectedRow(), 6).toString());
+        for (int i = 0; i < jCBEmployeeJobId.getItemCount(); i++) {
+            if (jCBEmployeeJobId.getItemAt(i).split(" - ")[0].equals(jTEmployee.getValueAt(jTEmployee.getSelectedRow(), 7).toString()))
+                jCBEmployeeJobId.setSelectedIndex(i);
         }
-        return list;
-    }
+        jTFEmployeeSalary.setText(jTEmployee.getValueAt(jTEmployee.getSelectedRow(), 8).toString());
+        jTFEmployeeCommissionPct.setText(jTEmployee.getValueAt(jTEmployee.getSelectedRow(), 9).toString());
+        for (int i = 0; i < jCBEmployeeManagerId.getItemCount(); i++) {
+            if (jCBEmployeeManagerId.getItemAt(i).split(" - ")[0].equals(jTEmployee.getValueAt(jTEmployee.getSelectedRow(), 10).toString()))
+                jCBEmployeeManagerId.setSelectedIndex(i);
+        }
+        for (int i = 0; i < jCBEmployeeDepartmentId.getItemCount(); i++) {
+            if (jCBEmployeeDepartmentId.getItemAt(i).split(" - ")[0].equals(jTEmployee.getValueAt(jTEmployee.getSelectedRow(), 11).toString()))
+                jCBEmployeeDepartmentId.setSelectedIndex(i);
+        }
+    }//GEN-LAST:event_jTEmployeeMouseClicked
+
+    private void jBEmployeeClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEmployeeClearActionPerformed
+        jTFEmployeeEmployeeId.setEditable(true);
+        jTFEmployeeEmployeeId.setText("");
+        jTFEmployeeFirstName.setText("");
+        jTFEmployeeLastName.setText("");
+        jTFEmployeeEmail.setText("");
+        jTFEmployeePhoneNumber.setText("");
+        jTFEmployeeHireDate.setText("");
+        jCBEmployeeJobId.setSelectedIndex(0);
+        jTFEmployeeSalary.setText("");
+        jTFEmployeeCommissionPct.setText("");
+        jCBEmployeeManagerId.setSelectedIndex(0);
+        jCBEmployeeDepartmentId.setSelectedIndex(0);
+    }//GEN-LAST:event_jBEmployeeClearActionPerformed
+
+    private void jTFEmployeeSalaryKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFEmployeeSalaryKeyTyped
+        filterhuruf(evt);
+    }//GEN-LAST:event_jTFEmployeeSalaryKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBEmployeeClear;
     private javax.swing.JButton jBEmployeeDelete;
-    private javax.swing.JButton jBEmployeeGetAll;
     private javax.swing.JButton jBEmployeeInsert;
     private javax.swing.JButton jBEmployeeSearch;
-    private javax.swing.JButton jBEmployeeUpdate;
+    private javax.swing.JComboBox<String> jCBEmployeeDepartmentId;
+    private javax.swing.JComboBox<String> jCBEmployeeJobId;
+    private javax.swing.JComboBox<String> jCBEmployeeManagerId;
     private javax.swing.JCheckBox jCBEmployeeisGetById;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLEmployeeCommissionPct;
     private javax.swing.JLabel jLEmployeeDepartmentId;
     private javax.swing.JLabel jLEmployeeEmail;

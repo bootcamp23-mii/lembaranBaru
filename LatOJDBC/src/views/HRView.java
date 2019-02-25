@@ -178,6 +178,7 @@ public class HRView extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jobsframe = new javax.swing.JMenuItem();
+        regionMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -547,6 +548,14 @@ public class HRView extends javax.swing.JFrame {
         });
         jMenu1.add(jobsframe);
 
+        regionMenuItem.setText("Regions");
+        regionMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regionMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(regionMenuItem);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -767,6 +776,13 @@ public class HRView extends javax.swing.JFrame {
         filterhuruf(evt);
     }//GEN-LAST:event_tf_maxsalKeyTyped
 
+    private void regionMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regionMenuItemActionPerformed
+        // TODO add your handling code here:
+        RegionView rv = new RegionView();
+        jPanelMain.add(rv);
+        rv.setVisible(true);
+    }//GEN-LAST:event_regionMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -865,6 +881,7 @@ public class HRView extends javax.swing.JFrame {
     private javax.swing.JTextField jTFEmployeeSearch;
     private javax.swing.JTable jTable1;
     private javax.swing.JMenuItem jobsframe;
+    private javax.swing.JMenuItem regionMenuItem;
     private javax.swing.JComboBox<String> search;
     private javax.swing.JTextField tf_id;
     private javax.swing.JTextField tf_maxsal;

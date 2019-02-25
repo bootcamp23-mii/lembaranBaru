@@ -7,6 +7,7 @@ package controllers;
 
 import daos.DepartmentDAO;
 import java.sql.Connection;
+import java.util.List;
 import models.Department;
 
 /**
@@ -15,6 +16,7 @@ import models.Department;
  */
 public class DepartmentController {
     private DepartmentDAO ddao;
+    private Connection connection;
 
     public DepartmentController(Connection connection) {
       ddao=new DepartmentDAO(connection);
@@ -50,4 +52,34 @@ public class DepartmentController {
         }
         return result;
     }
+
+    
+    public String getData(String keyword, boolean isGetById){
+        String result="";
+        if (keyword.equals("") && !isGetById) {
+            if (ddao.getData(keyword, isGetById).isEmpty())System.out.println("Data tidak ditemukan");
+            else System.out.println("Data berhasil dilihat");
+            
+        } else if (!keyword.equals("") && !isGetById) {
+            if (ddao.getData(keyword, isGetById).isEmpty())System.out.println("Data tidak ditemukan");
+            else System.out.println("Data berhasil dilihat");
+        } else if (!keyword.equals("") && isGetById) {
+            if (ddao.getData(keyword, isGetById).isEmpty())System.out.println("Data tidak ditemukan");
+            else System.out.println("Data berhasil dilihat");
+        } else if (keyword.equals("") && isGetById) {
+            if (ddao.getData(keyword, isGetById).isEmpty())System.out.println("Data tidak ditemukan");
+            else System.out.println("Data berhasil dilihat");
+        }
+        return result;
+    }
+    
+     public List<Department> getById(String key){
+        List result=ddao.getData(key, true);
+        return result;
+    }
+     
+     public List<Department> seachBy(String key){
+        List result=ddao.getData(key, false);
+        return result;
+     }
 }
