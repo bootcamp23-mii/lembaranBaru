@@ -6,6 +6,7 @@
 package views;
 
 import controllers.RegionController;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,15 +15,15 @@ import javax.swing.table.DefaultTableModel;
 import models.Region;
 import tools.DBConnection;
 
-
 /**
  *
  * @author AdhityaWP
  */
 public class RegionView extends javax.swing.JInternalFrame {
+
     List<Region> listdata = new ArrayList<Region>();
     int x = 0;
-    private DefaultTableModel model;
+    DefaultTableModel model = new DefaultTableModel();;
     DBConnection connection = new DBConnection();
     RegionController rc = new RegionController(connection.getConnection());
 
@@ -31,21 +32,13 @@ public class RegionView extends javax.swing.JInternalFrame {
      */
     public RegionView() {
         initComponents();
-        judultabel();
-        TampilData("", false);
-    }
-    
-    private void judultabel() {
-        model = new DefaultTableModel();
-        model.addColumn("No");
-        model.addColumn("Id");
-        model.addColumn("Nama");
-        jTable2.setModel(model);
+        TampilData(rc.getAllData());
     }
 
-    private void TampilData(String i, boolean j) {
-        model.setRowCount(0);
-        listdata = rc.getById(i, j);
+
+    private void TampilData(List<Region> listdata) {
+        Object[] columnNames ={"No","Id","Nama"};
+        Object[][] data = new Object[listdata.size()][columnNames.length];
 //        for (Region region : rc.getById("",false)) {
 //            Object[] data = new Object[2];
 //            data [0]= region.getId();
@@ -53,12 +46,35 @@ public class RegionView extends javax.swing.JInternalFrame {
 //            model.addColumn(data);
 //            System.out.println(data);
 //        }
-        for (x = 0; x < listdata.size(); x++) {
-            Object[] data = new Object[3];
-            data[0] = x + 1;
-            data[1] = listdata.get(x).getId();
-            data[2] = listdata.get(x).getName();
-            model.addRow(data);
+        for (int i = 0; i < data.length; i++) {
+            data[i][0] = (i + 1);
+            data[i][1] = listdata.get(i).getId();
+            data[i][2] = listdata.get(i).getName();
+        }
+        model = new DefaultTableModel(data,columnNames);
+        jTable2.setModel(model);
+    }
+    
+    private boolean konfirmasi() {
+        if (idTextField.getText().equals("") || namaTextField.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Data tidak boleh kosong");
+            return false;
+        }
+        return true;
+    }
+
+    
+    private boolean isEmpty() {
+        if (rc.getById(idTextField.getText()).isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+    void filterhuruf(KeyEvent a) {
+        if (Character.isAlphabetic(a.getKeyChar())) {
+            a.consume();
+            JOptionPane.showMessageDialog(null,"Hanya Bisa Memasukan Karakter Angka");
         }
     }
 
@@ -94,6 +110,12 @@ public class RegionView extends javax.swing.JInternalFrame {
 
         idLabel.setText("Id");
         topPanel.add(idLabel);
+
+        idTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                idTextFieldKeyTyped(evt);
+            }
+        });
         topPanel.add(idTextField);
 
         namaLabel.setText("Nama");
@@ -258,19 +280,29 @@ public class RegionView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         idTextField.setText("");
         namaTextField.setText("");
+        TampilData(rc.getAllData());
     }//GEN-LAST:event_bClearActionPerformed
 
     private void bInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bInsertActionPerformed
         // TODO add your handling code here:
-        String id = idTextField.getText().toString().trim();
-        String nama = namaTextField.getText().toString().trim();
-        if (idTextField.getText().equals("") || namaTextField.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Data Belum Lengkap!");
-            TampilData("", false);
-        } else {
-            rc.insert(id, nama);
-            TampilData("", false);
-            JOptionPane.showMessageDialog(null, "Data Berhasil ditambahkan!");
+        if (konfirmasi()) {
+            if (isEmpty()) {
+                JOptionPane.showMessageDialog(null, rc.insert(idTextField.getText(), namaTextField.getText()));
+            } else {
+                try {
+                    int reply = JOptionPane.showConfirmDialog(null,
+                            "Anda yakin akan melakukan perubahan data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
+                    );
+                    if (reply == JOptionPane.YES_OPTION) {
+                        JOptionPane.showMessageDialog(null, rc.update(idTextField.getText(), namaTextField.getText()));
+                        
+                        TampilData(rc.getAllData());
+                    }
+                } catch (Exception e) {
+                   e.printStackTrace();//dispose();
+                }
+            }
+            TampilData(rc.getAllData());
         }
     }//GEN-LAST:event_bInsertActionPerformed
 
@@ -278,10 +310,10 @@ public class RegionView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int row = jTable2.getSelectedRow();
         String idhapus = jTable2.getValueAt(row, 1).toString();
-        int confirm = JOptionPane.showConfirmDialog(null, "Anda Yakin?","", JOptionPane.YES_NO_OPTION);
-        if(confirm==JOptionPane.YES_OPTION){
+        int confirm = JOptionPane.showConfirmDialog(null, "Anda Yakin?", "", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
             rc.delete(idhapus);
-            TampilData("", false);
+            TampilData(rc.getAllData());
         }
 
     }//GEN-LAST:event_bDeleteActionPerformed
@@ -305,13 +337,18 @@ public class RegionView extends javax.swing.JInternalFrame {
         String key = searchTextField.getText().toString().trim();
         boolean cb = jCheckBox1.isSelected();
         if (!cb) {
-            rc.searchBy(key, cb);
-            TampilData(key, cb);
+            
+            TampilData(rc.searchBy(key));
         } else {
-            rc.getById(key, cb);
-            TampilData(key, cb);
+            
+            TampilData(rc.getById(key));
         }
     }//GEN-LAST:event_bSearchActionPerformed
+
+    private void idTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idTextFieldKeyTyped
+        // TODO add your handling code here:
+        filterhuruf(evt);
+    }//GEN-LAST:event_idTextFieldKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
