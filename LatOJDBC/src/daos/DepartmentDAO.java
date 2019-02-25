@@ -28,7 +28,7 @@ public class DepartmentDAO {
         List<Department> listDepartment = new ArrayList<Department>();
         String query = "";
         if (isGetById) {
-            query = "SELECT * FROM DEPARTMENTS WHERE DEPARTMENT_ID= " + keyword;
+            query = "SELECT * FROM DEPARTMENTS DEPARTMENT_ID LIKE '%" + keyword + "%'";
         } else {
             query = "SELECT * FROM DEPARTMENTS WHERE DEPARTMENT_ID LIKE '%" + keyword
                     + "%' OR DEPARTMENT_NAME like '%" + keyword + "%' OR MANAGER_ID LIKE '%" + keyword
@@ -52,14 +52,16 @@ public class DepartmentDAO {
         boolean result = false;
         String query = "";
         if (isInsert) {
-            query = "INSERT INTO DEPARTMENTS(DEPARTMENT_ID,DEPARTMENT_NAME,MANAGER_ID,LOCATION_ID) VALUES(" + d.getId() + ",'"
-                    + d.getName() + "'," + d.getManager_id() + "," + d.getLocation_id() + ")";
+            query = "INSERT INTO DEPARTMENTS(DEPARTMENT_ID,DEPARTMENT_NAME,MANAGER_ID,LOCATION_ID) VALUES(?,?,?,?)";
         } else {
-            query = "UPDATE DEPARTMENTS SET DEPARTMENT_NAME='" + d.getName() + "',MANAGER_ID=" + d.getManager_id()
-                    + ",LOCATION_ID=" + d.getLocation_id() + "WHERE ID=" + d.getId();
+            query = "UPDATE DEPARTMENTS SET DEPARTMENT_NAME=? ,MANAGER_ID=? ,LOCATION_ID=? WHERE DEPARTMENT_ID=?";
         }
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, d.getName());
+            preparedStatement.setInt(2, d.getManager_id());
+            preparedStatement.setInt(3, d.getLocation_id());
+            preparedStatement.setInt(4, d.getId());
             preparedStatement.executeQuery();
             result = true;
         } catch (Exception e) {
@@ -70,11 +72,10 @@ public class DepartmentDAO {
 
     public boolean delete(int id) {
         boolean isDelete = false;
-        String query = "DELETE FROM DEPARTMENTS WHERE DEPARTMENT_ID = ?";
+        String query = "DELETE FROM DEPARTMENTS WHERE DEPARTMENT_ID ='" + id + "'";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            preparedStatement.executeQuery();
             isDelete = true;
         } catch (Exception e) {
             e.getStackTrace();
