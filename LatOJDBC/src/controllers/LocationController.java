@@ -48,4 +48,9 @@ public class LocationController {
         result = ldao.getData(keyword, false);
         return result;
     }
+    public List<Location> getById(String keyword) {
+        List result;
+        result = ldao.getData(keyword, true);
+        return result;
+    }
 }
