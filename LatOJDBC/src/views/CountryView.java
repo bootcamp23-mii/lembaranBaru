@@ -35,7 +35,7 @@ public class CountryView extends javax.swing.JInternalFrame {
     }
     
     void tampilRegion() {
-        for (Region region : rc.getAllData("", false)) {
+        for (Region region : rc.getAllData()) {
             jComboRegionId.addItem(region.getId()+"-"+region.getName());
         }
     }
@@ -70,6 +70,8 @@ public class CountryView extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableCountries = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
+
+        setClosable(true);
 
         jLabelCountries.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabelCountries.setText("COUNTRIES");
@@ -108,7 +110,6 @@ public class CountryView extends javax.swing.JInternalFrame {
 
         jPanelKanan.setLayout(new java.awt.GridLayout(9, 1));
 
-        jTextCountryId.setText("[ Country ID ]");
         jTextCountryId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextCountryIdActionPerformed(evt);
@@ -116,7 +117,6 @@ public class CountryView extends javax.swing.JInternalFrame {
         });
         jPanelKanan.add(jTextCountryId);
 
-        jTextCountryName.setText("[ Country Name ]");
         jTextCountryName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextCountryNameActionPerformed(evt);
@@ -139,8 +139,6 @@ public class CountryView extends javax.swing.JInternalFrame {
             }
         });
         jPanelKanan.add(jButtonSave);
-
-        jTextSearch.setText("[ Search / Delete ]");
         jPanelKanan.add(jTextSearch);
 
         jButtonDeleteId.setText("Delete by ID");
@@ -152,11 +150,6 @@ public class CountryView extends javax.swing.JInternalFrame {
         jPanelKanan.add(jButtonDeleteId);
 
         jButtonSearch.setText("Search");
-        jButtonSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSearchActionPerformed(evt);
-            }
-        });
         jPanelKanan.add(jButtonSearch);
 
         jCheckById.setText("Get by ID");
@@ -223,11 +216,15 @@ public class CountryView extends javax.swing.JInternalFrame {
     private void jButtonDeleteIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteIdActionPerformed
         
     }//GEN-LAST:event_jButtonDeleteIdActionPerformed
-
-    private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonSearchActionPerformed
     
+    private void jTableCountriesMouseClicked(java.awt.event.MouseEvent evt) {                                     
+        // TODO add your handling code here:
+        jTextCountryId.setText(jTableCountries.getValueAt(jTableCountries.getSelectedRow(), 1).toString());
+        jTextCountryName.setText(jTableCountries.getValueAt(jTableCountries.getSelectedRow(), 2).toString());
+        //jComboRegionId.setText(jTableCountries.getValueAt(jTableCountries.getSelectedRow(), 3).toString());
+
+        jTextCountryId.setEnabled(false);
+    } 
     
     private void tampilTabelCountries() {
         DefaultTableModel tabelCountries = (DefaultTableModel) jTableCountries.getModel();
