@@ -603,10 +603,12 @@ public class HRView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        jIFEmployee.setVisible(true);
+        EmployeeView ev = new EmployeeView();
+        jPanelMain.add(ev);
+        ev.setVisible(true);
 //        jIFEmployee.setBounds(5, 5, 200, 300);
-        jIFEmployee.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        jIFEmployee.revalidate();
+        ev.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        ev.revalidate();
 //        jPanel1.add(jInternalFrame1, javax.swing.JLayeredPane.DEFAULT_LAYER);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 

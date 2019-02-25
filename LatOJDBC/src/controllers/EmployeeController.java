@@ -103,7 +103,7 @@ public class EmployeeController {
         String result="";
         if (edao.save(new Employee(Integer.parseInt(id), first_name, last_name, 
                 email, phone_number, hire_date, job_id, Integer.parseInt(salary), 
-                Integer.parseInt(commission_pict), Integer.parseInt(manager_id), 
+                Double.parseDouble(commission_pict), Integer.parseInt(manager_id), 
                 Integer.parseInt(department_id)),false)) {
             result="Selamat data berhasil diupdate";
         }else{
