@@ -807,7 +807,7 @@ public class HRView extends javax.swing.JFrame {
 
     private void locationMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locationMenuActionPerformed
         // TODO add your handling code here:
-        LocationView lv = new LocationView();
+        LocationViews lv = new LocationViews();
         jPanelMain.add(lv);
         lv.setVisible(true);
     }//GEN-LAST:event_locationMenuActionPerformed
