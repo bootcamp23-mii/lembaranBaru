@@ -41,7 +41,7 @@ public class LocationMain {
 //        }
         
 //      SAVE
-        System.out.println(lc.insert("1001", "Jl. Kemanggisan Raya","63572","Jakarta brat","Jakarta","IN"));
+//        System.out.println(lc.insert("1001", "Jl. Kemanggisan Raya","63572","Jakarta brat","Jakarta","IN"));
 
 //      DELETE
 //      System.out.println(ldao.delete(1001));

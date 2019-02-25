@@ -8,67 +8,89 @@ package views;
 import controllers.EmployeeController;
 import controllers.LocationController;
 import daos.LocationDAO;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import models.Employee;
 import models.Location;
 import tools.DBConnection;
 
 /**
  *
- * @author FES
+ * @author Pandu
  */
-public class LocationView extends javax.swing.JFrame {
+public class LocationView extends javax.swing.JPanel {
 
-    List<Location> listdata = new ArrayList<Location>();
-    DBConnection connection = new DBConnection();
-    private DefaultTableModel model = new DefaultTableModel();
+    
+    List<Location> listdata         = new ArrayList<Location>();
+    DBConnection connection         = new DBConnection();
+    private DefaultTableModel modelLocation = new DefaultTableModel();
     int x = 0;
-    LocationDAO ldao = new LocationDAO(connection.getConnection());
-    EmployeeController ec = new EmployeeController(connection.getConnection());
-    LocationController lc = new LocationController(connection.getConnection());
+    LocationDAO ldao        = new LocationDAO(connection.getConnection());
+    LocationController lc   = new LocationController(connection.getConnection());
 
     /**
-     * Creates new form NewJFrame
+     * Creates new form LocationView
      */
     public LocationView() {
         initComponents();
-        tableData();
-        showData("", false);
+        tableData(lc.getAll(""));
+    }
+    
+    private boolean confirm() {
+        if (fieldId.getText().equals("") 
+                || fieldAddress.getText().equals("") 
+                || fieldPostal.getText().equals("") 
+                || fieldCity.getText().equals("") 
+                || fieldProvince.getText().equals("") 
+                || fieldCountry.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Data cannot be empty !");
+            return false;
+        }
+        return true;
+    }
+    
+    private boolean isEmpty() {
+        if (lc.getAll(fieldId.getText()).isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+    
+    private void tableData(List<models.Location> locs) {
+        
+        Object[] columnNames = {"NO", "ID", "Street Address", "Postal Code", "City", "State province", "Country ID"};
+        Object[][] data = new Object[locs.size()][columnNames.length];
+        
+        for (int i = 0; i < data.length; i++) {
+            data[i][0] = (i + 1);
+            data[i][1] = locs.get(i).getId();
+            data[i][2] = locs.get(i).getAddress();
+            data[i][3] = locs.get(i).getPostal();
+            data[i][4] = locs.get(i).getCity();
+            data[i][5] = locs.get(i).getProvince();
+            data[i][6] = locs.get(i).getCountry();
+        }
+        modelLocation = new DefaultTableModel(data, columnNames);
+        contentTable.setModel(modelLocation);
+    }
+    
+    private void clean() {
+        fieldId.setEnabled(true);
+        fieldAddress.setText("");
+        fieldPostal.setText("");
+        fieldCity.setText("");
+        fieldProvince.setText("");
+        fieldCountry.setText("");
     }
 
-    private void tableData() {
-        model = new DefaultTableModel();
-        model.addColumn("No");
-        model.addColumn("Id");
-        model.addColumn("Address");
-        model.addColumn("Postal");
-        model.addColumn("City");
-        model.addColumn("Province");
-        model.addColumn("Country");
-        contentTable.setModel(model);
-    }
-
-    private void showData(String string, boolean b) {
-        model.setRowCount(0);
-        listdata = lc.getAll(string, true);
-
-        for (x = 0; x < listdata.size(); x++) {
-            Object[] data = new Object[3];
-            data[0] = x + 1;
-            data[1] = listdata.get(x).getId();
-            data[2] = listdata.get(x).getAddress();
-            data[2] = listdata.get(x).getPostal();
-            data[2] = listdata.get(x).getCity();
-            data[2] = listdata.get(x).getProvince();
-            data[2] = listdata.get(x).getCountry();
-            model.addRow(data);
-
+    void filterhuruf(KeyEvent a) {
+        if (Character.isAlphabetic(a.getKeyChar())) {
+            a.consume();
+            JOptionPane.showMessageDialog(null, "Pada Kolom Jumlah Hanya Bisa Memasukan Karakter Angka");
         }
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,330 +100,55 @@ public class LocationView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanelMain = new javax.swing.JPanel();
-        jIFEmployee = new javax.swing.JInternalFrame();
-        jPEmployeeMain = new javax.swing.JPanel();
-        jPEmployeeMainNorth = new javax.swing.JPanel();
-        jLEmployeeTitle = new javax.swing.JLabel();
-        jPEmployeeMainWest = new javax.swing.JPanel();
-        jLEmployeeEmployeeId = new javax.swing.JLabel();
-        jLEmployeeFirstName = new javax.swing.JLabel();
-        jLEmployeeLastName = new javax.swing.JLabel();
-        jLEmployeeEmail = new javax.swing.JLabel();
-        jLEmployeePhoneNumber = new javax.swing.JLabel();
-        jLEmployeeHireDate = new javax.swing.JLabel();
-        jLEmployeeJobId = new javax.swing.JLabel();
-        jLEmployeeSalary = new javax.swing.JLabel();
-        jLEmployeeCommissionPct = new javax.swing.JLabel();
-        jLEmployeeManagerId = new javax.swing.JLabel();
-        jLEmployeeDepartmentId = new javax.swing.JLabel();
-        jSEmployees1 = new javax.swing.JSeparator();
-        jLEmployeeSearch = new javax.swing.JLabel();
-        jPEmployeeMainCenter = new javax.swing.JPanel();
-        jTFEmployeeEmployeeId = new javax.swing.JTextField();
-        jTFEmployeeFirstName = new javax.swing.JTextField();
-        jTFEmployeeLastName = new javax.swing.JTextField();
-        jTFEmployeeEmail = new javax.swing.JTextField();
-        jTFEmployeePhoneNumber = new javax.swing.JTextField();
-        jTFEmployeeHireDate = new javax.swing.JTextField();
-        jTFEmployeeJobId = new javax.swing.JTextField();
-        jTFEmployeeSalary = new javax.swing.JTextField();
-        jTFEmployeeCommissionPct = new javax.swing.JTextField();
-        jTFEmployeeManagerId = new javax.swing.JTextField();
-        jTFEmployeeDepartmentId = new javax.swing.JTextField();
-        jPEmployeeMainCenterContent1 = new javax.swing.JPanel();
-        jBEmployeeInsert = new javax.swing.JButton();
-        jBEmployeeUpdate = new javax.swing.JButton();
-        jPEmployeeMainCenterContent2 = new javax.swing.JPanel();
-        jTFEmployeeSearch = new javax.swing.JTextField();
-        jPEmployeeMainCenterContent3 = new javax.swing.JPanel();
-        jBEmployeeDelete = new javax.swing.JButton();
-        jSEmployees2 = new javax.swing.JSeparator();
-        jBEmployeeSearch = new javax.swing.JButton();
-        jCBEmployeeisGetById = new javax.swing.JCheckBox();
-        jSEmployees3 = new javax.swing.JSeparator();
-        jBEmployeeGetAll = new javax.swing.JButton();
-        jPEmployeeMainSouth = new javax.swing.JPanel();
-        jSPEmployee = new javax.swing.JScrollPane();
-        jTEmployee = new javax.swing.JTable();
         jInternalFrame1 = new javax.swing.JInternalFrame();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        tflocation_id = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        tfStreet_address = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        tfPostal_code = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        tfCity = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        tfstate = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        tfCountryId = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        searchButton = new javax.swing.JButton();
-        insertButton = new javax.swing.JButton();
-        updateButton = new javax.swing.JButton();
+        idLabel = new javax.swing.JLabel();
+        addressLabel = new javax.swing.JLabel();
+        postalLabel = new javax.swing.JLabel();
+        cityLabel = new javax.swing.JLabel();
+        provinceLabel = new javax.swing.JLabel();
+        countryLabel = new javax.swing.JLabel();
+        fieldId = new javax.swing.JTextField();
+        fieldPostal = new javax.swing.JTextField();
+        fieldAddress = new javax.swing.JTextField();
+        fieldProvince = new javax.swing.JTextField();
+        fieldCountry = new javax.swing.JTextField();
+        fieldCity = new javax.swing.JTextField();
+        saveButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
+        searchButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         contentTable = new javax.swing.JTable();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanelMain.setLayout(new javax.swing.OverlayLayout(jPanelMain));
-
-        jIFEmployee.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jIFEmployee.setClosable(true);
-        jIFEmployee.setMinimumSize(new java.awt.Dimension(200, 200));
-        jIFEmployee.setNormalBounds(new java.awt.Rectangle(0, 0, 200, 200));
-        jIFEmployee.setVisible(false);
-
-        jPEmployeeMain.setLayout(new java.awt.BorderLayout(1, 1));
-
-        jLEmployeeTitle.setText("EMPLOYEES");
-        jPEmployeeMainNorth.add(jLEmployeeTitle);
-
-        jPEmployeeMain.add(jPEmployeeMainNorth, java.awt.BorderLayout.PAGE_START);
-
-        jPEmployeeMainWest.setLayout(new java.awt.GridLayout(14, 1));
-
-        jLEmployeeEmployeeId.setText("Employee ID");
-        jPEmployeeMainWest.add(jLEmployeeEmployeeId);
-
-        jLEmployeeFirstName.setText("First Name");
-        jPEmployeeMainWest.add(jLEmployeeFirstName);
-
-        jLEmployeeLastName.setText("Last Name");
-        jPEmployeeMainWest.add(jLEmployeeLastName);
-
-        jLEmployeeEmail.setText("Email");
-        jPEmployeeMainWest.add(jLEmployeeEmail);
-
-        jLEmployeePhoneNumber.setText("Phone Number");
-        jPEmployeeMainWest.add(jLEmployeePhoneNumber);
-
-        jLEmployeeHireDate.setText("Hire Date");
-        jPEmployeeMainWest.add(jLEmployeeHireDate);
-
-        jLEmployeeJobId.setText("Job Id");
-        jPEmployeeMainWest.add(jLEmployeeJobId);
-
-        jLEmployeeSalary.setText("Salary");
-        jPEmployeeMainWest.add(jLEmployeeSalary);
-
-        jLEmployeeCommissionPct.setText("Commission Pct");
-        jPEmployeeMainWest.add(jLEmployeeCommissionPct);
-
-        jLEmployeeManagerId.setText("Manager Id");
-        jPEmployeeMainWest.add(jLEmployeeManagerId);
-
-        jLEmployeeDepartmentId.setText("Department Id");
-        jPEmployeeMainWest.add(jLEmployeeDepartmentId);
-        jPEmployeeMainWest.add(jSEmployees1);
-
-        jLEmployeeSearch.setText("Search/Delete");
-        jPEmployeeMainWest.add(jLEmployeeSearch);
-
-        jPEmployeeMain.add(jPEmployeeMainWest, java.awt.BorderLayout.LINE_START);
-
-        jPEmployeeMainCenter.setLayout(new java.awt.GridLayout(14, 1));
-
-        jTFEmployeeEmployeeId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFEmployeeEmployeeIdActionPerformed(evt);
-            }
-        });
-        jPEmployeeMainCenter.add(jTFEmployeeEmployeeId);
-        jPEmployeeMainCenter.add(jTFEmployeeFirstName);
-        jPEmployeeMainCenter.add(jTFEmployeeLastName);
-        jPEmployeeMainCenter.add(jTFEmployeeEmail);
-        jPEmployeeMainCenter.add(jTFEmployeePhoneNumber);
-        jPEmployeeMainCenter.add(jTFEmployeeHireDate);
-        jPEmployeeMainCenter.add(jTFEmployeeJobId);
-        jPEmployeeMainCenter.add(jTFEmployeeSalary);
-        jPEmployeeMainCenter.add(jTFEmployeeCommissionPct);
-        jPEmployeeMainCenter.add(jTFEmployeeManagerId);
-        jPEmployeeMainCenter.add(jTFEmployeeDepartmentId);
-
-        jPEmployeeMainCenterContent1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
-        jBEmployeeInsert.setText("Insert");
-        jBEmployeeInsert.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEmployeeInsertActionPerformed(evt);
-            }
-        });
-        jPEmployeeMainCenterContent1.add(jBEmployeeInsert);
-
-        jBEmployeeUpdate.setText("Update");
-        jBEmployeeUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEmployeeUpdateActionPerformed(evt);
-            }
-        });
-        jPEmployeeMainCenterContent1.add(jBEmployeeUpdate);
-
-        jPEmployeeMainCenter.add(jPEmployeeMainCenterContent1);
-
-        jPEmployeeMainCenterContent2.setLayout(new java.awt.GridLayout(1, 0));
-        jPEmployeeMainCenterContent2.add(jTFEmployeeSearch);
-
-        jPEmployeeMainCenter.add(jPEmployeeMainCenterContent2);
-
-        jPEmployeeMainCenterContent3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
-        jBEmployeeDelete.setText("Delete by ID");
-        jBEmployeeDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEmployeeDeleteActionPerformed(evt);
-            }
-        });
-        jPEmployeeMainCenterContent3.add(jBEmployeeDelete);
-        jPEmployeeMainCenterContent3.add(jSEmployees2);
-
-        jBEmployeeSearch.setText("Search");
-        jBEmployeeSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEmployeeSearchActionPerformed(evt);
-            }
-        });
-        jPEmployeeMainCenterContent3.add(jBEmployeeSearch);
-
-        jCBEmployeeisGetById.setText("Get By ID");
-        jCBEmployeeisGetById.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBEmployeeisGetByIdActionPerformed(evt);
-            }
-        });
-        jPEmployeeMainCenterContent3.add(jCBEmployeeisGetById);
-        jPEmployeeMainCenterContent3.add(jSEmployees3);
-
-        jBEmployeeGetAll.setText("Get All Data");
-        jBEmployeeGetAll.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEmployeeGetAllActionPerformed(evt);
-            }
-        });
-        jPEmployeeMainCenterContent3.add(jBEmployeeGetAll);
-
-        jPEmployeeMainCenter.add(jPEmployeeMainCenterContent3);
-
-        jPEmployeeMain.add(jPEmployeeMainCenter, java.awt.BorderLayout.CENTER);
-
-        jTEmployee.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Employee ID", "First Name", "Last Name", "Email", "Phone Number", "Hire Date", "Job ID", "Salary", "Commission Pct", "Manager ID", "Department ID"
-            }
-        ));
-        jSPEmployee.setViewportView(jTEmployee);
-
-        javax.swing.GroupLayout jPEmployeeMainSouthLayout = new javax.swing.GroupLayout(jPEmployeeMainSouth);
-        jPEmployeeMainSouth.setLayout(jPEmployeeMainSouthLayout);
-        jPEmployeeMainSouthLayout.setHorizontalGroup(
-            jPEmployeeMainSouthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSPEmployee, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
-        );
-        jPEmployeeMainSouthLayout.setVerticalGroup(
-            jPEmployeeMainSouthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPEmployeeMainSouthLayout.createSequentialGroup()
-                .addComponent(jSPEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        jPEmployeeMain.add(jPEmployeeMainSouth, java.awt.BorderLayout.PAGE_END);
-
-        javax.swing.GroupLayout jIFEmployeeLayout = new javax.swing.GroupLayout(jIFEmployee.getContentPane());
-        jIFEmployee.getContentPane().setLayout(jIFEmployeeLayout);
-        jIFEmployeeLayout.setHorizontalGroup(
-            jIFEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jIFEmployeeLayout.createSequentialGroup()
-                .addComponent(jPEmployeeMain, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jIFEmployeeLayout.setVerticalGroup(
-            jIFEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPEmployeeMain, javax.swing.GroupLayout.PREFERRED_SIZE, 667, Short.MAX_VALUE)
-        );
-
-        jPanelMain.add(jIFEmployee);
+        resetButton = new javax.swing.JButton();
 
         jInternalFrame1.setVisible(true);
 
-        jLabel1.setText("LOCATIONS");
+        idLabel.setText("Location ID");
 
-        jLabel2.setText("Location Id");
+        addressLabel.setText("Street Address");
 
-        tflocation_id.addActionListener(new java.awt.event.ActionListener() {
+        postalLabel.setText("Postal Code");
+
+        cityLabel.setText("City");
+
+        provinceLabel.setText("State Province");
+
+        countryLabel.setText("Country");
+
+        saveButton.setText("SAVE");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tflocation_idActionPerformed(evt);
+                saveButtonActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("Street Address");
-
-        jLabel5.setText("Postal Code");
-
-        jLabel6.setText("City");
-
-        jLabel7.setText("State Province");
-
-        tfstate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfstateActionPerformed(evt);
-            }
-        });
-
-        jLabel8.setText("Country Id");
-
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
-            }
-        });
-
-        searchButton.setText("search");
-        searchButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchButtonActionPerformed(evt);
-            }
-        });
-
-        insertButton.setText("Insert");
-        insertButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                insertButtonActionPerformed(evt);
-            }
-        });
-
-        updateButton.setText("Update");
-        updateButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateButtonActionPerformed(evt);
-            }
-        });
-
-        deleteButton.setText("Delete");
+        deleteButton.setText("DELETE");
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteButtonActionPerformed(evt);
             }
         });
+
+        searchButton.setText("SEARCH");
 
         contentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -411,343 +158,211 @@ public class LocationView extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "NO", "ID", "Address", "Post", "City", "Province", "Country"
+                "NO", "ID", "Address", "Postal", "City", "Province", "Country"
             }
         ));
+        contentTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                contentTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(contentTable);
+
+        resetButton.setText("RESET");
+        resetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
         jInternalFrame1Layout.setHorizontalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                .addGap(257, 257, 257)
-                .addComponent(jLabel1)
-                .addContainerGap(288, Short.MAX_VALUE))
-            .addGroup(jInternalFrame1Layout.createSequentialGroup()
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jInternalFrame1Layout.createSequentialGroup()
                         .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                                .addGap(129, 129, 129)
-                                .addComponent(jLabel4))
+                                .addGap(24, 24, 24)
+                                .addComponent(idLabel)
+                                .addGap(41, 41, 41))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(postalLabel)
+                                    .addComponent(addressLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(saveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)))
+                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fieldPostal, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fieldAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                                .addGap(44, 44, 44)
                                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                                        .addGap(64, 64, 64)
                                         .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel5)
-                                            .addComponent(insertButton)
-                                            .addComponent(searchButton))
-                                        .addGap(26, 26, 26)
-                                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                                                .addComponent(updateButton)
-                                                .addGap(30, 30, 30)
-                                                .addComponent(deleteButton))
-                                            .addComponent(tfPostal_code, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jInternalFrame1Layout.createSequentialGroup()
-                                            .addComponent(jLabel2)
-                                            .addGap(39, 39, 39)
-                                            .addComponent(tflocation_id))
-                                        .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                                            .addComponent(jLabel3)
-                                            .addGap(20, 20, 20)
-                                            .addComponent(tfStreet_address, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfCity, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(tfstate, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
-                                .addComponent(tfCountryId)))))
-                .addContainerGap(65, Short.MAX_VALUE))
+                                            .addComponent(cityLabel)
+                                            .addComponent(countryLabel)
+                                            .addComponent(deleteButton))
+                                        .addGap(24, 24, 24))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(provinceLabel)
+                                        .addGap(18, 18, 18)))
+                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(fieldCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(fieldCity, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(fieldProvince, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
+                                .addGap(218, 218, 218)
+                                .addComponent(searchButton))))
+                    .addComponent(resetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(45, 45, 45)
+                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jInternalFrame1Layout.createSequentialGroup()
+                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(fieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(idLabel))
+                                .addGap(28, 28, 28)
+                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(fieldAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(addressLabel)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jInternalFrame1Layout.createSequentialGroup()
+                                .addGap(100, 100, 100)
+                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(fieldPostal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(postalLabel)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(fieldCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cityLabel))))
+                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(fieldCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(countryLabel)))
+                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(fieldProvince, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(provinceLabel))))
+                .addGap(32, 32, 32)
+                .addComponent(resetButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tflocation_id, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel6)
-                    .addComponent(tfCity, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(saveButton)
+                    .addComponent(deleteButton)
+                    .addComponent(searchButton))
                 .addGap(18, 18, 18)
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(tfStreet_address, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(tfstate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(tfPostal_code, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(tfCountryId, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addGap(20, 20, 20)
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchButton)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(insertButton)
-                    .addComponent(updateButton)
-                    .addComponent(deleteButton))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        jPanelMain.add(jInternalFrame1);
-
-        jMenu1.setText("CRUD");
-
-        jMenuItem1.setText("Employees");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem1);
-
-        jMenuBar1.add(jMenu1);
-
-        setJMenuBar(jMenuBar1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
+            .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
+            .addComponent(jInternalFrame1)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        jIFEmployee.setVisible(true);
-//        jIFEmployee.setBounds(5, 5, 200, 300);
-        jIFEmployee.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        jIFEmployee.revalidate();
-//        jPanel1.add(jInternalFrame1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jBEmployeeInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEmployeeInsertActionPerformed
-        JOptionPane.showMessageDialog(rootPane, ec.insert(jTFEmployeeEmployeeId.getText(), jTFEmployeeFirstName.getText(), jTFEmployeeLastName.getText(), jTFEmployeeEmail.getText(), jTFEmployeePhoneNumber.getText(), jTFEmployeeHireDate.getText(), jTFEmployeeJobId.getText(), jTFEmployeeSalary.getText(), jTFEmployeeCommissionPct.getText(), jTFEmployeeManagerId.getText(), jTFEmployeeDepartmentId.getText()));
-    }//GEN-LAST:event_jBEmployeeInsertActionPerformed
-
-    private void jBEmployeeUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEmployeeUpdateActionPerformed
-        JOptionPane.showMessageDialog(rootPane, ec.update(jTFEmployeeEmployeeId.getText(), jTFEmployeeFirstName.getText(), jTFEmployeeLastName.getText(), jTFEmployeeEmail.getText(), jTFEmployeePhoneNumber.getText(), jTFEmployeeHireDate.getText(), jTFEmployeeJobId.getText(), jTFEmployeeSalary.getText(), jTFEmployeeCommissionPct.getText(), jTFEmployeeManagerId.getText(), jTFEmployeeDepartmentId.getText()));
-    }//GEN-LAST:event_jBEmployeeUpdateActionPerformed
-
-    private void jTFEmployeeEmployeeIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFEmployeeEmployeeIdActionPerformed
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFEmployeeEmployeeIdActionPerformed
-
-    private void jCBEmployeeisGetByIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBEmployeeisGetByIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCBEmployeeisGetByIdActionPerformed
-
-    private void jBEmployeeGetAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEmployeeGetAllActionPerformed
-        DefaultTableModel tableModelEmployee = (DefaultTableModel) jTEmployee.getModel();
-        tableModelEmployee.setRowCount(0);
-        for (Employee value : ec.getAllData()) {
-            Object[] data = {value.getEmployeeId(), value.getFirst_name(),
-                value.getLast_name(), value.getEmail(), value.getPhone_number(),
-                value.getHire_date(), value.getJob_id(), value.getSalary(),
-                value.getCommission_pct(), value.getManager_id(), value.getDepartment_id()
-            };
-            tableModelEmployee.addRow(data);
-        }
-
-    }//GEN-LAST:event_jBEmployeeGetAllActionPerformed
-
-    private void jBEmployeeSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEmployeeSearchActionPerformed
-        DefaultTableModel tableModelEmployee = (DefaultTableModel) jTEmployee.getModel();
-        tableModelEmployee.setRowCount(0);
-        for (Employee value : ec.searchData(jTFEmployeeSearch.getText().toString(), jCBEmployeeisGetById.isSelected())) {
-            Object[] data = {value.getEmployeeId(), value.getFirst_name(),
-                value.getLast_name(), value.getEmail(), value.getPhone_number(),
-                value.getHire_date(), value.getJob_id(), value.getSalary(),
-                value.getCommission_pct(), value.getManager_id(), value.getDepartment_id()
-            };
-            tableModelEmployee.addRow(data);
-        }
-
-    }//GEN-LAST:event_jBEmployeeSearchActionPerformed
-
-    private void jBEmployeeDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEmployeeDeleteActionPerformed
-        JOptionPane.showMessageDialog(rootPane, ec.delete(jTFEmployeeSearch.getText()));
-    }//GEN-LAST:event_jBEmployeeDeleteActionPerformed
-
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
-
-    private void tflocation_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tflocation_idActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tflocation_idActionPerformed
-
-    private void tfstateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfstateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfstateActionPerformed
-
-    private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
-
-        String id = tflocation_id.getText();
-        String address = tfStreet_address.getText();
-        String postalCode = tfPostal_code.getText();
-        String city = tfCity.getText();
-        String state = tfstate.getText();
-        String countryId = tfCountryId.getText();
-        lc.insert(id, address, postalCode, city, state, countryId);
-    }//GEN-LAST:event_insertButtonActionPerformed
-
-    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-        String id           = tflocation_id.getText();
-        String address      = tfStreet_address.getText();
-        String postalCode   = tfPostal_code.getText();
-        String city         = tfCity.getText();
-        String state        = tfstate.getText();
-        String countryId    = tfCountryId.getText();
-        lc.update(id, address, postalCode, city, state, countryId);
-    }//GEN-LAST:event_updateButtonActionPerformed
-
-    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-
-//        String id =Integer.parseInttflocation_id.getText();
-//        lc.delete(id);
-    }//GEN-LAST:event_deleteButtonActionPerformed
-
-    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchButtonActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+        if (confirm()) {
+            if (isEmpty()) {
+                JOptionPane.showMessageDialog(null, lc.insert(
+                        fieldId.getText(), fieldAddress.getText(), 
+                        fieldPostal.getText(), fieldCity.getText(),
+                        fieldProvince.getText(), fieldCountry.getText()));
+            } else {
+                try {
+                    int reply = JOptionPane.showConfirmDialog(null,
+                            "Confirm your Action ?", 
+                            "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
+                    );
+                    if (reply == JOptionPane.YES_OPTION) {
+                        JOptionPane.showMessageDialog(null, lc.update(
+                            fieldId.getText(), fieldAddress.getText(), 
+                            fieldPostal.getText(), fieldCity.getText(),
+                            fieldProvince.getText(), fieldCountry.getText()));
+                        clean();
+                        tableData(lc.getAll(""));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HRView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HRView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HRView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HRView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            clean();
+            tableData(lc.getAll(""));
         }
-        //</editor-fold>
-        //</editor-fold>
+        
+        String id           = fieldId.getText();
+        String address      = fieldAddress.getText();
+        String postalCode   = fieldPostal.getText();
+        String city         = fieldCity.getText();
+        String state        = fieldProvince.getText();
+        String countryId    = fieldCountry.getText();
+        lc.insert(id, address, postalCode, city, state, countryId);
+        
+    }//GEN-LAST:event_saveButtonActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new HRView().setVisible(true);
-            }
-        });
-    }
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void contentTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contentTableMouseClicked
+        // TODO add your handling code here:
+        fieldId.setText(contentTable.getValueAt(contentTable.getSelectedRow(), 1).toString());
+        fieldAddress.setText(contentTable.getValueAt(contentTable.getSelectedRow(), 2).toString());
+        fieldPostal.setText(contentTable.getValueAt(contentTable.getSelectedRow(), 3).toString());
+        fieldCity.setText(contentTable.getValueAt(contentTable.getSelectedRow(), 4).toString());
+        fieldProvince.setText(contentTable.getValueAt(contentTable.getSelectedRow(), 5).toString());
+        fieldCountry.setText(contentTable.getValueAt(contentTable.getSelectedRow(), 6).toString());
+
+        fieldId.setEnabled(false);
+    }//GEN-LAST:event_contentTableMouseClicked
+
+    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
+        // TODO add your handling code here:
+        clean();
+        fieldId.setEnabled(true);
+        clean();
+    }//GEN-LAST:event_resetButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel addressLabel;
+    private javax.swing.JLabel cityLabel;
     private javax.swing.JTable contentTable;
+    private javax.swing.JLabel countryLabel;
     private javax.swing.JButton deleteButton;
-    private javax.swing.JButton insertButton;
-    private javax.swing.JButton jBEmployeeDelete;
-    private javax.swing.JButton jBEmployeeGetAll;
-    private javax.swing.JButton jBEmployeeInsert;
-    private javax.swing.JButton jBEmployeeSearch;
-    private javax.swing.JButton jBEmployeeUpdate;
-    private javax.swing.JCheckBox jCBEmployeeisGetById;
-    private javax.swing.JInternalFrame jIFEmployee;
+    private javax.swing.JTextField fieldAddress;
+    private javax.swing.JTextField fieldCity;
+    private javax.swing.JTextField fieldCountry;
+    private javax.swing.JTextField fieldId;
+    private javax.swing.JTextField fieldPostal;
+    private javax.swing.JTextField fieldProvince;
+    private javax.swing.JLabel idLabel;
     private javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JLabel jLEmployeeCommissionPct;
-    private javax.swing.JLabel jLEmployeeDepartmentId;
-    private javax.swing.JLabel jLEmployeeEmail;
-    private javax.swing.JLabel jLEmployeeEmployeeId;
-    private javax.swing.JLabel jLEmployeeFirstName;
-    private javax.swing.JLabel jLEmployeeHireDate;
-    private javax.swing.JLabel jLEmployeeJobId;
-    private javax.swing.JLabel jLEmployeeLastName;
-    private javax.swing.JLabel jLEmployeeManagerId;
-    private javax.swing.JLabel jLEmployeePhoneNumber;
-    private javax.swing.JLabel jLEmployeeSalary;
-    private javax.swing.JLabel jLEmployeeSearch;
-    private javax.swing.JLabel jLEmployeeTitle;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JPanel jPEmployeeMain;
-    private javax.swing.JPanel jPEmployeeMainCenter;
-    private javax.swing.JPanel jPEmployeeMainCenterContent1;
-    private javax.swing.JPanel jPEmployeeMainCenterContent2;
-    private javax.swing.JPanel jPEmployeeMainCenterContent3;
-    private javax.swing.JPanel jPEmployeeMainNorth;
-    private javax.swing.JPanel jPEmployeeMainSouth;
-    private javax.swing.JPanel jPEmployeeMainWest;
-    private javax.swing.JPanel jPanelMain;
-    private javax.swing.JSeparator jSEmployees1;
-    private javax.swing.JSeparator jSEmployees2;
-    private javax.swing.JSeparator jSEmployees3;
-    private javax.swing.JScrollPane jSPEmployee;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTEmployee;
-    private javax.swing.JTextField jTFEmployeeCommissionPct;
-    private javax.swing.JTextField jTFEmployeeDepartmentId;
-    private javax.swing.JTextField jTFEmployeeEmail;
-    private javax.swing.JTextField jTFEmployeeEmployeeId;
-    private javax.swing.JTextField jTFEmployeeFirstName;
-    private javax.swing.JTextField jTFEmployeeHireDate;
-    private javax.swing.JTextField jTFEmployeeJobId;
-    private javax.swing.JTextField jTFEmployeeLastName;
-    private javax.swing.JTextField jTFEmployeeManagerId;
-    private javax.swing.JTextField jTFEmployeePhoneNumber;
-    private javax.swing.JTextField jTFEmployeeSalary;
-    private javax.swing.JTextField jTFEmployeeSearch;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JLabel postalLabel;
+    private javax.swing.JLabel provinceLabel;
+    private javax.swing.JButton resetButton;
+    private javax.swing.JButton saveButton;
     private javax.swing.JButton searchButton;
-    private javax.swing.JTextField tfCity;
-    private javax.swing.JTextField tfCountryId;
-    private javax.swing.JTextField tfPostal_code;
-    private javax.swing.JTextField tfStreet_address;
-    private javax.swing.JTextField tflocation_id;
-    private javax.swing.JTextField tfstate;
-    private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
-
 }

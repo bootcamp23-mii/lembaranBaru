@@ -26,9 +26,9 @@ public class LocationController {
     public String insert(String id, String address, String postal, String city, String province, String country) {
         String result = "";
         if (ldao.save(new Location(Integer.parseInt(id), address, postal, city, province, country), true)) {
-            result = "YEAY";
+            result = "YEAY, your new data inserted into table";
         } else {
-            result = "OUCH";
+            result = "Ouch, Sorry you might miss something";
         }
         return result;
     }
@@ -36,16 +36,16 @@ public class LocationController {
     public String update(String id, String address, String postal, String city, String province, String country) {
         String result = "";
         if (ldao.save(new Location(Integer.parseInt(id), address, postal, city, province,country), false)) {
-            result = "Data berhasil disimpan";
+            result = "Data Changes Complete";
         } else {
-            result = "Maaf, data gagal disimpan";
+            result = "Ouch, Sorry you might miss something";
         }
         return result;
     }
 
-    public List<Location> getAll(String keyword, boolean con) {
+    public List<Location> getAll(String keyword) {
         List result;
-        result = ldao.getData(keyword, con);
+        result = ldao.getData(keyword, false);
         return result;
     }
 }
