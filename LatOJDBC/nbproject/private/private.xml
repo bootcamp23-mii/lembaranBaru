@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Pandu/Documents/GitHub/lembaranBaru/LatOJDBC/src/views/HRView.java</file>
-            <file>file:/C:/Users/Pandu/Documents/GitHub/lembaranBaru/LatOJDBC/src/views/Job.java</file>
-            <file>file:/C:/Users/Pandu/Documents/GitHub/lembaranBaru/LatOJDBC/src/tools/DBConnection.java</file>
-            <file>file:/C:/Users/Pandu/Documents/GitHub/lembaranBaru/LatOJDBC/src/tools/LocationMain.java</file>
+            <file>file:/C:/Users/USER/Desktop/BOOTCAMP%2023/%5B%20Tugas%20Bootcamp%20%5D/MVC-HR/lembaranBaru/LatOJDBC/src/views/CountryView.java</file>
+            <file>file:/C:/Users/USER/Desktop/BOOTCAMP%2023/%5B%20Tugas%20Bootcamp%20%5D/MVC-HR/lembaranBaru/LatOJDBC/src/models/Country.java</file>
+            <file>file:/C:/Users/USER/Desktop/BOOTCAMP%2023/%5B%20Tugas%20Bootcamp%20%5D/MVC-HR/lembaranBaru/LatOJDBC/src/daos/CountryDAO.java</file>
+            <file>file:/C:/Users/USER/Desktop/BOOTCAMP%2023/%5B%20Tugas%20Bootcamp%20%5D/MVC-HR/lembaranBaru/LatOJDBC/src/controllers/CountryController.java</file>
+            <file>file:/C:/Users/USER/Desktop/BOOTCAMP%2023/%5B%20Tugas%20Bootcamp%20%5D/MVC-HR/lembaranBaru/LatOJDBC/src/views/HRView.java</file>
         </group>
     </open-files>
 </project-private>
