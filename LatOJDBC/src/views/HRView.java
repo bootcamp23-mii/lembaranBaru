@@ -180,6 +180,7 @@ public class HRView extends javax.swing.JFrame {
         jobsframe = new javax.swing.JMenuItem();
         regionMenuItem = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        locationMenu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -565,6 +566,14 @@ public class HRView extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem2);
 
+        locationMenu.setText("Location");
+        locationMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                locationMenuActionPerformed(evt);
+            }
+        });
+        jMenu1.add(locationMenu);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -796,6 +805,13 @@ public class HRView extends javax.swing.JFrame {
         cv.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void locationMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locationMenuActionPerformed
+        // TODO add your handling code here:
+        LocationView lv = new LocationView();
+        jPanelMain.add(lv);
+        lv.setVisible(true);
+    }//GEN-LAST:event_locationMenuActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -895,6 +911,7 @@ public class HRView extends javax.swing.JFrame {
     private javax.swing.JTextField jTFEmployeeSearch;
     private javax.swing.JTable jTable1;
     private javax.swing.JMenuItem jobsframe;
+    private javax.swing.JMenuItem locationMenu;
     private javax.swing.JMenuItem regionMenuItem;
     private javax.swing.JComboBox<String> search;
     private javax.swing.JTextField tf_id;
