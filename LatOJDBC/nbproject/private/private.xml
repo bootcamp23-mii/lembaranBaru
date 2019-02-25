@@ -3,16 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Kirizu/Documents/NetBeansProjects/lembaranBaru/LatOJDBC/src/views/EmployeeView.java</file>
-            <file>file:/C:/Users/Kirizu/Documents/NetBeansProjects/lembaranBaru/LatOJDBC/src/views/Job.java</file>
-            <file>file:/C:/Users/Kirizu/Documents/NetBeansProjects/lembaranBaru/LatOJDBC/src/models/Employee.java</file>
-            <file>file:/C:/Users/Kirizu/Documents/NetBeansProjects/lembaranBaru/LatOJDBC/src/controllers/RegionController.java</file>
-            <file>file:/C:/Users/Kirizu/Documents/NetBeansProjects/lembaranBaru/LatOJDBC/src/tools/DBConnection.java</file>
-            <file>file:/C:/Users/Kirizu/Documents/NetBeansProjects/lembaranBaru/LatOJDBC/src/controllers/DepartmentController.java</file>
-            <file>file:/C:/Users/Kirizu/Documents/NetBeansProjects/lembaranBaru/LatOJDBC/src/controllers/EmployeeController.java</file>
-            <file>file:/C:/Users/Kirizu/Documents/NetBeansProjects/lembaranBaru/LatOJDBC/src/tools/LatOJDBC.java</file>
-            <file>file:/C:/Users/Kirizu/Documents/NetBeansProjects/lembaranBaru/LatOJDBC/src/daos/EmployeeDAO.java</file>
-            <file>file:/C:/Users/Kirizu/Documents/NetBeansProjects/lembaranBaru/LatOJDBC/src/views/HRView.java</file>
+            <file>file:/C:/Users/Pandu/Documents/GitHub/lembaranBaru/LatOJDBC/src/views/HRView.java</file>
+            <file>file:/C:/Users/Pandu/Documents/GitHub/lembaranBaru/LatOJDBC/src/views/DepartmentView2.java</file>
+            <file>file:/C:/Users/Pandu/Documents/GitHub/lembaranBaru/LatOJDBC/src/controllers/LocationController.java</file>
+            <file>file:/C:/Users/Pandu/Documents/GitHub/lembaranBaru/LatOJDBC/src/views/LocationView.java</file>
+            <file>file:/C:/Users/Pandu/Documents/GitHub/lembaranBaru/LatOJDBC/src/daos/LocationDAO.java</file>
+            <file>file:/C:/Users/Pandu/Documents/GitHub/lembaranBaru/LatOJDBC/src/views/Job.java</file>
         </group>
     </open-files>
 </project-private>
