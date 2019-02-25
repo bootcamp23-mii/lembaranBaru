@@ -3,10 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Pandu/Documents/GitHub/lembaranBaru/LatOJDBC/src/views/HRView.java</file>
-            <file>file:/C:/Users/Pandu/Documents/GitHub/lembaranBaru/LatOJDBC/src/views/Job.java</file>
-            <file>file:/C:/Users/Pandu/Documents/GitHub/lembaranBaru/LatOJDBC/src/tools/DBConnection.java</file>
-            <file>file:/C:/Users/Pandu/Documents/GitHub/lembaranBaru/LatOJDBC/src/tools/LocationMain.java</file>
+            <file>file:/C:/Users/AdhityaWP/Documents/NetBeansProjects/untukupload/lembaranBaru/LatOJDBC/src/controllers/RegionController.java</file>
+            <file>file:/C:/Users/AdhityaWP/Documents/NetBeansProjects/untukupload/lembaranBaru/LatOJDBC/src/daos/RegionDAO.java</file>
+            <file>file:/C:/Users/AdhityaWP/Documents/NetBeansProjects/untukupload/lembaranBaru/LatOJDBC/src/tools/DBConnection.java</file>
         </group>
     </open-files>
 </project-private>

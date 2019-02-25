@@ -63,9 +63,7 @@ public class RegionController {
         return result;        
     }
     
-    public List<Region> getAllData(String key, boolean s){
-        List result = new ArrayList();
-        result = rdao.getData(key, s);
-        return result;        
+    public List<Region> getAllData(){
+        return rdao.getData("", false);        
     }
 }
