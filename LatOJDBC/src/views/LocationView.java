@@ -25,7 +25,7 @@ public class LocationView extends javax.swing.JPanel {
     
     List<Location> listdata         = new ArrayList<Location>();
     DBConnection connection         = new DBConnection();
-    private DefaultTableModel model = new DefaultTableModel();
+    private DefaultTableModel modelLocation = new DefaultTableModel();
     int x = 0;
     LocationDAO ldao        = new LocationDAO(connection.getConnection());
     LocationController lc   = new LocationController(connection.getConnection());
@@ -60,7 +60,7 @@ public class LocationView extends javax.swing.JPanel {
     
     private void tableData(List<models.Location> locs) {
         
-        Object[] columnNames = {"Nomor", "Job Id", "Job Title", "Minimal Salary", "Maximal Salary"};
+        Object[] columnNames = {"NO", "ID", "Street Address", "Postal Code", "City", "State province", "Country ID"};
         Object[][] data = new Object[locs.size()][columnNames.length];
         
         for (int i = 0; i < data.length; i++) {
@@ -72,8 +72,8 @@ public class LocationView extends javax.swing.JPanel {
             data[i][5] = locs.get(i).getProvince();
             data[i][6] = locs.get(i).getCountry();
         }
-        model = new DefaultTableModel(data, columnNames);
-        contentTable.setModel(model);
+        modelLocation = new DefaultTableModel(data, columnNames);
+        contentTable.setModel(modelLocation);
     }
     
     private void clean() {
@@ -118,6 +118,7 @@ public class LocationView extends javax.swing.JPanel {
         searchButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         contentTable = new javax.swing.JTable();
+        resetButton = new javax.swing.JButton();
 
         jInternalFrame1.setVisible(true);
 
@@ -160,7 +161,19 @@ public class LocationView extends javax.swing.JPanel {
                 "NO", "ID", "Address", "Postal", "City", "Province", "Country"
             }
         ));
+        contentTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                contentTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(contentTable);
+
+        resetButton.setText("RESET");
+        resetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
@@ -206,7 +219,8 @@ public class LocationView extends javax.swing.JPanel {
                                     .addComponent(fieldProvince, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
                                 .addGap(218, 218, 218)
-                                .addComponent(searchButton)))))
+                                .addComponent(searchButton))))
+                    .addComponent(resetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         jInternalFrame1Layout.setVerticalGroup(
@@ -242,7 +256,9 @@ public class LocationView extends javax.swing.JPanel {
                         .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(fieldProvince, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(provinceLabel))))
-                .addGap(76, 76, 76)
+                .addGap(32, 32, 32)
+                .addComponent(resetButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveButton)
                     .addComponent(deleteButton)
@@ -266,6 +282,35 @@ public class LocationView extends javax.swing.JPanel {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
+        
+        if (confirm()) {
+            if (isEmpty()) {
+                JOptionPane.showMessageDialog(null, lc.insert(
+                        fieldId.getText(), fieldAddress.getText(), 
+                        fieldPostal.getText(), fieldCity.getText(),
+                        fieldProvince.getText(), fieldCountry.getText()));
+            } else {
+                try {
+                    int reply = JOptionPane.showConfirmDialog(null,
+                            "Confirm your Action ?", 
+                            "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
+                    );
+                    if (reply == JOptionPane.YES_OPTION) {
+                        JOptionPane.showMessageDialog(null, lc.update(
+                            fieldId.getText(), fieldAddress.getText(), 
+                            fieldPostal.getText(), fieldCity.getText(),
+                            fieldProvince.getText(), fieldCountry.getText()));
+                        clean();
+                        tableData(lc.getAll(""));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            clean();
+            tableData(lc.getAll(""));
+        }
+        
         String id           = fieldId.getText();
         String address      = fieldAddress.getText();
         String postalCode   = fieldPostal.getText();
@@ -279,6 +324,24 @@ public class LocationView extends javax.swing.JPanel {
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void contentTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contentTableMouseClicked
+        // TODO add your handling code here:
+        fieldId.setText(contentTable.getValueAt(contentTable.getSelectedRow(), 1).toString());
+        fieldAddress.setText(contentTable.getValueAt(contentTable.getSelectedRow(), 2).toString());
+        fieldPostal.setText(contentTable.getValueAt(contentTable.getSelectedRow(), 3).toString());
+        fieldCity.setText(contentTable.getValueAt(contentTable.getSelectedRow(), 4).toString());
+        fieldProvince.setText(contentTable.getValueAt(contentTable.getSelectedRow(), 5).toString());
+        fieldCountry.setText(contentTable.getValueAt(contentTable.getSelectedRow(), 6).toString());
+
+        fieldId.setEnabled(false);
+    }//GEN-LAST:event_contentTableMouseClicked
+
+    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
+        // TODO add your handling code here:
+        clean();
+        fieldId.setEnabled(true);
+    }//GEN-LAST:event_resetButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -298,6 +361,7 @@ public class LocationView extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel postalLabel;
     private javax.swing.JLabel provinceLabel;
+    private javax.swing.JButton resetButton;
     private javax.swing.JButton saveButton;
     private javax.swing.JButton searchButton;
     // End of variables declaration//GEN-END:variables
