@@ -28,7 +28,7 @@ public class LocationMain {
         LocationController lc = new LocationController(connection.getConnection());
         
 
-        for (Location location : ldao.getData("", false)) {
+        for (Location location : ldao.getData("1001", true)) {
          
             System.out.println("ID              : " + location.getId());
             System.out.println("ADDRESS         : " + location.getAddress());

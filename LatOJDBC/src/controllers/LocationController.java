@@ -61,7 +61,7 @@ public class LocationController {
 
     public List<Location> getById(String keyword) {
         List result;
-        result = ldao.getData(keyword, true);
+        result = ldao.getData(keyword, false);
         return result;
     }
 
