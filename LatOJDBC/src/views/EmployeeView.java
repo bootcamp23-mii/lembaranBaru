@@ -253,9 +253,19 @@ public class EmployeeView extends javax.swing.JInternalFrame {
 
         jCBEmployeeManagerId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
         jCBEmployeeManagerId.setToolTipText("");
+        jCBEmployeeManagerId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBEmployeeManagerIdActionPerformed(evt);
+            }
+        });
         jPEmployeeMainCenter.add(jCBEmployeeManagerId);
 
         jCBEmployeeDepartmentId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+        jCBEmployeeDepartmentId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBEmployeeDepartmentIdActionPerformed(evt);
+            }
+        });
         jPEmployeeMainCenter.add(jCBEmployeeDepartmentId);
 
         jPEmployeeMainCenterContent1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
@@ -473,6 +483,14 @@ public class EmployeeView extends javax.swing.JInternalFrame {
     private void jTFEmployeeSalaryKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFEmployeeSalaryKeyTyped
         filterhuruf(evt);
     }//GEN-LAST:event_jTFEmployeeSalaryKeyTyped
+
+    private void jCBEmployeeManagerIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBEmployeeManagerIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBEmployeeManagerIdActionPerformed
+
+    private void jCBEmployeeDepartmentIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBEmployeeDepartmentIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBEmployeeDepartmentIdActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBEmployeeClear;
