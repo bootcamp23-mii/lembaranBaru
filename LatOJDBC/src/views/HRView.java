@@ -825,11 +825,9 @@ public class HRView extends javax.swing.JFrame {
     }//GEN-LAST:event_locationMenuActionPerformed
 
     private void deptMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deptMenuItemActionPerformed
-        // TODO add your handling code here:
-                deptMenuItem.setVisible(true);
-//        jIFEmployee.setBounds(5, 5, 200, 300);
-        jIFJob.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        jIFJob.revalidate();
+       DepartmentView3 dv=new DepartmentView3();
+       jPanelMain.add(dv);
+       dv.setVisible(true);
     }//GEN-LAST:event_deptMenuItemActionPerformed
 
     /**

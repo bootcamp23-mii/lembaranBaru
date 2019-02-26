@@ -11,25 +11,23 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import tools.DBConnection;
-
 /**
  *
  * @author milhamafemi
  */
-public class DepartmentView2 extends javax.swing.JFrame {
-
+public class DepartmentView3 extends javax.swing.JPanel {
     DefaultTableModel myTable = new DefaultTableModel();
     DBConnection connection = new DBConnection();
 
     DepartmentController dc = new DepartmentController(connection.getConnection());
 
     /**
-     * Creates new form DepartmentView2
+     * Creates new form DepartmentView3
      */
-    public DepartmentView2() {
+    public DepartmentView3() {
         initComponents();
     }
-
+    
     private boolean konfirmasi() {
         if (jTextDeptName.equals("") || jTextDeptId.equals("") || jTextDeptManagerId.equals("") || jTextLocId.equals("")) {
             JOptionPane.showMessageDialog(null, "Maaf, data tidak boleh kosong");
@@ -73,7 +71,6 @@ public class DepartmentView2 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Pada kolom ID Department Hanya bisa memasukkan angka");
         }
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -83,52 +80,37 @@ public class DepartmentView2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        SearchData = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jTextDeptId = new javax.swing.JTextField();
         jTextDeptName = new javax.swing.JTextField();
         jTextDeptManagerId = new javax.swing.JTextField();
         jTextLocId = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         comboSearch = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        SearchData = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
-
-        jLabel1.setText("Deprartment id");
 
         jLabel2.setText("Department Name");
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setText("Department");
+
         jLabel3.setText("Manager Id");
+
+        jButton3.setText("Delete");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Location Id");
 
@@ -158,6 +140,24 @@ public class DepartmentView2 extends javax.swing.JFrame {
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
         jButton2.setText("Update");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,27 +172,19 @@ public class DepartmentView2 extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Deprartment id");
+
         jLabel5.setText("Search");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel6.setText("Department");
-
-        jButton3.setText("Delete");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,9 +253,65 @@ public class DepartmentView2 extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        String id = jTextDeptId.getText();
+        if (id.equals("")) {
+            JOptionPane.showMessageDialog(null, "Data tidak boleh kosong");
+        } else {
+            try {
+                int reply = JOptionPane.showConfirmDialog(null,
+                    "Anda yakin akan menghapus data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
+                );
+                if (reply == JOptionPane.YES_OPTION) {
+                    JOptionPane.showMessageDialog(null, dc.delete(id));
+                    clean();
+                }
+            } catch (Exception e) {
+                dispose();
+            }
+        }
+        tableData(dc.getAll());
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTextDeptManagerIdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextDeptManagerIdKeyTyped
+        // TODO add your handling code here:
+        filterHuruf(evt);
+    }//GEN-LAST:event_jTextDeptManagerIdKeyTyped
+
+    private void jTextLocIdInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTextLocIdInputMethodTextChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextLocIdInputMethodTextChanged
+
+    private void jTextLocIdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextLocIdKeyTyped
+        // TODO add your handling code here:
+        filterHuruf(evt);
+    }//GEN-LAST:event_jTextLocIdKeyTyped
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if (isEmpty()) {
+            JOptionPane.showMessageDialog(null, dc.insert(jTextDeptId.getText(), jTextDeptName.getText(),
+                jTextDeptManagerId.getText(), jTextLocId.getText()));
+        } else {
+            try {
+                int reply = JOptionPane.showConfirmDialog(null, "Anda yakin untuk melakukan perubahan data?",
+                    "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (reply == JOptionPane.YES_OPTION) {
+                    JOptionPane.showMessageDialog(null, dc.update(jTextDeptId.getText(), jTextDeptName.getText(),
+                        jTextDeptManagerId.getText(), jTextLocId.getText()));
+                clean();
+                tableData(dc.getAll());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        }
+        clean();
+        tableData(dc.getAll());
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
@@ -273,6 +321,31 @@ public class DepartmentView2 extends javax.swing.JFrame {
         jTextLocId.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
         jTextDeptId.setEnabled(false);
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        String id = jTextDeptId.getText();
+        if (konfirmasi()) {
+            if (isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Data tidak boleh kosong");
+        } else {
+            try {
+                int reply = JOptionPane.showConfirmDialog(null, "Anda yakin akan menghapus Data ini?",
+                    "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (reply==JOptionPane.YES_OPTION) {
+                    JOptionPane.showMessageDialog(null, dc.update(jTextDeptId.getText(), jTextDeptName.getText(),
+                        jTextDeptManagerId.getText(), jTextLocId.getText()));
+                    tableData(dc.getAll());
+                }
+            } catch (Exception e) {
+                dispose();
+            }
+            clean();
+            dc.getAll();
+        }
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void comboSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboSearchActionPerformed
         // TODO add your handling code here:
@@ -286,114 +359,6 @@ public class DepartmentView2 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_comboSearchActionPerformed
 
-    private void jTextLocIdInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTextLocIdInputMethodTextChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextLocIdInputMethodTextChanged
-
-    private void jTextDeptManagerIdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextDeptManagerIdKeyTyped
-        // TODO add your handling code here:
-        filterHuruf(evt);
-    }//GEN-LAST:event_jTextDeptManagerIdKeyTyped
-
-    private void jTextLocIdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextLocIdKeyTyped
-        // TODO add your handling code here:
-        filterHuruf(evt);
-    }//GEN-LAST:event_jTextLocIdKeyTyped
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        if (isEmpty()) {
-            JOptionPane.showMessageDialog(null, dc.insert(jTextDeptId.getText(), jTextDeptName.getText(),
-                     jTextDeptManagerId.getText(), jTextLocId.getText()));
-        } else {
-            try {
-                int reply = JOptionPane.showConfirmDialog(null, "Anda yakin untuk melakukan perubahan data?",
-                         "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (reply == JOptionPane.YES_OPTION) {
-                    JOptionPane.showMessageDialog(null, dc.update(jTextDeptId.getText(), jTextDeptName.getText(),
-                             jTextDeptManagerId.getText(), jTextLocId.getText()));
-                    clean();
-                    tableData(dc.getAll());
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        clean();
-        tableData(dc.getAll());
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        String id = jTextDeptId.getText();
-        if (id.equals("")) {
-            JOptionPane.showMessageDialog(null, "Data tidak boleh kosong");
-        } else {
-            try {
-                int reply = JOptionPane.showConfirmDialog(null, "Anda yakin akan menghapus Data ini?",
-                         "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            } catch (Exception e) {
-                dispose();
-            }
-            dc.getAll();
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        String id = jTextDeptId.getText();
-        if (id.equals("")) {
-            JOptionPane.showMessageDialog(null, "Data tidak boleh kosong");
-        } else {
-            try {
-                int reply = JOptionPane.showConfirmDialog(null,
-                        "Anda yakin akan menghapus data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
-                );
-                if (reply == JOptionPane.YES_OPTION) {
-                    JOptionPane.showMessageDialog(null, dc.delete(id));
-                    clean();
-                }
-            } catch (Exception e) {
-                dispose();
-            }
-        }
-        tableData(dc.getAll());
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DepartmentView2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DepartmentView2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DepartmentView2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DepartmentView2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DepartmentView2().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField SearchData;
@@ -401,7 +366,6 @@ public class DepartmentView2 extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -415,4 +379,8 @@ public class DepartmentView2 extends javax.swing.JFrame {
     private javax.swing.JTextField jTextDeptName;
     private javax.swing.JTextField jTextLocId;
     // End of variables declaration//GEN-END:variables
+
+    private void dispose() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
