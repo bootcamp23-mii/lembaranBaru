@@ -6,20 +6,30 @@
 package views;
 
 import controllers.DepartmentController;
+import controllers.EmployeeController;
+import controllers.LocationController;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import models.Employee;
 import tools.DBConnection;
+
 /**
  *
  * @author milhamafemi
  */
 public class DepartmentView extends javax.swing.JPanel {
+
     DefaultTableModel myTable = new DefaultTableModel();
     DBConnection connection = new DBConnection();
+    List<models.Employee> employeeList = new ArrayList<>();
+    List<models.Location> locationList = new ArrayList<>();
 
     DepartmentController dc = new DepartmentController(connection.getConnection());
+    EmployeeController ec = new EmployeeController(connection.getConnection());
+    LocationController lc = new LocationController(connection.getConnection());
 
     /**
      * Creates new form DepartmentView3
@@ -27,10 +37,12 @@ public class DepartmentView extends javax.swing.JPanel {
     public DepartmentView() {
         initComponents();
         tableData(dc.getAll());
+        setComboBox();
+        
     }
-    
+
     private boolean konfirmasi() {
-        if (jTextDeptName.equals("") || jTextDeptId.equals("") || jTextDeptManagerId.equals("") || jTextLocId.equals("")) {
+        if (jTextDeptName.equals("") || jTextDeptId.equals("") || jComboManagerId.getSelectedIndex() == 0 || jComboBoxLocId.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data tidak boleh kosong");
             return false;
         }
@@ -62,8 +74,8 @@ public class DepartmentView extends javax.swing.JPanel {
         jTextDeptId.setEnabled(true);
         jTextDeptId.setText("");
         jTextDeptName.setText("");
-        jTextDeptManagerId.setText("");
-        jTextLocId.setText("");
+        jComboManagerId.setSelectedIndex(0);
+        jComboBoxLocId.setSelectedIndex(0);
     }
 
     private void filterHuruf(KeyEvent a) {
@@ -72,6 +84,16 @@ public class DepartmentView extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Pada kolom ID Department Hanya bisa memasukkan angka");
         }
     }
+
+    private void setComboBox() {
+        for (models.Employee employee : ec.getAllData()) {
+            jComboManagerId.addItem(employee.getEmployeeId() + " - " + employee.getLast_name());
+        }
+        for (models.Location location : lc.getAll("")) {
+            jComboBoxLocId.addItem(location.getId() + " - " + location.getAddress());
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -89,8 +111,6 @@ public class DepartmentView extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jTextDeptId = new javax.swing.JTextField();
         jTextDeptName = new javax.swing.JTextField();
-        jTextDeptManagerId = new javax.swing.JTextField();
-        jTextLocId = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -99,6 +119,8 @@ public class DepartmentView extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jComboManagerId = new javax.swing.JComboBox<>();
+        jComboBoxLocId = new javax.swing.JComboBox<>();
 
         jLabel2.setText("Department Name");
 
@@ -115,25 +137,6 @@ public class DepartmentView extends javax.swing.JPanel {
         });
 
         jLabel4.setText("Location Id");
-
-        jTextDeptManagerId.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextDeptManagerIdKeyTyped(evt);
-            }
-        });
-
-        jTextLocId.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                jTextLocIdInputMethodTextChanged(evt);
-            }
-        });
-        jTextLocId.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextLocIdKeyTyped(evt);
-            }
-        });
 
         jButton1.setText("Save");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -185,6 +188,10 @@ public class DepartmentView extends javax.swing.JPanel {
             }
         });
 
+        jComboManagerId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+
+        jComboBoxLocId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -193,24 +200,22 @@ public class DepartmentView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 46, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
-                        .addGap(4, 4, Short.MAX_VALUE)
+                        .addGap(29, 119, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextDeptName, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextDeptId, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextDeptManagerId, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jTextLocId, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
+                            .addComponent(jTextDeptName)
+                            .addComponent(jTextDeptId)
+                            .addComponent(jComboManagerId, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBoxLocId, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -218,10 +223,10 @@ public class DepartmentView extends javax.swing.JPanel {
                             .addComponent(SearchData, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(comboSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 98, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel6)
@@ -249,15 +254,15 @@ public class DepartmentView extends javax.swing.JPanel {
                     .addComponent(comboSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextDeptManagerId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton2)))
+                        .addComponent(jLabel3)
+                        .addComponent(jComboManagerId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextLocId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
+                    .addComponent(jComboBoxLocId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton3))
@@ -275,7 +280,7 @@ public class DepartmentView extends javax.swing.JPanel {
         } else {
             try {
                 int reply = JOptionPane.showConfirmDialog(null,
-                    "Anda yakin akan menghapus data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
+                        "Anda yakin akan menghapus data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
                 );
                 if (reply == JOptionPane.YES_OPTION) {
                     JOptionPane.showMessageDialog(null, dc.delete(id));
@@ -288,38 +293,25 @@ public class DepartmentView extends javax.swing.JPanel {
         tableData(dc.getAll());
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jTextDeptManagerIdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextDeptManagerIdKeyTyped
-        // TODO add your handling code here:
-        filterHuruf(evt);
-    }//GEN-LAST:event_jTextDeptManagerIdKeyTyped
-
-    private void jTextLocIdInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTextLocIdInputMethodTextChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextLocIdInputMethodTextChanged
-
-    private void jTextLocIdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextLocIdKeyTyped
-        // TODO add your handling code here:
-        filterHuruf(evt);
-    }//GEN-LAST:event_jTextLocIdKeyTyped
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if (isEmpty()) {
             JOptionPane.showMessageDialog(null, dc.insert(jTextDeptId.getText(), jTextDeptName.getText(),
-                jTextDeptManagerId.getText(), jTextLocId.getText()));
+                    jComboManagerId.getSelectedItem().toString().split(" - ")[0], jComboBoxLocId.getSelectedItem().toString().split(" - ")[0]));
         } else {
             try {
                 int reply = JOptionPane.showConfirmDialog(null, "Anda yakin untuk melakukan perubahan data?",
-                    "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                        "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (reply == JOptionPane.YES_OPTION) {
                     JOptionPane.showMessageDialog(null, dc.update(jTextDeptId.getText(), jTextDeptName.getText(),
-                        jTextDeptManagerId.getText(), jTextLocId.getText()));
-                clean();
-                tableData(dc.getAll());
+                            jComboManagerId.getSelectedItem().toString().split(" - ")[0], jComboBoxLocId.getSelectedItem().toString().split(" - ")[0]));
+
+                    clean();
+                    tableData(dc.getAll());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         }
         clean();
         tableData(dc.getAll());
@@ -329,9 +321,19 @@ public class DepartmentView extends javax.swing.JPanel {
         // TODO add your handling code here:
         jTextDeptId.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
         jTextDeptName.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
-        jTextDeptManagerId.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
-        jTextLocId.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
-        
+//        jTextDeptManagerId.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
+        for (int i = 0; i < jComboManagerId.getItemCount(); i++) {
+            if (jComboManagerId.getItemAt(i).split(" - ")[0].equals(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString())) {
+                jComboManagerId.setSelectedIndex(i);
+            }
+        }
+//        jTextLocId.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
+        for (int i = 0; i < jComboBoxLocId.getItemCount(); i++) {
+            if (jComboBoxLocId.getItemAt(i).split(" - ")[0].equals(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString())) {
+                jComboBoxLocId.setSelectedIndex(i);
+            }
+        }
+
         jTextDeptId.setEnabled(false);
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -365,6 +367,8 @@ public class DepartmentView extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JComboBox<String> jComboBoxLocId;
+    private javax.swing.JComboBox<String> jComboManagerId;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -374,10 +378,7 @@ public class DepartmentView extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextDeptId;
-    private javax.swing.JTextField jTextDeptManagerId;
     private javax.swing.JTextField jTextDeptName;
-    private javax.swing.JTextField jTextLocId;
     // End of variables declaration//GEN-END:variables
 
-   
 }
