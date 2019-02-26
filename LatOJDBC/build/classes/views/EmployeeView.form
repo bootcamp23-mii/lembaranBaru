@@ -23,24 +23,24 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPEmployeeMain" alignment="0" max="32767" attributes="0"/>
+          <Component id="pnEmployeeMain" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPEmployeeMain" alignment="0" pref="670" max="32767" attributes="0"/>
+          <Component id="pnEmployeeMain" alignment="0" pref="670" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="jPEmployeeMain">
+    <Container class="javax.swing.JPanel" name="pnEmployeeMain">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout">
         <Property name="horizontalGap" type="int" value="1"/>
         <Property name="verticalGap" type="int" value="1"/>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="jPEmployeeMainNorth">
+        <Container class="javax.swing.JPanel" name="pnEmployeeMainNorth">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
               <BorderConstraints direction="First"/>
@@ -49,14 +49,14 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLEmployeeTitle">
+            <Component class="javax.swing.JLabel" name="lblEmployeeTitle">
               <Properties>
                 <Property name="text" type="java.lang.String" value="EMPLOYEES"/>
               </Properties>
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="jPEmployeeMainWest">
+        <Container class="javax.swing.JPanel" name="pnEmployeeMainWest">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
               <BorderConstraints direction="Before"/>
@@ -68,71 +68,71 @@
             <Property name="rows" type="int" value="14"/>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLEmployeeEmployeeId">
+            <Component class="javax.swing.JLabel" name="lblEmployeeEmployeeId">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Employee ID"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLEmployeeFirstName">
+            <Component class="javax.swing.JLabel" name="lblEmployeeFirstName">
               <Properties>
                 <Property name="text" type="java.lang.String" value="First Name"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLEmployeeLastName">
+            <Component class="javax.swing.JLabel" name="lblEmployeeLastName">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Last Name"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLEmployeeEmail">
+            <Component class="javax.swing.JLabel" name="lblEmployeeEmail">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Email"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLEmployeePhoneNumber">
+            <Component class="javax.swing.JLabel" name="lblEmployeePhoneNumber">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Phone Number"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLEmployeeHireDate">
+            <Component class="javax.swing.JLabel" name="lblEmployeeHireDate">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Hire Date"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLEmployeeJobId">
+            <Component class="javax.swing.JLabel" name="lblEmployeeJobId">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Job Id"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLEmployeeSalary">
+            <Component class="javax.swing.JLabel" name="lblEmployeeSalary">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Salary"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLEmployeeCommissionPct">
+            <Component class="javax.swing.JLabel" name="lblEmployeeCommissionPct">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Commission Pct"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLEmployeeManagerId">
+            <Component class="javax.swing.JLabel" name="lblEmployeeManagerId">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Manager Id"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLEmployeeDepartmentId">
+            <Component class="javax.swing.JLabel" name="lblEmployeeDepartmentId">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Department Id"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JSeparator" name="jSEmployees1">
+            <Component class="javax.swing.JSeparator" name="spcEmployees1">
             </Component>
-            <Component class="javax.swing.JLabel" name="jLEmployeeSearch">
+            <Component class="javax.swing.JLabel" name="lblEmployeeSearch">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Search/Delete"/>
               </Properties>
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="jPEmployeeMainCenter">
+        <Container class="javax.swing.JPanel" name="pnEmployeeMainCenter">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
               <BorderConstraints direction="Center"/>
@@ -144,22 +144,25 @@
             <Property name="rows" type="int" value="14"/>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JTextField" name="jTFEmployeeEmployeeId">
+            <Component class="javax.swing.JTextField" name="tfEmployeeEmployeeId">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTFEmployeeEmployeeIdActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfEmployeeEmployeeIdActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTFEmployeeFirstName">
+            <Component class="javax.swing.JTextField" name="tfEmployeeFirstName">
             </Component>
-            <Component class="javax.swing.JTextField" name="jTFEmployeeLastName">
+            <Component class="javax.swing.JTextField" name="tfEmployeeLastName">
             </Component>
-            <Component class="javax.swing.JTextField" name="jTFEmployeeEmail">
+            <Component class="javax.swing.JTextField" name="tfEmployeeEmail">
             </Component>
-            <Component class="javax.swing.JTextField" name="jTFEmployeePhoneNumber">
+            <Component class="javax.swing.JTextField" name="tfEmployeePhoneNumber">
             </Component>
-            <Component class="javax.swing.JTextField" name="jTFEmployeeHireDate">
+            <Component class="javax.swing.JTextField" name="tfEmployeeHireDate">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="format: yyyy-mm-dd"/>
+              </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jCBEmployeeJobId">
+            <Component class="javax.swing.JComboBox" name="cbEmployeeJobId">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
@@ -169,20 +172,20 @@
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCBEmployeeJobIdActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbEmployeeJobIdActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTFEmployeeSalary">
+            <Component class="javax.swing.JTextField" name="tfEmployeeSalary">
               <Events>
-                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTFEmployeeSalaryKeyTyped"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfEmployeeSalaryKeyTyped"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTFEmployeeCommissionPct">
+            <Component class="javax.swing.JTextField" name="tfEmployeeCommissionPct">
             </Component>
-            <Component class="javax.swing.JComboBox" name="jCBEmployeeManagerId">
+            <Component class="javax.swing.JComboBox" name="cbEmployeeManagerId">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
@@ -192,14 +195,14 @@
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCBEmployeeManagerIdActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbEmployeeManagerIdActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="EmployeeView_jCBEmployeeManagerId"/>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jCBEmployeeDepartmentId">
+            <Component class="javax.swing.JComboBox" name="cbEmployeeDepartmentId">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
@@ -208,86 +211,86 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCBEmployeeDepartmentIdActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbEmployeeDepartmentIdActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Container class="javax.swing.JPanel" name="jPEmployeeMainCenterContent1">
+            <Container class="javax.swing.JPanel" name="pnEmployeeMainCenterContent1">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
                 <Property name="alignment" type="int" value="0"/>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JButton" name="jBEmployeeInsert">
+                <Component class="javax.swing.JButton" name="btEmployeeInsert">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Save"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBEmployeeInsertActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btEmployeeInsertActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jBEmployeeClear">
+                <Component class="javax.swing.JButton" name="btEmployeeDelete">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Clear"/>
+                    <Property name="text" type="java.lang.String" value="Delete"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBEmployeeClearActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btEmployeeDeleteActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="jPEmployeeMainCenterContent2">
+            <Container class="javax.swing.JPanel" name="pnEmployeeMainCenterContent2">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                 <Property name="columns" type="int" value="0"/>
                 <Property name="rows" type="int" value="1"/>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JTextField" name="jTFEmployeeSearch">
+                <Component class="javax.swing.JTextField" name="tfEmployeeSearch">
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="jPEmployeeMainCenterContent3">
+            <Container class="javax.swing.JPanel" name="pnEmployeeMainCenterContent3">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
                 <Property name="alignment" type="int" value="0"/>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JButton" name="jBEmployeeDelete">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Delete by ID"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBEmployeeDeleteActionPerformed"/>
-                  </Events>
+                <Component class="javax.swing.JSeparator" name="spcEmployees2">
                 </Component>
-                <Component class="javax.swing.JSeparator" name="jSEmployees2">
-                </Component>
-                <Component class="javax.swing.JButton" name="jBEmployeeSearch">
+                <Component class="javax.swing.JButton" name="btEmployeeSearch">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Search"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBEmployeeSearchActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btEmployeeSearchActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JCheckBox" name="jCBEmployeeisGetById">
+                <Component class="javax.swing.JCheckBox" name="chbEmployeeisGetById">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Get By ID"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCBEmployeeisGetByIdActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chbEmployeeisGetByIdActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JSeparator" name="jSEmployees3">
+                <Component class="javax.swing.JSeparator" name="spcEmployees3">
+                </Component>
+                <Component class="javax.swing.JButton" name="btEmployeeClear">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Clear"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btEmployeeClearActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="jPEmployeeMainSouth">
+        <Container class="javax.swing.JPanel" name="pnEmployeeMainSouth">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
               <BorderConstraints direction="Last"/>
@@ -297,17 +300,17 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jSPEmployee" alignment="0" pref="698" max="32767" attributes="0"/>
+                  <Component id="scpEmployee" alignment="0" pref="698" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jSPEmployee" alignment="0" min="-2" pref="242" max="-2" attributes="0"/>
+                  <Component id="scpEmployee" alignment="0" min="-2" pref="242" max="-2" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="javax.swing.JScrollPane" name="jSPEmployee">
+            <Container class="javax.swing.JScrollPane" name="scpEmployee">
               <Properties>
                 <Property name="horizontalScrollBarPolicy" type="int" value="32"/>
                 <Property name="verticalScrollBarPolicy" type="int" value="22"/>
@@ -318,7 +321,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="jTEmployee">
+                <Component class="javax.swing.JTable" name="tbEmployee">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="0" rowCount="0"/>
@@ -331,7 +334,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTEmployeeMouseClicked"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbEmployeeMouseClicked"/>
                   </Events>
                 </Component>
               </SubComponents>

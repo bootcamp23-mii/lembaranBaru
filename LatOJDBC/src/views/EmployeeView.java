@@ -46,33 +46,49 @@ public class EmployeeView extends javax.swing.JInternalFrame {
     }
     
     private boolean konfirmasi() {
-        if (jTFEmployeeEmployeeId.getText().equals("") || 
-                jTFEmployeeFirstName.getText().equals("") || 
-                jTFEmployeeLastName.getText().equals("") || 
-                jTFEmployeeEmail.getText().equals("") || 
-                jTFEmployeePhoneNumber.getText().equals("") || 
-                jTFEmployeeHireDate.getText().equals("") ||
-                jCBEmployeeJobId.getSelectedIndex()==0 ||
-                jCBEmployeeDepartmentId.getSelectedIndex()==0 ||
-                jCBEmployeeManagerId.getSelectedIndex()==0 ||
-                jTFEmployeeSalary.getText().equals("")) {
+        if (tfEmployeeEmployeeId.getText().equals("") || 
+                tfEmployeeFirstName.getText().equals("") || 
+                tfEmployeeLastName.getText().equals("") || 
+                tfEmployeeEmail.getText().equals("") || 
+                tfEmployeePhoneNumber.getText().equals("") || 
+                tfEmployeeHireDate.getText().equals("") ||
+                cbEmployeeJobId.getSelectedIndex()==0 ||
+                cbEmployeeDepartmentId.getSelectedIndex()==0 ||
+                cbEmployeeManagerId.getSelectedIndex()==0 ||
+                tfEmployeeSalary.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Data tidak boleh kosong");
             return false;
         }
         return true;
     }
     
+    private void clear(){
+        tfEmployeeEmployeeId.setEnabled(true);
+        tfEmployeeEmployeeId.setText("");
+        tfEmployeeFirstName.setText("");
+        tfEmployeeLastName.setText("");
+        tfEmployeeEmail.setText("");
+        tfEmployeePhoneNumber.setText("");
+        tfEmployeeHireDate.setText("");
+        cbEmployeeJobId.setSelectedIndex(0);
+        tfEmployeeSalary.setText("");
+        tfEmployeeCommissionPct.setText("");
+        cbEmployeeManagerId.setSelectedIndex(0);
+        cbEmployeeDepartmentId.setSelectedIndex(0);
+        tfEmployeeSearch.setText("");
+    }
+    
     private boolean isEmpty() {
-        if (ec.searchData(jTFEmployeeEmployeeId.getText(),true).isEmpty()) {
+        if (ec.searchData(tfEmployeeEmployeeId.getText(),true).isEmpty()) {
             return true;
         }
         return false;
     }
     
     private void setComboBox(){
-        for (models.Job data : jobList) jCBEmployeeJobId.addItem(data.getId()+" - "+data.getName());
-        for (Employee data : employeeList) jCBEmployeeManagerId.addItem(data.getEmployeeId()+" - "+data.getFirst_name()+" "+data.getLast_name());
-        for (models.Department data : departmentList) jCBEmployeeDepartmentId.addItem(data.getId()+" - "+data.getName());
+        for (models.Job data : jobList) cbEmployeeJobId.addItem(data.getId()+" - "+data.getName());
+        for (Employee data : employeeList) cbEmployeeManagerId.addItem(data.getEmployeeId()+" - "+data.getFirst_name()+" "+data.getLast_name());
+        for (models.Department data : departmentList) cbEmployeeDepartmentId.addItem(data.getId()+" - "+data.getName());
     }
     
     private void showAllEmployeeTable(List<Employee> employees){
@@ -93,7 +109,7 @@ public class EmployeeView extends javax.swing.JInternalFrame {
             data[i][11] = employees.get(i).getDepartment_id();
         }
         tableModel = new DefaultTableModel(data, columnNames);
-        jTEmployee.setModel(tableModel);
+        tbEmployee.setModel(tableModel);
     }
     
     private void showAllJob(List<models.Job> jobs){
@@ -127,210 +143,212 @@ public class EmployeeView extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPEmployeeMain = new javax.swing.JPanel();
-        jPEmployeeMainNorth = new javax.swing.JPanel();
-        jLEmployeeTitle = new javax.swing.JLabel();
-        jPEmployeeMainWest = new javax.swing.JPanel();
-        jLEmployeeEmployeeId = new javax.swing.JLabel();
-        jLEmployeeFirstName = new javax.swing.JLabel();
-        jLEmployeeLastName = new javax.swing.JLabel();
-        jLEmployeeEmail = new javax.swing.JLabel();
-        jLEmployeePhoneNumber = new javax.swing.JLabel();
-        jLEmployeeHireDate = new javax.swing.JLabel();
-        jLEmployeeJobId = new javax.swing.JLabel();
-        jLEmployeeSalary = new javax.swing.JLabel();
-        jLEmployeeCommissionPct = new javax.swing.JLabel();
-        jLEmployeeManagerId = new javax.swing.JLabel();
-        jLEmployeeDepartmentId = new javax.swing.JLabel();
-        jSEmployees1 = new javax.swing.JSeparator();
-        jLEmployeeSearch = new javax.swing.JLabel();
-        jPEmployeeMainCenter = new javax.swing.JPanel();
-        jTFEmployeeEmployeeId = new javax.swing.JTextField();
-        jTFEmployeeFirstName = new javax.swing.JTextField();
-        jTFEmployeeLastName = new javax.swing.JTextField();
-        jTFEmployeeEmail = new javax.swing.JTextField();
-        jTFEmployeePhoneNumber = new javax.swing.JTextField();
-        jTFEmployeeHireDate = new javax.swing.JTextField();
-        jCBEmployeeJobId = new javax.swing.JComboBox<>();
-        jTFEmployeeSalary = new javax.swing.JTextField();
-        jTFEmployeeCommissionPct = new javax.swing.JTextField();
-        jCBEmployeeManagerId = new javax.swing.JComboBox<>();
-        jCBEmployeeDepartmentId = new javax.swing.JComboBox<>();
-        jPEmployeeMainCenterContent1 = new javax.swing.JPanel();
-        jBEmployeeInsert = new javax.swing.JButton();
-        jBEmployeeClear = new javax.swing.JButton();
-        jPEmployeeMainCenterContent2 = new javax.swing.JPanel();
-        jTFEmployeeSearch = new javax.swing.JTextField();
-        jPEmployeeMainCenterContent3 = new javax.swing.JPanel();
-        jBEmployeeDelete = new javax.swing.JButton();
-        jSEmployees2 = new javax.swing.JSeparator();
-        jBEmployeeSearch = new javax.swing.JButton();
-        jCBEmployeeisGetById = new javax.swing.JCheckBox();
-        jSEmployees3 = new javax.swing.JSeparator();
-        jPEmployeeMainSouth = new javax.swing.JPanel();
-        jSPEmployee = new javax.swing.JScrollPane();
-        jTEmployee = new javax.swing.JTable();
+        pnEmployeeMain = new javax.swing.JPanel();
+        pnEmployeeMainNorth = new javax.swing.JPanel();
+        lblEmployeeTitle = new javax.swing.JLabel();
+        pnEmployeeMainWest = new javax.swing.JPanel();
+        lblEmployeeEmployeeId = new javax.swing.JLabel();
+        lblEmployeeFirstName = new javax.swing.JLabel();
+        lblEmployeeLastName = new javax.swing.JLabel();
+        lblEmployeeEmail = new javax.swing.JLabel();
+        lblEmployeePhoneNumber = new javax.swing.JLabel();
+        lblEmployeeHireDate = new javax.swing.JLabel();
+        lblEmployeeJobId = new javax.swing.JLabel();
+        lblEmployeeSalary = new javax.swing.JLabel();
+        lblEmployeeCommissionPct = new javax.swing.JLabel();
+        lblEmployeeManagerId = new javax.swing.JLabel();
+        lblEmployeeDepartmentId = new javax.swing.JLabel();
+        spcEmployees1 = new javax.swing.JSeparator();
+        lblEmployeeSearch = new javax.swing.JLabel();
+        pnEmployeeMainCenter = new javax.swing.JPanel();
+        tfEmployeeEmployeeId = new javax.swing.JTextField();
+        tfEmployeeFirstName = new javax.swing.JTextField();
+        tfEmployeeLastName = new javax.swing.JTextField();
+        tfEmployeeEmail = new javax.swing.JTextField();
+        tfEmployeePhoneNumber = new javax.swing.JTextField();
+        tfEmployeeHireDate = new javax.swing.JTextField();
+        cbEmployeeJobId = new javax.swing.JComboBox<>();
+        tfEmployeeSalary = new javax.swing.JTextField();
+        tfEmployeeCommissionPct = new javax.swing.JTextField();
+        cbEmployeeManagerId = new javax.swing.JComboBox<>();
+        cbEmployeeDepartmentId = new javax.swing.JComboBox<>();
+        pnEmployeeMainCenterContent1 = new javax.swing.JPanel();
+        btEmployeeInsert = new javax.swing.JButton();
+        btEmployeeDelete = new javax.swing.JButton();
+        pnEmployeeMainCenterContent2 = new javax.swing.JPanel();
+        tfEmployeeSearch = new javax.swing.JTextField();
+        pnEmployeeMainCenterContent3 = new javax.swing.JPanel();
+        spcEmployees2 = new javax.swing.JSeparator();
+        btEmployeeSearch = new javax.swing.JButton();
+        chbEmployeeisGetById = new javax.swing.JCheckBox();
+        spcEmployees3 = new javax.swing.JSeparator();
+        btEmployeeClear = new javax.swing.JButton();
+        pnEmployeeMainSouth = new javax.swing.JPanel();
+        scpEmployee = new javax.swing.JScrollPane();
+        tbEmployee = new javax.swing.JTable();
 
         setClosable(true);
         setVisible(true);
 
-        jPEmployeeMain.setLayout(new java.awt.BorderLayout(1, 1));
+        pnEmployeeMain.setLayout(new java.awt.BorderLayout(1, 1));
 
-        jLEmployeeTitle.setText("EMPLOYEES");
-        jPEmployeeMainNorth.add(jLEmployeeTitle);
+        lblEmployeeTitle.setText("EMPLOYEES");
+        pnEmployeeMainNorth.add(lblEmployeeTitle);
 
-        jPEmployeeMain.add(jPEmployeeMainNorth, java.awt.BorderLayout.PAGE_START);
+        pnEmployeeMain.add(pnEmployeeMainNorth, java.awt.BorderLayout.PAGE_START);
 
-        jPEmployeeMainWest.setLayout(new java.awt.GridLayout(14, 1));
+        pnEmployeeMainWest.setLayout(new java.awt.GridLayout(14, 1));
 
-        jLEmployeeEmployeeId.setText("Employee ID");
-        jPEmployeeMainWest.add(jLEmployeeEmployeeId);
+        lblEmployeeEmployeeId.setText("Employee ID");
+        pnEmployeeMainWest.add(lblEmployeeEmployeeId);
 
-        jLEmployeeFirstName.setText("First Name");
-        jPEmployeeMainWest.add(jLEmployeeFirstName);
+        lblEmployeeFirstName.setText("First Name");
+        pnEmployeeMainWest.add(lblEmployeeFirstName);
 
-        jLEmployeeLastName.setText("Last Name");
-        jPEmployeeMainWest.add(jLEmployeeLastName);
+        lblEmployeeLastName.setText("Last Name");
+        pnEmployeeMainWest.add(lblEmployeeLastName);
 
-        jLEmployeeEmail.setText("Email");
-        jPEmployeeMainWest.add(jLEmployeeEmail);
+        lblEmployeeEmail.setText("Email");
+        pnEmployeeMainWest.add(lblEmployeeEmail);
 
-        jLEmployeePhoneNumber.setText("Phone Number");
-        jPEmployeeMainWest.add(jLEmployeePhoneNumber);
+        lblEmployeePhoneNumber.setText("Phone Number");
+        pnEmployeeMainWest.add(lblEmployeePhoneNumber);
 
-        jLEmployeeHireDate.setText("Hire Date");
-        jPEmployeeMainWest.add(jLEmployeeHireDate);
+        lblEmployeeHireDate.setText("Hire Date");
+        pnEmployeeMainWest.add(lblEmployeeHireDate);
 
-        jLEmployeeJobId.setText("Job Id");
-        jPEmployeeMainWest.add(jLEmployeeJobId);
+        lblEmployeeJobId.setText("Job Id");
+        pnEmployeeMainWest.add(lblEmployeeJobId);
 
-        jLEmployeeSalary.setText("Salary");
-        jPEmployeeMainWest.add(jLEmployeeSalary);
+        lblEmployeeSalary.setText("Salary");
+        pnEmployeeMainWest.add(lblEmployeeSalary);
 
-        jLEmployeeCommissionPct.setText("Commission Pct");
-        jPEmployeeMainWest.add(jLEmployeeCommissionPct);
+        lblEmployeeCommissionPct.setText("Commission Pct");
+        pnEmployeeMainWest.add(lblEmployeeCommissionPct);
 
-        jLEmployeeManagerId.setText("Manager Id");
-        jPEmployeeMainWest.add(jLEmployeeManagerId);
+        lblEmployeeManagerId.setText("Manager Id");
+        pnEmployeeMainWest.add(lblEmployeeManagerId);
 
-        jLEmployeeDepartmentId.setText("Department Id");
-        jPEmployeeMainWest.add(jLEmployeeDepartmentId);
-        jPEmployeeMainWest.add(jSEmployees1);
+        lblEmployeeDepartmentId.setText("Department Id");
+        pnEmployeeMainWest.add(lblEmployeeDepartmentId);
+        pnEmployeeMainWest.add(spcEmployees1);
 
-        jLEmployeeSearch.setText("Search/Delete");
-        jPEmployeeMainWest.add(jLEmployeeSearch);
+        lblEmployeeSearch.setText("Search/Delete");
+        pnEmployeeMainWest.add(lblEmployeeSearch);
 
-        jPEmployeeMain.add(jPEmployeeMainWest, java.awt.BorderLayout.LINE_START);
+        pnEmployeeMain.add(pnEmployeeMainWest, java.awt.BorderLayout.LINE_START);
 
-        jPEmployeeMainCenter.setLayout(new java.awt.GridLayout(14, 1));
+        pnEmployeeMainCenter.setLayout(new java.awt.GridLayout(14, 1));
 
-        jTFEmployeeEmployeeId.addActionListener(new java.awt.event.ActionListener() {
+        tfEmployeeEmployeeId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFEmployeeEmployeeIdActionPerformed(evt);
+                tfEmployeeEmployeeIdActionPerformed(evt);
             }
         });
-        jPEmployeeMainCenter.add(jTFEmployeeEmployeeId);
-        jPEmployeeMainCenter.add(jTFEmployeeFirstName);
-        jPEmployeeMainCenter.add(jTFEmployeeLastName);
-        jPEmployeeMainCenter.add(jTFEmployeeEmail);
-        jPEmployeeMainCenter.add(jTFEmployeePhoneNumber);
-        jPEmployeeMainCenter.add(jTFEmployeeHireDate);
+        pnEmployeeMainCenter.add(tfEmployeeEmployeeId);
+        pnEmployeeMainCenter.add(tfEmployeeFirstName);
+        pnEmployeeMainCenter.add(tfEmployeeLastName);
+        pnEmployeeMainCenter.add(tfEmployeeEmail);
+        pnEmployeeMainCenter.add(tfEmployeePhoneNumber);
 
-        jCBEmployeeJobId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
-        jCBEmployeeJobId.setToolTipText("");
-        jCBEmployeeJobId.addActionListener(new java.awt.event.ActionListener() {
+        tfEmployeeHireDate.setToolTipText("format: yyyy-mm-dd");
+        pnEmployeeMainCenter.add(tfEmployeeHireDate);
+
+        cbEmployeeJobId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+        cbEmployeeJobId.setToolTipText("");
+        cbEmployeeJobId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBEmployeeJobIdActionPerformed(evt);
+                cbEmployeeJobIdActionPerformed(evt);
             }
         });
-        jPEmployeeMainCenter.add(jCBEmployeeJobId);
+        pnEmployeeMainCenter.add(cbEmployeeJobId);
 
-        jTFEmployeeSalary.addKeyListener(new java.awt.event.KeyAdapter() {
+        tfEmployeeSalary.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTFEmployeeSalaryKeyTyped(evt);
+                tfEmployeeSalaryKeyTyped(evt);
             }
         });
-        jPEmployeeMainCenter.add(jTFEmployeeSalary);
-        jPEmployeeMainCenter.add(jTFEmployeeCommissionPct);
+        pnEmployeeMainCenter.add(tfEmployeeSalary);
+        pnEmployeeMainCenter.add(tfEmployeeCommissionPct);
 
-        jCBEmployeeManagerId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
-        jCBEmployeeManagerId.setToolTipText("");
-        jCBEmployeeManagerId.addActionListener(new java.awt.event.ActionListener() {
+        cbEmployeeManagerId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+        cbEmployeeManagerId.setToolTipText("");
+        cbEmployeeManagerId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBEmployeeManagerIdActionPerformed(evt);
+                cbEmployeeManagerIdActionPerformed(evt);
             }
         });
-        jPEmployeeMainCenter.add(jCBEmployeeManagerId);
+        pnEmployeeMainCenter.add(cbEmployeeManagerId);
 
-        jCBEmployeeDepartmentId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
-        jCBEmployeeDepartmentId.addActionListener(new java.awt.event.ActionListener() {
+        cbEmployeeDepartmentId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+        cbEmployeeDepartmentId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBEmployeeDepartmentIdActionPerformed(evt);
+                cbEmployeeDepartmentIdActionPerformed(evt);
             }
         });
-        jPEmployeeMainCenter.add(jCBEmployeeDepartmentId);
+        pnEmployeeMainCenter.add(cbEmployeeDepartmentId);
 
-        jPEmployeeMainCenterContent1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        pnEmployeeMainCenterContent1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        jBEmployeeInsert.setText("Save");
-        jBEmployeeInsert.addActionListener(new java.awt.event.ActionListener() {
+        btEmployeeInsert.setText("Save");
+        btEmployeeInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEmployeeInsertActionPerformed(evt);
+                btEmployeeInsertActionPerformed(evt);
             }
         });
-        jPEmployeeMainCenterContent1.add(jBEmployeeInsert);
+        pnEmployeeMainCenterContent1.add(btEmployeeInsert);
 
-        jBEmployeeClear.setText("Clear");
-        jBEmployeeClear.addActionListener(new java.awt.event.ActionListener() {
+        btEmployeeDelete.setText("Delete");
+        btEmployeeDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEmployeeClearActionPerformed(evt);
+                btEmployeeDeleteActionPerformed(evt);
             }
         });
-        jPEmployeeMainCenterContent1.add(jBEmployeeClear);
+        pnEmployeeMainCenterContent1.add(btEmployeeDelete);
 
-        jPEmployeeMainCenter.add(jPEmployeeMainCenterContent1);
+        pnEmployeeMainCenter.add(pnEmployeeMainCenterContent1);
 
-        jPEmployeeMainCenterContent2.setLayout(new java.awt.GridLayout(1, 0));
-        jPEmployeeMainCenterContent2.add(jTFEmployeeSearch);
+        pnEmployeeMainCenterContent2.setLayout(new java.awt.GridLayout(1, 0));
+        pnEmployeeMainCenterContent2.add(tfEmployeeSearch);
 
-        jPEmployeeMainCenter.add(jPEmployeeMainCenterContent2);
+        pnEmployeeMainCenter.add(pnEmployeeMainCenterContent2);
 
-        jPEmployeeMainCenterContent3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        pnEmployeeMainCenterContent3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        pnEmployeeMainCenterContent3.add(spcEmployees2);
 
-        jBEmployeeDelete.setText("Delete by ID");
-        jBEmployeeDelete.addActionListener(new java.awt.event.ActionListener() {
+        btEmployeeSearch.setText("Search");
+        btEmployeeSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEmployeeDeleteActionPerformed(evt);
+                btEmployeeSearchActionPerformed(evt);
             }
         });
-        jPEmployeeMainCenterContent3.add(jBEmployeeDelete);
-        jPEmployeeMainCenterContent3.add(jSEmployees2);
+        pnEmployeeMainCenterContent3.add(btEmployeeSearch);
 
-        jBEmployeeSearch.setText("Search");
-        jBEmployeeSearch.addActionListener(new java.awt.event.ActionListener() {
+        chbEmployeeisGetById.setText("Get By ID");
+        chbEmployeeisGetById.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEmployeeSearchActionPerformed(evt);
+                chbEmployeeisGetByIdActionPerformed(evt);
             }
         });
-        jPEmployeeMainCenterContent3.add(jBEmployeeSearch);
+        pnEmployeeMainCenterContent3.add(chbEmployeeisGetById);
+        pnEmployeeMainCenterContent3.add(spcEmployees3);
 
-        jCBEmployeeisGetById.setText("Get By ID");
-        jCBEmployeeisGetById.addActionListener(new java.awt.event.ActionListener() {
+        btEmployeeClear.setText("Clear");
+        btEmployeeClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBEmployeeisGetByIdActionPerformed(evt);
+                btEmployeeClearActionPerformed(evt);
             }
         });
-        jPEmployeeMainCenterContent3.add(jCBEmployeeisGetById);
-        jPEmployeeMainCenterContent3.add(jSEmployees3);
+        pnEmployeeMainCenterContent3.add(btEmployeeClear);
 
-        jPEmployeeMainCenter.add(jPEmployeeMainCenterContent3);
+        pnEmployeeMainCenter.add(pnEmployeeMainCenterContent3);
 
-        jPEmployeeMain.add(jPEmployeeMainCenter, java.awt.BorderLayout.CENTER);
+        pnEmployeeMain.add(pnEmployeeMainCenter, java.awt.BorderLayout.CENTER);
 
-        jSPEmployee.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-        jSPEmployee.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scpEmployee.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scpEmployee.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-        jTEmployee.setModel(new javax.swing.table.DefaultTableModel(
+        tbEmployee.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -338,54 +356,54 @@ public class EmployeeView extends javax.swing.JInternalFrame {
 
             }
         ));
-        jTEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTEmployeeMouseClicked(evt);
+                tbEmployeeMouseClicked(evt);
             }
         });
-        jSPEmployee.setViewportView(jTEmployee);
+        scpEmployee.setViewportView(tbEmployee);
 
-        javax.swing.GroupLayout jPEmployeeMainSouthLayout = new javax.swing.GroupLayout(jPEmployeeMainSouth);
-        jPEmployeeMainSouth.setLayout(jPEmployeeMainSouthLayout);
-        jPEmployeeMainSouthLayout.setHorizontalGroup(
-            jPEmployeeMainSouthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSPEmployee, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+        javax.swing.GroupLayout pnEmployeeMainSouthLayout = new javax.swing.GroupLayout(pnEmployeeMainSouth);
+        pnEmployeeMainSouth.setLayout(pnEmployeeMainSouthLayout);
+        pnEmployeeMainSouthLayout.setHorizontalGroup(
+            pnEmployeeMainSouthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(scpEmployee, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
         );
-        jPEmployeeMainSouthLayout.setVerticalGroup(
-            jPEmployeeMainSouthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSPEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+        pnEmployeeMainSouthLayout.setVerticalGroup(
+            pnEmployeeMainSouthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(scpEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        jPEmployeeMain.add(jPEmployeeMainSouth, java.awt.BorderLayout.PAGE_END);
+        pnEmployeeMain.add(pnEmployeeMainSouth, java.awt.BorderLayout.PAGE_END);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPEmployeeMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnEmployeeMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPEmployeeMain, javax.swing.GroupLayout.PREFERRED_SIZE, 670, Short.MAX_VALUE)
+            .addComponent(pnEmployeeMain, javax.swing.GroupLayout.PREFERRED_SIZE, 670, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTFEmployeeEmployeeIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFEmployeeEmployeeIdActionPerformed
+    private void tfEmployeeEmployeeIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfEmployeeEmployeeIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFEmployeeEmployeeIdActionPerformed
+    }//GEN-LAST:event_tfEmployeeEmployeeIdActionPerformed
 
-    private void jBEmployeeInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEmployeeInsertActionPerformed
+    private void btEmployeeInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEmployeeInsertActionPerformed
 //        ec.insert(jTFEmployeeEmployeeId.getText(), jTFEmployeeFirstName.getText(), jTFEmployeeLastName.getText(), jTFEmployeeEmail.getText(), jTFEmployeePhoneNumber.getText(), jTFEmployeeHireDate.getText(), jTFEmployeeJobId.getText(), jTFEmployeeSalary.getText(), jTFEmployeeCommissionPct.getText(), jTFEmployeeManagerId.getText(), jTFEmployeeDepartmentId.getText());
         if (konfirmasi()){
             if (isEmpty())JOptionPane.showMessageDialog(null, ec.insert(
-                    jTFEmployeeEmployeeId.getText(), jTFEmployeeFirstName.getText(), jTFEmployeeLastName.getText(), 
-                    jTFEmployeeEmail.getText(), jTFEmployeePhoneNumber.getText(), jTFEmployeeHireDate.getText(), 
-                    jCBEmployeeJobId.getSelectedItem().toString().split(" - ")[0], jTFEmployeeSalary.getText(), 
-                    jTFEmployeeCommissionPct.getText(), 
-                    jCBEmployeeManagerId.getSelectedItem().toString().split(" - ")[0], 
-                    jCBEmployeeDepartmentId.getSelectedItem().toString().split(" - ")[0]));
+                    tfEmployeeEmployeeId.getText(), tfEmployeeFirstName.getText(), tfEmployeeLastName.getText(), 
+                    tfEmployeeEmail.getText(), tfEmployeePhoneNumber.getText(), tfEmployeeHireDate.getText(), 
+                    cbEmployeeJobId.getSelectedItem().toString().split(" - ")[0], tfEmployeeSalary.getText(), 
+                    tfEmployeeCommissionPct.getText(), 
+                    cbEmployeeManagerId.getSelectedItem().toString().split(" - ")[0], 
+                    cbEmployeeDepartmentId.getSelectedItem().toString().split(" - ")[0]));
             else 
             {
                 try {
@@ -393,25 +411,26 @@ public class EmployeeView extends javax.swing.JInternalFrame {
                             "Anda yakin akan melakukan perubahan data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
                     );
                     if (reply == JOptionPane.YES_OPTION) {
-                        JOptionPane.showMessageDialog(null, ec.update(jTFEmployeeEmployeeId.getText(), jTFEmployeeFirstName.getText(), 
-                                jTFEmployeeLastName.getText(), jTFEmployeeEmail.getText(), jTFEmployeePhoneNumber.getText(), 
-                                jTFEmployeeHireDate.getText(), jCBEmployeeJobId.getSelectedItem().toString().split(" - ")[0], 
-                                jTFEmployeeSalary.getText(), jTFEmployeeCommissionPct.getText(), 
-                                jCBEmployeeManagerId.getSelectedItem().toString().split(" - ")[0], 
-                                jCBEmployeeDepartmentId.getSelectedItem().toString().split(" - ")[0]));
+                        JOptionPane.showMessageDialog(null, ec.update(tfEmployeeEmployeeId.getText(), tfEmployeeFirstName.getText(), 
+                                tfEmployeeLastName.getText(), tfEmployeeEmail.getText(), tfEmployeePhoneNumber.getText(), 
+                                tfEmployeeHireDate.getText(), cbEmployeeJobId.getSelectedItem().toString().split(" - ")[0], 
+                                tfEmployeeSalary.getText(), tfEmployeeCommissionPct.getText(), 
+                                cbEmployeeManagerId.getSelectedItem().toString().split(" - ")[0], 
+                                cbEmployeeDepartmentId.getSelectedItem().toString().split(" - ")[0]));
                         showAllEmployeeTable(ec.getAllData());
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
+            clear();
             showAllEmployeeTable(ec.getAllData());
         }
-    }//GEN-LAST:event_jBEmployeeInsertActionPerformed
+    }//GEN-LAST:event_btEmployeeInsertActionPerformed
 
-    private void jBEmployeeDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEmployeeDeleteActionPerformed
+    private void btEmployeeDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEmployeeDeleteActionPerformed
 //        JOptionPane.showConfirmDialog(null, ec.delete(jTFEmployeeSearch.getText()));
-        if (jTFEmployeeSearch.equals("")) JOptionPane.showMessageDialog(null, "Data tidak boleh kosong");
+        if (tfEmployeeSearch.equals("")) JOptionPane.showMessageDialog(null, "Data tidak boleh kosong");
         else 
         {
             try {
@@ -419,9 +438,8 @@ public class EmployeeView extends javax.swing.JInternalFrame {
                         "Anda yakin akan menghapus data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
                 );
                 if (reply == JOptionPane.YES_OPTION) {
-                    jhc.delete(jTFEmployeeSearch.getText());
-                    JOptionPane.showMessageDialog(null, ec.delete(jTFEmployeeSearch.getText()));
-                    jTFEmployeeSearch.setText("");
+                    JOptionPane.showMessageDialog(null, ec.delete(tfEmployeeEmployeeId.getText()));
+                    tfEmployeeSearch.setText("");
                     showAllEmployeeTable(ec.getAllData());
                 }
             } catch (Exception e) {
@@ -429,115 +447,127 @@ public class EmployeeView extends javax.swing.JInternalFrame {
             }
         }
         showAllEmployeeTable(ec.getAllData());
-    }//GEN-LAST:event_jBEmployeeDeleteActionPerformed
+    }//GEN-LAST:event_btEmployeeDeleteActionPerformed
 
-    private void jBEmployeeSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEmployeeSearchActionPerformed
+    private void btEmployeeSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEmployeeSearchActionPerformed
+        if(!chbEmployeeisGetById.isSelected())showAllEmployeeTable(ec.searchData(tfEmployeeSearch.getText(), chbEmployeeisGetById.isSelected()));
+        else {
+            Employee data = ec.getById(tfEmployeeSearch.getText());
+            tfEmployeeEmployeeId.setText(data.getEmployeeId()+"");
+            tfEmployeeEmployeeId.setEnabled(false);
+            tfEmployeeFirstName.setText(data.getFirst_name());
+            tfEmployeeLastName.setText(data.getLast_name());
+            tfEmployeeEmail.setText(data.getEmail());
+            tfEmployeePhoneNumber.setText(data.getPhone_number());
+            tfEmployeeHireDate.setText(data.getHire_date());
+            for (int i = 0; i < cbEmployeeJobId.getItemCount(); i++) {
+                if (cbEmployeeJobId.getItemAt(i).split(" - ")[0].equals(data.getJob_id()))
+                    cbEmployeeJobId.setSelectedIndex(i);
+            }
+            tfEmployeeSalary.setText(data.getSalary()+"");
+            tfEmployeeCommissionPct.setText(data.getCommission_pct()+"");
+            for (int i = 0; i < cbEmployeeManagerId.getItemCount(); i++) {
+                if (cbEmployeeManagerId.getItemAt(i).split(" - ")[0].equals(data.getManager_id()+""))
+                    cbEmployeeManagerId.setSelectedIndex(i);
+            }
+            for (int i = 0; i < cbEmployeeDepartmentId.getItemCount(); i++) {
+                if (cbEmployeeDepartmentId.getItemAt(i).split(" - ")[0].equals(data.getDepartment_id()+""))
+                    cbEmployeeDepartmentId.setSelectedIndex(i);
+            }
+        }
+    }//GEN-LAST:event_btEmployeeSearchActionPerformed
 
-        showAllEmployeeTable(ec.searchData(jTFEmployeeSearch.getText(), jCBEmployeeisGetById.isSelected()));
-    }//GEN-LAST:event_jBEmployeeSearchActionPerformed
-
-    private void jCBEmployeeisGetByIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBEmployeeisGetByIdActionPerformed
+    private void chbEmployeeisGetByIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbEmployeeisGetByIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCBEmployeeisGetByIdActionPerformed
+    }//GEN-LAST:event_chbEmployeeisGetByIdActionPerformed
 
-    private void jCBEmployeeJobIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBEmployeeJobIdActionPerformed
+    private void cbEmployeeJobIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEmployeeJobIdActionPerformed
         
-    }//GEN-LAST:event_jCBEmployeeJobIdActionPerformed
+    }//GEN-LAST:event_cbEmployeeJobIdActionPerformed
 
-    private void jTEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTEmployeeMouseClicked
-        jTFEmployeeEmployeeId.setText(jTEmployee.getValueAt(jTEmployee.getSelectedRow(), 1).toString());
-        jTFEmployeeEmployeeId.setEditable(false);
-        jTFEmployeeFirstName.setText(jTEmployee.getValueAt(jTEmployee.getSelectedRow(), 2).toString());
-        jTFEmployeeLastName.setText(jTEmployee.getValueAt(jTEmployee.getSelectedRow(), 3).toString());
-        jTFEmployeeEmail.setText(jTEmployee.getValueAt(jTEmployee.getSelectedRow(), 4).toString());
-        jTFEmployeePhoneNumber.setText(jTEmployee.getValueAt(jTEmployee.getSelectedRow(), 5).toString());
-        jTFEmployeeHireDate.setText(jTEmployee.getValueAt(jTEmployee.getSelectedRow(), 6).toString());
-        for (int i = 0; i < jCBEmployeeJobId.getItemCount(); i++) {
-            if (jCBEmployeeJobId.getItemAt(i).split(" - ")[0].equals(jTEmployee.getValueAt(jTEmployee.getSelectedRow(), 7).toString()))
-                jCBEmployeeJobId.setSelectedIndex(i);
+    private void tbEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbEmployeeMouseClicked
+        tfEmployeeEmployeeId.setText(tbEmployee.getValueAt(tbEmployee.getSelectedRow(), 1).toString());
+        tfEmployeeEmployeeId.setEnabled(false);
+        tfEmployeeFirstName.setText(tbEmployee.getValueAt(tbEmployee.getSelectedRow(), 2).toString());
+        tfEmployeeLastName.setText(tbEmployee.getValueAt(tbEmployee.getSelectedRow(), 3).toString());
+        tfEmployeeEmail.setText(tbEmployee.getValueAt(tbEmployee.getSelectedRow(), 4).toString());
+        tfEmployeePhoneNumber.setText(tbEmployee.getValueAt(tbEmployee.getSelectedRow(), 5).toString());
+        tfEmployeeHireDate.setText(tbEmployee.getValueAt(tbEmployee.getSelectedRow(), 6).toString());
+        for (int i = 0; i < cbEmployeeJobId.getItemCount(); i++) {
+            if (cbEmployeeJobId.getItemAt(i).split(" - ")[0].equals(tbEmployee.getValueAt(tbEmployee.getSelectedRow(), 7).toString()))
+                cbEmployeeJobId.setSelectedIndex(i);
         }
-        jTFEmployeeSalary.setText(jTEmployee.getValueAt(jTEmployee.getSelectedRow(), 8).toString());
-        jTFEmployeeCommissionPct.setText(jTEmployee.getValueAt(jTEmployee.getSelectedRow(), 9).toString());
-        for (int i = 0; i < jCBEmployeeManagerId.getItemCount(); i++) {
-            if (jCBEmployeeManagerId.getItemAt(i).split(" - ")[0].equals(jTEmployee.getValueAt(jTEmployee.getSelectedRow(), 10).toString()))
-                jCBEmployeeManagerId.setSelectedIndex(i);
+        tfEmployeeSalary.setText(tbEmployee.getValueAt(tbEmployee.getSelectedRow(), 8).toString());
+        tfEmployeeCommissionPct.setText(tbEmployee.getValueAt(tbEmployee.getSelectedRow(), 9).toString());
+        for (int i = 0; i < cbEmployeeManagerId.getItemCount(); i++) {
+            if (cbEmployeeManagerId.getItemAt(i).split(" - ")[0].equals(tbEmployee.getValueAt(tbEmployee.getSelectedRow(), 10).toString()))
+                cbEmployeeManagerId.setSelectedIndex(i);
         }
-        for (int i = 0; i < jCBEmployeeDepartmentId.getItemCount(); i++) {
-            if (jCBEmployeeDepartmentId.getItemAt(i).split(" - ")[0].equals(jTEmployee.getValueAt(jTEmployee.getSelectedRow(), 11).toString()))
-                jCBEmployeeDepartmentId.setSelectedIndex(i);
+        for (int i = 0; i < cbEmployeeDepartmentId.getItemCount(); i++) {
+            if (cbEmployeeDepartmentId.getItemAt(i).split(" - ")[0].equals(tbEmployee.getValueAt(tbEmployee.getSelectedRow(), 11).toString()))
+                cbEmployeeDepartmentId.setSelectedIndex(i);
         }
-    }//GEN-LAST:event_jTEmployeeMouseClicked
+    }//GEN-LAST:event_tbEmployeeMouseClicked
 
-    private void jBEmployeeClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEmployeeClearActionPerformed
-        jTFEmployeeEmployeeId.setEditable(true);
-        jTFEmployeeEmployeeId.setText("");
-        jTFEmployeeFirstName.setText("");
-        jTFEmployeeLastName.setText("");
-        jTFEmployeeEmail.setText("");
-        jTFEmployeePhoneNumber.setText("");
-        jTFEmployeeHireDate.setText("");
-        jCBEmployeeJobId.setSelectedIndex(0);
-        jTFEmployeeSalary.setText("");
-        jTFEmployeeCommissionPct.setText("");
-        jCBEmployeeManagerId.setSelectedIndex(0);
-        jCBEmployeeDepartmentId.setSelectedIndex(0);
-    }//GEN-LAST:event_jBEmployeeClearActionPerformed
+    private void btEmployeeClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEmployeeClearActionPerformed
+        clear();
+    }//GEN-LAST:event_btEmployeeClearActionPerformed
 
-    private void jTFEmployeeSalaryKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFEmployeeSalaryKeyTyped
+    private void tfEmployeeSalaryKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfEmployeeSalaryKeyTyped
         filterhuruf(evt);
-    }//GEN-LAST:event_jTFEmployeeSalaryKeyTyped
+    }//GEN-LAST:event_tfEmployeeSalaryKeyTyped
 
-    private void jCBEmployeeManagerIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBEmployeeManagerIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCBEmployeeManagerIdActionPerformed
+    private void cbEmployeeManagerIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEmployeeManagerIdActionPerformed
 
-    private void jCBEmployeeDepartmentIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBEmployeeDepartmentIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCBEmployeeDepartmentIdActionPerformed
+    }//GEN-LAST:event_cbEmployeeManagerIdActionPerformed
+
+    private void cbEmployeeDepartmentIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEmployeeDepartmentIdActionPerformed
+
+    }//GEN-LAST:event_cbEmployeeDepartmentIdActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBEmployeeClear;
-    private javax.swing.JButton jBEmployeeDelete;
-    private javax.swing.JButton jBEmployeeInsert;
-    private javax.swing.JButton jBEmployeeSearch;
-    private javax.swing.JComboBox<String> jCBEmployeeDepartmentId;
-    private javax.swing.JComboBox<String> jCBEmployeeJobId;
-    private javax.swing.JComboBox<String> jCBEmployeeManagerId;
-    private javax.swing.JCheckBox jCBEmployeeisGetById;
-    private javax.swing.JLabel jLEmployeeCommissionPct;
-    private javax.swing.JLabel jLEmployeeDepartmentId;
-    private javax.swing.JLabel jLEmployeeEmail;
-    private javax.swing.JLabel jLEmployeeEmployeeId;
-    private javax.swing.JLabel jLEmployeeFirstName;
-    private javax.swing.JLabel jLEmployeeHireDate;
-    private javax.swing.JLabel jLEmployeeJobId;
-    private javax.swing.JLabel jLEmployeeLastName;
-    private javax.swing.JLabel jLEmployeeManagerId;
-    private javax.swing.JLabel jLEmployeePhoneNumber;
-    private javax.swing.JLabel jLEmployeeSalary;
-    private javax.swing.JLabel jLEmployeeSearch;
-    private javax.swing.JLabel jLEmployeeTitle;
-    private javax.swing.JPanel jPEmployeeMain;
-    private javax.swing.JPanel jPEmployeeMainCenter;
-    private javax.swing.JPanel jPEmployeeMainCenterContent1;
-    private javax.swing.JPanel jPEmployeeMainCenterContent2;
-    private javax.swing.JPanel jPEmployeeMainCenterContent3;
-    private javax.swing.JPanel jPEmployeeMainNorth;
-    private javax.swing.JPanel jPEmployeeMainSouth;
-    private javax.swing.JPanel jPEmployeeMainWest;
-    private javax.swing.JSeparator jSEmployees1;
-    private javax.swing.JSeparator jSEmployees2;
-    private javax.swing.JSeparator jSEmployees3;
-    private javax.swing.JScrollPane jSPEmployee;
-    private javax.swing.JTable jTEmployee;
-    private javax.swing.JTextField jTFEmployeeCommissionPct;
-    private javax.swing.JTextField jTFEmployeeEmail;
-    private javax.swing.JTextField jTFEmployeeEmployeeId;
-    private javax.swing.JTextField jTFEmployeeFirstName;
-    private javax.swing.JTextField jTFEmployeeHireDate;
-    private javax.swing.JTextField jTFEmployeeLastName;
-    private javax.swing.JTextField jTFEmployeePhoneNumber;
-    private javax.swing.JTextField jTFEmployeeSalary;
-    private javax.swing.JTextField jTFEmployeeSearch;
+    private javax.swing.JButton btEmployeeClear;
+    private javax.swing.JButton btEmployeeDelete;
+    private javax.swing.JButton btEmployeeInsert;
+    private javax.swing.JButton btEmployeeSearch;
+    private javax.swing.JComboBox<String> cbEmployeeDepartmentId;
+    private javax.swing.JComboBox<String> cbEmployeeJobId;
+    private javax.swing.JComboBox<String> cbEmployeeManagerId;
+    private javax.swing.JCheckBox chbEmployeeisGetById;
+    private javax.swing.JLabel lblEmployeeCommissionPct;
+    private javax.swing.JLabel lblEmployeeDepartmentId;
+    private javax.swing.JLabel lblEmployeeEmail;
+    private javax.swing.JLabel lblEmployeeEmployeeId;
+    private javax.swing.JLabel lblEmployeeFirstName;
+    private javax.swing.JLabel lblEmployeeHireDate;
+    private javax.swing.JLabel lblEmployeeJobId;
+    private javax.swing.JLabel lblEmployeeLastName;
+    private javax.swing.JLabel lblEmployeeManagerId;
+    private javax.swing.JLabel lblEmployeePhoneNumber;
+    private javax.swing.JLabel lblEmployeeSalary;
+    private javax.swing.JLabel lblEmployeeSearch;
+    private javax.swing.JLabel lblEmployeeTitle;
+    private javax.swing.JPanel pnEmployeeMain;
+    private javax.swing.JPanel pnEmployeeMainCenter;
+    private javax.swing.JPanel pnEmployeeMainCenterContent1;
+    private javax.swing.JPanel pnEmployeeMainCenterContent2;
+    private javax.swing.JPanel pnEmployeeMainCenterContent3;
+    private javax.swing.JPanel pnEmployeeMainNorth;
+    private javax.swing.JPanel pnEmployeeMainSouth;
+    private javax.swing.JPanel pnEmployeeMainWest;
+    private javax.swing.JScrollPane scpEmployee;
+    private javax.swing.JSeparator spcEmployees1;
+    private javax.swing.JSeparator spcEmployees2;
+    private javax.swing.JSeparator spcEmployees3;
+    private javax.swing.JTable tbEmployee;
+    private javax.swing.JTextField tfEmployeeCommissionPct;
+    private javax.swing.JTextField tfEmployeeEmail;
+    private javax.swing.JTextField tfEmployeeEmployeeId;
+    private javax.swing.JTextField tfEmployeeFirstName;
+    private javax.swing.JTextField tfEmployeeHireDate;
+    private javax.swing.JTextField tfEmployeeLastName;
+    private javax.swing.JTextField tfEmployeePhoneNumber;
+    private javax.swing.JTextField tfEmployeeSalary;
+    private javax.swing.JTextField tfEmployeeSearch;
     // End of variables declaration//GEN-END:variables
 }
