@@ -25,9 +25,9 @@ public class EmployeeDAO {
     }
     
     /**
-     * 
-     * @param keyword
-     * @param isGetById
+     * Method yang digunakan untuk mencari data pada tabel EMPLOYEES
+     * @param keyword kata kunci untuk mencari data
+     * @param isById <p>True: mencari data melalui ID.<p>False: mencari data dengan kata kunci di setiap atribut tabel.
      * @return 
      */
     public List<Employee> getData(Object keyword, boolean isGetById) {

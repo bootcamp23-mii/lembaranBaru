@@ -24,38 +24,7 @@ public class EmployeeController {
     }
     
     /**
-     * 
-     * @param keyword
-     * @param isGetById
-     * @return 
-     */
-    public String getData(String keyword, boolean isGetById){
-        String result ="";
-        if (keyword.equals("")&&!isGetById)
-        {
-            if (edao.getData(keyword, isGetById).isEmpty())System.out.println("Data tidak ditemukan");
-            else System.out.println("Data berhasil dilihat");
-        }
-        else if (!keyword.equals("")&&!isGetById)
-        {
-            if (edao.getData(keyword, isGetById).isEmpty())System.out.println("Data tidak ditemukan");
-            else System.out.println("Data berhasil dilihat");
-        }
-        else if (!keyword.equals("")&&isGetById)
-        {
-            if (edao.getData(keyword, isGetById).isEmpty())System.out.println("Data tidak ditemukan");
-            else System.out.println("Data berhasil dilihat");
-        }
-        else if (keyword.equals("")&&isGetById)
-        {
-            if (edao.getData(keyword, isGetById).isEmpty())System.out.println("Data tidak ditemukan");
-            else System.out.println("Data berhasil dilihat");
-        }
-        return result;
-    }
-    
-    /**
-     * Method yang digunakan untuk memvalidasi fungsi insert data dari EMPLOYEES
+     * Method yang digunakan untuk memvalidasi fungsi insert data dari tabel EMPLOYEES
      * @param id ID Employee
      * @param first_name Nama depan Employee
      * @param last_name Nama belakang Employee
@@ -84,7 +53,7 @@ public class EmployeeController {
     }
     
     /**
-     * Method yang digunakan untuk memvalidasi fungsi update data dari EMPLOYEES
+     * Method yang digunakan untuk memvalidasi fungsi update data dari tabel EMPLOYEES
      * @param id ID Employee
      * @param first_name Nama depan Employee
      * @param last_name Nama belakang Employee
@@ -113,7 +82,7 @@ public class EmployeeController {
     }
     
     /**
-     * Method yang digunakan untuk memvalidasi fungsi delete data dari EMPLOYEES
+     * Method yang digunakan untuk memvalidasi fungsi delete data dari tabel EMPLOYEES
      * @param id ID Employee yang akan dihapus
      * @return <p>Berhasil: akan mengeluarkan hasil "Selamat data berhasil dihapus".
      * <p>Gagal: akan mengeluarkan hasil "Maaf, data gagal dihapus". 
@@ -128,9 +97,29 @@ public class EmployeeController {
         return result;
     }
     
+    /**
+     * Method untuk menampilkan semua data dari tabel EMPLOYEES
+     * @return 
+     */
     public List<Employee> getAllData(){
         return edao.getData("", false);
     }
+    
+    /**
+     * Method untuk mencari sebuah data dari tabel EMPLOYEES
+     * @param id 
+     * @return 
+     */
+    public Employee getById(Object id){
+        return edao.getData(id, true).get(0);
+    }
+    
+    /**
+     * Method untuk mencari data pada tabel EMPLOYEES
+     * @param keyword kata kunci untuk mencari data
+     * @param isById <p>True: mencari data melalui ID.<p>False: mencari data dengan kata kunci di setiap atribut tabel.
+     * @return 
+     */
     public List<Employee> searchData(Object keyword, boolean isById){
         return edao.getData(keyword, isById);
     }
