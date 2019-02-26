@@ -79,10 +79,7 @@ public class EmployeeView extends javax.swing.JInternalFrame {
     }
     
     private boolean isEmpty() {
-        if (ec.searchData(tfEmployeeEmployeeId.getText(),true).isEmpty()) {
-            return true;
-        }
-        return false;
+        return ec.searchData(tfEmployeeEmployeeId.getText(),true).isEmpty();
     }
     
     private void setComboBox(){
@@ -397,13 +394,16 @@ public class EmployeeView extends javax.swing.JInternalFrame {
     private void btEmployeeInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEmployeeInsertActionPerformed
 //        ec.insert(jTFEmployeeEmployeeId.getText(), jTFEmployeeFirstName.getText(), jTFEmployeeLastName.getText(), jTFEmployeeEmail.getText(), jTFEmployeePhoneNumber.getText(), jTFEmployeeHireDate.getText(), jTFEmployeeJobId.getText(), jTFEmployeeSalary.getText(), jTFEmployeeCommissionPct.getText(), jTFEmployeeManagerId.getText(), jTFEmployeeDepartmentId.getText());
         if (konfirmasi()){
-            if (isEmpty())JOptionPane.showMessageDialog(null, ec.insert(
+            if (isEmpty()){
+                JOptionPane.showMessageDialog(null, ec.insert(
                     tfEmployeeEmployeeId.getText(), tfEmployeeFirstName.getText(), tfEmployeeLastName.getText(), 
                     tfEmployeeEmail.getText(), tfEmployeePhoneNumber.getText(), tfEmployeeHireDate.getText(), 
                     cbEmployeeJobId.getSelectedItem().toString().split(" - ")[0], tfEmployeeSalary.getText(), 
                     tfEmployeeCommissionPct.getText(), 
                     cbEmployeeManagerId.getSelectedItem().toString().split(" - ")[0], 
                     cbEmployeeDepartmentId.getSelectedItem().toString().split(" - ")[0]));
+                clear();
+            }
             else 
             {
                 try {
@@ -417,13 +417,12 @@ public class EmployeeView extends javax.swing.JInternalFrame {
                                 tfEmployeeSalary.getText(), tfEmployeeCommissionPct.getText(), 
                                 cbEmployeeManagerId.getSelectedItem().toString().split(" - ")[0], 
                                 cbEmployeeDepartmentId.getSelectedItem().toString().split(" - ")[0]));
-                        showAllEmployeeTable(ec.getAllData());
+                        clear();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-            clear();
             showAllEmployeeTable(ec.getAllData());
         }
     }//GEN-LAST:event_btEmployeeInsertActionPerformed
