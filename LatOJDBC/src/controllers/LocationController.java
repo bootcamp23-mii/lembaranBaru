@@ -27,11 +27,10 @@ public class LocationController {
         String result = "";
         if (ldao.save(new Location(Integer.parseInt(id), address, postal, city, province, country), true)) {
 
-            result = "YEAY";
+            result = "YEAY, your new data inserted into table";
         } else {
             result = "OUCH";
 
-            result = "YEAY, your new data inserted into table";
 //        } else {
 //            result = "Ouch, Sorry you might miss something";
         }
@@ -61,6 +60,15 @@ public class LocationController {
     public List<Location> getById(String keyword) {
         List result;
         result = ldao.getData(keyword, true);
+        return result;
+    }
+    public String delete(String id) {
+        String result = "";
+        if (ldao.delete(Integer.parseInt(id))) {
+            result = "Data have been deleted";
+        } else {
+            result = "Ouch, Something Missing";
+        }
         return result;
     }
 }
