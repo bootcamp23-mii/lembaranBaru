@@ -1,6 +1,7 @@
 
 
 
+import controllers.EmployeeController;
 import daos.DepartmentDAO;
 import daos.RegionDAO;
 import models.Region;
@@ -36,6 +37,9 @@ public class LatOJDBC {
 //            System.out.println("ID      : " + region.getId());
 //            System.out.println("Name    : " + region.getName());
 //        }
+        EmployeeController ec = new EmployeeController(connection.getConnection());
+        System.out.println(ec.delete("210"));
+        
     }
 }
 

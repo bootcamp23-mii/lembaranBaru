@@ -18,6 +18,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import models.Job;
+import controllers.JobController;
+import java.awt.event.KeyEvent;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import tools.DBConnection;
 
 /**
  *
@@ -33,6 +39,10 @@ public class JobView extends javax.swing.JInternalFrame {
     JobController jc = new JobController(connection.getConnection());
     DefaultTableModel myTable = new DefaultTableModel();
 //    List<Job> jobs = new ArrayList<Job>();
+
+    /**
+     * Creates new form Job
+     */
 
     /**
      * Creates new form Job
@@ -88,6 +98,7 @@ public class JobView extends javax.swing.JInternalFrame {
         myTable = new DefaultTableModel(data, columnNames);
         jTable1.setModel(myTable);
     }
+
 
     private void clean() {
         tf_id.setEnabled(true);
@@ -162,6 +173,12 @@ public class JobView extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
+
+        tf_title.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_titleActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Minimal Salary");
 
@@ -438,6 +455,10 @@ public class JobView extends javax.swing.JInternalFrame {
     private void tf_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_idActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_idActionPerformed
+
+    private void tf_titleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_titleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_titleActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
