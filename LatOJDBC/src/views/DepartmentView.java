@@ -26,6 +26,7 @@ public class DepartmentView extends javax.swing.JPanel {
      */
     public DepartmentView() {
         initComponents();
+        tableData(dc.getAll());
     }
     
     private boolean konfirmasi() {
@@ -303,6 +304,7 @@ public class DepartmentView extends javax.swing.JPanel {
         jTextDeptName.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
         jTextDeptManagerId.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
         jTextLocId.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
+        
         jTextDeptId.setEnabled(false);
     }//GEN-LAST:event_jTable1MouseClicked
 

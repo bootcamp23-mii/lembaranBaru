@@ -55,19 +55,20 @@ public class DepartmentDAO {
         String query = "";
         if (isInsert) {
 
-            query = "INSERT INTO DEPARTMENTS(DEPARTMENT_ID,DEPARTMENT_NAME,MANAGER_ID,LOCATION_ID) VALUES(?,?,?,?)";
+            query = "INSERT INTO DEPARTMENTS(DEPARTMENT_ID,DEPARTMENT_NAME,MANAGER_ID,LOCATION_ID) VALUES(" + d.getId() + ",'"
+                    + d.getName() + "'," + d.getManager_id() + "," + d.getLocation_id()+")";
         } else {
 
-            query = "INSERT INTO DEPARTMENTS(DEPARTMENT_ID,DEPARTMENT_NAME,MANAGER_ID,LOCATION_ID) VALUES(" + d.getId() + ",'"
-                    + d.getName() + "'," + d.getManager_id() + "," + d.getLocation_id();
+            query = "UPDATE DEPARTMENTS SET DEPARTMENT_NAME='" + d.getName() + "',MANAGER_ID=" + d.getManager_id()
+                    + ",LOCATION_ID=" + d.getLocation_id() + "WHERE DEPARTMENT_ID=" + d.getId();
 
         }
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, d.getName());
-            preparedStatement.setInt(2, d.getManager_id());
-            preparedStatement.setInt(3, d.getLocation_id());
-            preparedStatement.setInt(4, d.getId());
+//            preparedStatement.setString(1, d.getName());
+//            preparedStatement.setInt(2, d.getManager_id());
+//            preparedStatement.setInt(3, d.getLocation_id());
+//            preparedStatement.setInt(4, d.getId());
             preparedStatement.executeQuery();
             result = true;
         } catch (Exception e) {
