@@ -825,7 +825,7 @@ public class HRView extends javax.swing.JFrame {
     }//GEN-LAST:event_locationMenuActionPerformed
 
     private void deptMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deptMenuItemActionPerformed
-       DepartmentView3 dv=new DepartmentView3();
+       DepartmentView dv=new DepartmentView();
        jPanelMain.add(dv);
        dv.setVisible(true);
     }//GEN-LAST:event_deptMenuItemActionPerformed
