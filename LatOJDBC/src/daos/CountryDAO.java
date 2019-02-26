@@ -34,9 +34,9 @@ public class CountryDAO {
         List<Country> listCountry = new ArrayList<Country>();
         String query = "";
         if (isGetById) {
-            query = "SELECT * FROM COUNTRIES WHERE COUNTRY_ID = " + keyword;
+            query = "SELECT * FROM COUNTRIES WHERE COUNTRY_ID = '" + keyword + "'";
         } else {
-            query = "SELECT * FROM COUNTRIES WHERE COUNTRY_ID like '%" + keyword + "%' or COUNTRY_NAME like '%" + keyword + "%'";
+            query = "SELECT * FROM COUNTRIES WHERE COUNTRY_ID like '%" + keyword + "%' or COUNTRY_NAME like '%" + keyword + "%' or REGION_ID like '%" + keyword + "%'";
         }
 
         try {
@@ -61,9 +61,9 @@ public class CountryDAO {
         boolean result = false;
         String query = "";
         if (isInsert) {
-            query = "INSERT INTO COUNTRY (COUNTRY_ID,COUNTRY_NAME) VALUES(" +c.getCountry_id()+ "," + c.getCountry_name()+")";
+            query = "INSERT INTO COUNTRIES (COUNTRY_ID,COUNTRY_NAME,REGION_ID) VALUES('" +c.getCountry_id()+ "','" + c.getCountry_name()+ "'," + c.getRegion_id() + ")";
         } else {
-            query = "UPDATE EMPLOYEES SET COUNTRY_ID=" + c.getCountry_id()+ ",COUNTRY_NAME=" + c.getCountry_name()+ " WHERE COUNTRY_ID=" + c.getCountry_id();
+            query = "UPDATE COUNTRIES SET REGION_ID=" + c.getRegion_id() + ",COUNTRY_NAME='" + c.getCountry_name()+ "' WHERE COUNTRY_ID='" + c.getCountry_id() + "'";
         }
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -80,12 +80,12 @@ public class CountryDAO {
      * @param country_id
      * @return 
      */
-    public boolean delete(int country_id){
+    public boolean delete(String country_id){
         boolean result = false;
         String query = "DELETE FROM COUNTRIES WHERE COUNTRY_ID = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);            
-            preparedStatement.setInt(1, country_id);
+            preparedStatement.setString(1, country_id);
             ResultSet resultSet = preparedStatement.executeQuery();
             result = true;
         } catch (Exception e) {

@@ -28,6 +28,15 @@ public class LocationMain {
         LocationController lc = new LocationController(connection.getConnection());
         
 
+//        for (Location location : ldao.getData("1001", true)) {
+//            System.out.println("ID              : " + location.getId());
+//            System.out.println("ADDRESS         : " + location.getAddress());
+//            System.out.println("POSTAL CODE     : " + location.getPostal());
+//            System.out.println("CITY            : " + location.getCity());
+//            System.out.println("PROVINCE        : " + location.getProvince());
+//            System.out.println("COUNTRY         : " + location.getCountry());   
+//        }
+
 //      GET DATA
 //        
 //        for (Location location : ldao.getData("", false)) {
