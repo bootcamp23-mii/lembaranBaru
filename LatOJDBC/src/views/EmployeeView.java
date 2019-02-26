@@ -8,6 +8,7 @@ package views;
 import controllers.DepartmentController;
 import controllers.EmployeeController;
 import controllers.JobController;
+import controllers.JobHistoryController;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ public class EmployeeView extends javax.swing.JInternalFrame {
 
     DBConnection connection = new DBConnection();
     EmployeeController ec = new EmployeeController(connection.getConnection());
+    JobHistoryController jhc = new JobHistoryController(connection.getConnection());
     JobController jc = new JobController(connection.getConnection());
     DepartmentController dc = new DepartmentController(connection.getConnection());
     List<Employee> employeeList = new ArrayList<>();
@@ -407,6 +409,7 @@ public class EmployeeView extends javax.swing.JInternalFrame {
                         "Anda yakin akan menghapus data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
                 );
                 if (reply == JOptionPane.YES_OPTION) {
+                    jhc.delete(jTFEmployeeSearch.getText());
                     JOptionPane.showMessageDialog(null, ec.delete(jTFEmployeeSearch.getText()));
                     jTFEmployeeSearch.setText("");
                     showAllEmployeeTable(ec.getAllData());
