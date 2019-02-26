@@ -24,7 +24,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="mainPanel" max="32767" attributes="0"/>
+              <Component id="pnMain" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -33,31 +33,31 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="mainPanel" max="32767" attributes="0"/>
+              <Component id="pnMain" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="mainPanel">
+    <Container class="javax.swing.JPanel" name="pnMain">
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="buttonPanel" alignment="0" max="32767" attributes="0"/>
+              <Component id="pnButton" alignment="0" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="topPanel" min="-2" pref="452" max="-2" attributes="0"/>
+                  <Component id="pnTop" min="-2" pref="452" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="tablePanel" min="-2" max="-2" attributes="0"/>
+                  <Component id="pnTableRegion" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="searchPanel" max="32767" attributes="0"/>
+                      <Component id="pnSearch" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -66,17 +66,17 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="topPanel" min="-2" max="-2" attributes="0"/>
+                  <Component id="pnTop" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="buttonPanel" min="-2" max="-2" attributes="0"/>
+                  <Component id="pnButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="31" max="32767" attributes="0"/>
-                  <Component id="tablePanel" min="-2" max="-2" attributes="0"/>
+                  <Component id="pnTableRegion" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace pref="111" max="32767" attributes="0"/>
-                      <Component id="searchPanel" min="-2" max="-2" attributes="0"/>
+                      <Component id="pnSearch" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="153" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -84,7 +84,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="topPanel">
+        <Container class="javax.swing.JPanel" name="pnTop">
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
             <Property name="columns" type="int" value="2"/>
@@ -92,34 +92,34 @@
             <Property name="verticalGap" type="int" value="5"/>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="idLabel">
+            <Component class="javax.swing.JLabel" name="lblIdl">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Id"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="idTextField">
+            <Component class="javax.swing.JTextField" name="tfId">
             </Component>
-            <Component class="javax.swing.JLabel" name="namaLabel">
+            <Component class="javax.swing.JLabel" name="lblNama">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nama"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="namaTextField">
+            <Component class="javax.swing.JTextField" name="tfNama">
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="buttonPanel">
+        <Container class="javax.swing.JPanel" name="pnButton">
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="bClear" min="-2" max="-2" attributes="0"/>
+                      <Component id="btClear" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="bInsert" min="-2" max="-2" attributes="0"/>
+                      <Component id="btInsert" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                      <Component id="bDelete" min="-2" max="-2" attributes="0"/>
+                      <Component id="btDelete" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -129,50 +129,50 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="5" pref="5" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="bInsert" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="bClear" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="bDelete" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btInsert" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btClear" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btDelete" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="bClear">
+            <Component class="javax.swing.JButton" name="btClear">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Clear"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bClearActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btClearActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="bInsert">
+            <Component class="javax.swing.JButton" name="btInsert">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Save"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bInsertActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btInsertActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="bDelete">
+            <Component class="javax.swing.JButton" name="btDelete">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Delete"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bDeleteActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btDeleteActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="tablePanel">
+        <Container class="javax.swing.JPanel" name="pnTableRegion">
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" pref="450" max="-2" attributes="0"/>
+                      <Component id="scpTabelRegion" min="-2" pref="450" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -180,18 +180,18 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane2" min="-2" pref="103" max="-2" attributes="0"/>
+                      <Component id="scpTabelRegion" min="-2" pref="103" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="27" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+            <Container class="javax.swing.JScrollPane" name="scpTabelRegion">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="jTable2">
+                <Component class="javax.swing.JTable" name="tbRegion">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="4" rowCount="4">
@@ -203,38 +203,38 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable2MouseClicked"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbRegionMouseClicked"/>
                   </Events>
                 </Component>
               </SubComponents>
             </Container>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="searchPanel">
+        <Container class="javax.swing.JPanel" name="pnSearch">
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="searchLabel">
+            <Component class="javax.swing.JLabel" name="lblSearch">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Search"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="searchTextField">
+            <Component class="javax.swing.JTextField" name="tfSearch">
             </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+            <Component class="javax.swing.JCheckBox" name="chbById">
               <Properties>
                 <Property name="text" type="java.lang.String" value="by Id"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBox1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chbByIdActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="bSearch">
+            <Component class="javax.swing.JButton" name="btSearch">
               <Properties>
                 <Property name="text" type="java.lang.String" value="search"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bSearchActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btSearchActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

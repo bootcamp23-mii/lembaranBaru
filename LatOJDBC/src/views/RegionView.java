@@ -41,11 +41,11 @@ public class RegionView extends javax.swing.JInternalFrame {
             data[i][2] = listdata.get(i).getName();
         }
         model = new DefaultTableModel(data, columnNames);
-        jTable2.setModel(model);
+        tbRegion.setModel(model);
     }
 
     private boolean konfirmasi() {
-        if (idTextField.getText().equals("") || namaTextField.getText().equals("")) {
+        if (tfId.getText().equals("") || tfNama.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Data tidak boleh kosong");
             return false;
         }
@@ -53,7 +53,7 @@ public class RegionView extends javax.swing.JInternalFrame {
     }
 
     private boolean isEmpty() {
-        if (rc.getById(idTextField.getText()).equals("")) {
+        if (rc.getById(tfId.getText()).equals("")) {
             return true;
         }
         return false;
@@ -67,11 +67,12 @@ public class RegionView extends javax.swing.JInternalFrame {
     }
 
     private void clearing() {
-        idTextField.setEnabled(true);
-        idTextField.setText("");
-        namaTextField.setText("");
-        searchTextField.setText("");
-        jCheckBox1.setSelected(false);
+        tfId.setEnabled(true);
+        tfId.setText("");
+        btDelete.setEnabled(false);
+        tfNama.setText("");
+        tfSearch.setText("");
+        chbById.setSelected(false);
     }
 
     /**
@@ -83,83 +84,83 @@ public class RegionView extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        mainPanel = new javax.swing.JPanel();
-        topPanel = new javax.swing.JPanel();
-        idLabel = new javax.swing.JLabel();
-        idTextField = new javax.swing.JTextField();
-        namaLabel = new javax.swing.JLabel();
-        namaTextField = new javax.swing.JTextField();
-        buttonPanel = new javax.swing.JPanel();
-        bClear = new javax.swing.JButton();
-        bInsert = new javax.swing.JButton();
-        bDelete = new javax.swing.JButton();
-        tablePanel = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        searchPanel = new javax.swing.JPanel();
-        searchLabel = new javax.swing.JLabel();
-        searchTextField = new javax.swing.JTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        bSearch = new javax.swing.JButton();
+        pnMain = new javax.swing.JPanel();
+        pnTop = new javax.swing.JPanel();
+        lblIdl = new javax.swing.JLabel();
+        tfId = new javax.swing.JTextField();
+        lblNama = new javax.swing.JLabel();
+        tfNama = new javax.swing.JTextField();
+        pnButton = new javax.swing.JPanel();
+        btClear = new javax.swing.JButton();
+        btInsert = new javax.swing.JButton();
+        btDelete = new javax.swing.JButton();
+        pnTableRegion = new javax.swing.JPanel();
+        scpTabelRegion = new javax.swing.JScrollPane();
+        tbRegion = new javax.swing.JTable();
+        pnSearch = new javax.swing.JPanel();
+        lblSearch = new javax.swing.JLabel();
+        tfSearch = new javax.swing.JTextField();
+        chbById = new javax.swing.JCheckBox();
+        btSearch = new javax.swing.JButton();
 
         setClosable(true);
 
-        topPanel.setLayout(new java.awt.GridLayout(2, 2, 0, 5));
+        pnTop.setLayout(new java.awt.GridLayout(2, 2, 0, 5));
 
-        idLabel.setText("Id");
-        topPanel.add(idLabel);
-        topPanel.add(idTextField);
+        lblIdl.setText("Id");
+        pnTop.add(lblIdl);
+        pnTop.add(tfId);
 
-        namaLabel.setText("Nama");
-        topPanel.add(namaLabel);
-        topPanel.add(namaTextField);
+        lblNama.setText("Nama");
+        pnTop.add(lblNama);
+        pnTop.add(tfNama);
 
-        bClear.setText("Clear");
-        bClear.addActionListener(new java.awt.event.ActionListener() {
+        btClear.setText("Clear");
+        btClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bClearActionPerformed(evt);
+                btClearActionPerformed(evt);
             }
         });
 
-        bInsert.setText("Save");
-        bInsert.addActionListener(new java.awt.event.ActionListener() {
+        btInsert.setText("Save");
+        btInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bInsertActionPerformed(evt);
+                btInsertActionPerformed(evt);
             }
         });
 
-        bDelete.setText("Delete");
-        bDelete.setEnabled(false);
-        bDelete.addActionListener(new java.awt.event.ActionListener() {
+        btDelete.setText("Delete");
+        btDelete.setEnabled(false);
+        btDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bDeleteActionPerformed(evt);
+                btDeleteActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout buttonPanelLayout = new javax.swing.GroupLayout(buttonPanel);
-        buttonPanel.setLayout(buttonPanelLayout);
-        buttonPanelLayout.setHorizontalGroup(
-            buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(buttonPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnButtonLayout = new javax.swing.GroupLayout(pnButton);
+        pnButton.setLayout(pnButtonLayout);
+        pnButtonLayout.setHorizontalGroup(
+            pnButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnButtonLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bClear)
+                .addComponent(btClear)
                 .addGap(18, 18, 18)
-                .addComponent(bInsert)
+                .addComponent(btInsert)
                 .addGap(28, 28, 28)
-                .addComponent(bDelete)
+                .addComponent(btDelete)
                 .addGap(33, 33, 33))
         );
-        buttonPanelLayout.setVerticalGroup(
-            buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(buttonPanelLayout.createSequentialGroup()
+        pnButtonLayout.setVerticalGroup(
+            pnButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnButtonLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bInsert)
-                    .addComponent(bClear)
-                    .addComponent(bDelete)))
+                .addGroup(pnButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btInsert)
+                    .addComponent(btClear)
+                    .addComponent(btDelete)))
         );
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbRegion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -170,81 +171,81 @@ public class RegionView extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbRegion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable2MouseClicked(evt);
+                tbRegionMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        scpTabelRegion.setViewportView(tbRegion);
 
-        javax.swing.GroupLayout tablePanelLayout = new javax.swing.GroupLayout(tablePanel);
-        tablePanel.setLayout(tablePanelLayout);
-        tablePanelLayout.setHorizontalGroup(
-            tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablePanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnTableRegionLayout = new javax.swing.GroupLayout(pnTableRegion);
+        pnTableRegion.setLayout(pnTableRegionLayout);
+        pnTableRegionLayout.setHorizontalGroup(
+            pnTableRegionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnTableRegionLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scpTabelRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        tablePanelLayout.setVerticalGroup(
-            tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tablePanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+        pnTableRegionLayout.setVerticalGroup(
+            pnTableRegionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTableRegionLayout.createSequentialGroup()
+                .addComponent(scpTabelRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 27, Short.MAX_VALUE))
         );
 
-        searchPanel.setLayout(new javax.swing.BoxLayout(searchPanel, javax.swing.BoxLayout.LINE_AXIS));
+        pnSearch.setLayout(new javax.swing.BoxLayout(pnSearch, javax.swing.BoxLayout.LINE_AXIS));
 
-        searchLabel.setText("Search");
-        searchPanel.add(searchLabel);
-        searchPanel.add(searchTextField);
+        lblSearch.setText("Search");
+        pnSearch.add(lblSearch);
+        pnSearch.add(tfSearch);
 
-        jCheckBox1.setText("by Id");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        chbById.setText("by Id");
+        chbById.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                chbByIdActionPerformed(evt);
             }
         });
-        searchPanel.add(jCheckBox1);
+        pnSearch.add(chbById);
 
-        bSearch.setText("search");
-        bSearch.addActionListener(new java.awt.event.ActionListener() {
+        btSearch.setText("search");
+        btSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bSearchActionPerformed(evt);
+                btSearchActionPerformed(evt);
             }
         });
-        searchPanel.add(bSearch);
+        pnSearch.add(btSearch);
 
-        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
-        mainPanel.setLayout(mainPanelLayout);
-        mainPanelLayout.setHorizontalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(buttonPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout pnMainLayout = new javax.swing.GroupLayout(pnMain);
+        pnMain.setLayout(pnMainLayout);
+        pnMainLayout.setHorizontalGroup(
+            pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(pnMainLayout.createSequentialGroup()
+                .addComponent(pnTop, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnMainLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnTableRegion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(mainPanelLayout.createSequentialGroup()
-                    .addComponent(searchPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnMainLayout.createSequentialGroup()
+                    .addComponent(pnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addContainerGap()))
         );
-        mainPanelLayout.setVerticalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        pnMainLayout.setVerticalGroup(
+            pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnMainLayout.createSequentialGroup()
+                .addComponent(pnTop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnTableRegion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+            .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnMainLayout.createSequentialGroup()
                     .addContainerGap(111, Short.MAX_VALUE)
-                    .addComponent(searchPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(153, Short.MAX_VALUE)))
         );
 
@@ -254,36 +255,36 @@ public class RegionView extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bClearActionPerformed
+    private void btClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClearActionPerformed
         clearing();
         TampilData(rc.getAllData());
-    }//GEN-LAST:event_bClearActionPerformed
+    }//GEN-LAST:event_btClearActionPerformed
 
-    private void bInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bInsertActionPerformed
+    private void btInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInsertActionPerformed
         if (konfirmasi()) {
             if (isEmpty()) {
-                JOptionPane.showMessageDialog(null, rc.insert(idTextField.getText(), namaTextField.getText()));
+                JOptionPane.showMessageDialog(null, rc.insert(tfId.getText(), tfNama.getText()));
             } else {
                 try {
                     int reply = JOptionPane.showConfirmDialog(null,
                             "Anda yakin akan melakukan perubahan data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
                     );
                     if (reply == JOptionPane.YES_OPTION) {
-                        JOptionPane.showMessageDialog(null, rc.update(idTextField.getText(), namaTextField.getText()));
+                        JOptionPane.showMessageDialog(null, rc.update(tfId.getText(), tfNama.getText()));
                         TampilData(rc.getAllData());
                     }
                 } catch (Exception e) {
@@ -292,45 +293,45 @@ public class RegionView extends javax.swing.JInternalFrame {
             }
             TampilData(rc.getAllData());
         }
-    }//GEN-LAST:event_bInsertActionPerformed
+    }//GEN-LAST:event_btInsertActionPerformed
 
-    private void bDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeleteActionPerformed
+    private void btDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteActionPerformed
         int confirm = JOptionPane.showConfirmDialog(null, "Anda Yakin?", "", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
-            rc.delete(idTextField.getText().toString());
+            rc.delete(tfId.getText().toString());
             TampilData(rc.getAllData());
         }
-    }//GEN-LAST:event_bDeleteActionPerformed
+    }//GEN-LAST:event_btDeleteActionPerformed
 
-    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
-        if (jTable2.getSelectedColumnCount() == 1) {
-            bDelete.setEnabled(true);
-            int row = jTable2.getSelectedRow();
-            idTextField.setText(jTable2.getValueAt(row, 1).toString());
-            namaTextField.setText(jTable2.getValueAt(row, 2).toString());
-            idTextField.setEnabled(false);
+    private void tbRegionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRegionMouseClicked
+        if (tbRegion.getSelectedColumnCount() == 1) {
+            btDelete.setEnabled(true);
+            int row = tbRegion.getSelectedRow();
+            tfId.setText(tbRegion.getValueAt(row, 1).toString());
+            tfNama.setText(tbRegion.getValueAt(row, 2).toString());
+            tfId.setEnabled(false);
         }
-    }//GEN-LAST:event_jTable2MouseClicked
+    }//GEN-LAST:event_tbRegionMouseClicked
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void chbByIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbByIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_chbByIdActionPerformed
 
-    private void bSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSearchActionPerformed
+    private void btSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSearchActionPerformed
         // TODO add your handling code here:
-        String key = searchTextField.getText().toString();
-        boolean cb = jCheckBox1.isSelected();
+        String key = tfSearch.getText().toString();
+        boolean cb = chbById.isSelected();
         if (!cb) {
 
             TampilData(rc.searchBy(key));
         } else {
             Region tampungan = rc.getById(key);
-            idTextField.setText(tampungan.getId() + "");
-            namaTextField.setText(tampungan.getName());
+            tfId.setText(tampungan.getId() + "");
+            tfNama.setText(tampungan.getName());
         }
-        bDelete.setEnabled(true);
-        idTextField.setEnabled(false);
-    }//GEN-LAST:event_bSearchActionPerformed
+        btDelete.setEnabled(true);
+        tfId.setEnabled(false);
+    }//GEN-LAST:event_btSearchActionPerformed
 
     private void idTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idTextFieldKeyTyped
         // TODO add your handling code here:
@@ -339,23 +340,23 @@ public class RegionView extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bClear;
-    private javax.swing.JButton bDelete;
-    private javax.swing.JButton bInsert;
-    private javax.swing.JButton bSearch;
-    private javax.swing.JPanel buttonPanel;
-    private javax.swing.JLabel idLabel;
-    private javax.swing.JTextField idTextField;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JPanel mainPanel;
-    private javax.swing.JLabel namaLabel;
-    private javax.swing.JTextField namaTextField;
-    private javax.swing.JLabel searchLabel;
-    private javax.swing.JPanel searchPanel;
-    private javax.swing.JTextField searchTextField;
-    private javax.swing.JPanel tablePanel;
-    private javax.swing.JPanel topPanel;
+    private javax.swing.JButton btClear;
+    private javax.swing.JButton btDelete;
+    private javax.swing.JButton btInsert;
+    private javax.swing.JButton btSearch;
+    private javax.swing.JCheckBox chbById;
+    private javax.swing.JLabel lblIdl;
+    private javax.swing.JLabel lblNama;
+    private javax.swing.JLabel lblSearch;
+    private javax.swing.JPanel pnButton;
+    private javax.swing.JPanel pnMain;
+    private javax.swing.JPanel pnSearch;
+    private javax.swing.JPanel pnTableRegion;
+    private javax.swing.JPanel pnTop;
+    private javax.swing.JScrollPane scpTabelRegion;
+    private javax.swing.JTable tbRegion;
+    private javax.swing.JTextField tfId;
+    private javax.swing.JTextField tfNama;
+    private javax.swing.JTextField tfSearch;
     // End of variables declaration//GEN-END:variables
 }

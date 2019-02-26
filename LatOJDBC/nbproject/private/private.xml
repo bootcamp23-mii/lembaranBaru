@@ -3,18 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/D:/Project_bootcamp/yangakandiupload/New%20folder/lembaranBaru/LatOJDBC/src/controllers/JobHistoryController.java</file>
-            <file>file:/D:/Project_bootcamp/yangakandiupload/New%20folder/lembaranBaru/LatOJDBC/src/views/EmployeeView.java</file>
-            <file>file:/D:/Project_bootcamp/yangakandiupload/New%20folder/lembaranBaru/LatOJDBC/src/controllers/EmployeeController.java</file>
-=======
-            <file>file:/C:/Users/Pandu/Documents/GitHub/lembaranBaru/LatOJDBC/src/controllers/LocationController.java</file>
-            <file>file:/C:/Users/Pandu/Documents/GitHub/lembaranBaru/LatOJDBC/src/views/LocationView.java</file>
-            <file>file:/C:/Users/Pandu/Documents/GitHub/lembaranBaru/LatOJDBC/src/daos/LocationDAO.java</file>
-            <file>file:/C:/Users/Pandu/Documents/GitHub/lembaranBaru/LatOJDBC/src/tools/DBConnection.java</file>
-            <file>file:/C:/Users/Pandu/Documents/GitHub/lembaranBaru/LatOJDBC/src/tools/LatOJDBC.java</file>
-            <file>file:/C:/Users/Pandu/Documents/GitHub/lembaranBaru/LatOJDBC/src/tools/LocationMain.java</file>
->>>>>>> 21dfda0be9b615f15fe1c54a0a8bb5e14323ded7
+            <file>file:/C:/Users/AdhityaWP/Documents/NetBeansProjects/26022019/lembaranBaru/LatOJDBC/src/tools/DBConnection.java</file>
+            <file>file:/C:/Users/AdhityaWP/Documents/NetBeansProjects/26022019/lembaranBaru/LatOJDBC/src/tools/LocationMain.java</file>
+            <file>file:/C:/Users/AdhityaWP/Documents/NetBeansProjects/26022019/lembaranBaru/LatOJDBC/src/views/HRView.java</file>
+            <file>file:/C:/Users/AdhityaWP/Documents/NetBeansProjects/26022019/lembaranBaru/LatOJDBC/src/daos/UserDAO.java</file>
+            <file>file:/C:/Users/AdhityaWP/Documents/NetBeansProjects/26022019/lembaranBaru/LatOJDBC/src/views/RegionView.java</file>
+            <file>file:/C:/Users/AdhityaWP/Documents/NetBeansProjects/26022019/lembaranBaru/LatOJDBC/src/tools/LatOJDBC.java</file>
+            <file>file:/C:/Users/AdhityaWP/Documents/NetBeansProjects/26022019/lembaranBaru/LatOJDBC/src/daos/RegionDAO.java</file>
+            <file>file:/C:/Users/AdhityaWP/Documents/NetBeansProjects/26022019/lembaranBaru/LatOJDBC/src/controllers/UserController.java</file>
         </group>
     </open-files>
 </project-private>
