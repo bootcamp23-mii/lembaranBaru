@@ -242,6 +242,11 @@ public class EmployeeView extends javax.swing.JInternalFrame {
                 tfEmployeeEmployeeIdActionPerformed(evt);
             }
         });
+        tfEmployeeEmployeeId.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfEmployeeEmployeeIdKeyTyped(evt);
+            }
+        });
         pnEmployeeMainCenter.add(tfEmployeeEmployeeId);
         pnEmployeeMainCenter.add(tfEmployeeFirstName);
         pnEmployeeMainCenter.add(tfEmployeeLastName);
@@ -523,6 +528,10 @@ public class EmployeeView extends javax.swing.JInternalFrame {
     private void cbEmployeeDepartmentIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEmployeeDepartmentIdActionPerformed
 
     }//GEN-LAST:event_cbEmployeeDepartmentIdActionPerformed
+
+    private void tfEmployeeEmployeeIdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfEmployeeEmployeeIdKeyTyped
+        filterhuruf(evt);
+    }//GEN-LAST:event_tfEmployeeEmployeeIdKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btEmployeeClear;
