@@ -42,7 +42,7 @@ public class DepartmentView extends javax.swing.JPanel {
     }
 
     private boolean konfirmasi() {
-        if (jTextDeptName.equals("") || jTextDeptId.equals("") || jComboManagerId.getSelectedIndex() == 0 || jComboBoxLocId.getSelectedIndex() == 0) {
+        if (tfDeptName.equals("") || tfDeptId.equals("") || cbManagerId.getSelectedIndex() == 0 || cbLocId.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data tidak boleh kosong");
             return false;
         }
@@ -50,7 +50,7 @@ public class DepartmentView extends javax.swing.JPanel {
     }
 
     private boolean isEmpty() {
-        if (dc.getById(jTextDeptId.getText()).isEmpty()) {
+        if (dc.getById(tfDeptId.getText()).isEmpty()) {
             return true;
         }
         return false;
@@ -67,15 +67,16 @@ public class DepartmentView extends javax.swing.JPanel {
             data[i][4] = dept.get(i).getLocation_id();
         }
         myTable = new DefaultTableModel(data, columnNames);
-        jTable1.setModel(myTable);
+        tbDepartment.setModel(myTable);
     }
 
     private void clean() {
-        jTextDeptId.setEnabled(true);
-        jTextDeptId.setText("");
-        jTextDeptName.setText("");
-        jComboManagerId.setSelectedIndex(0);
-        jComboBoxLocId.setSelectedIndex(0);
+        tfDeptId.setEnabled(true);
+        tfDeptId.setText("");
+        tfDeptName.setText("");
+        tfSearch.setText("");
+        cbManagerId.setSelectedIndex(0);
+        cbLocId.setSelectedIndex(0);
     }
 
     private void filterHuruf(KeyEvent a) {
@@ -87,10 +88,10 @@ public class DepartmentView extends javax.swing.JPanel {
 
     private void setComboBox() {
         for (models.Employee employee : ec.getAllData()) {
-            jComboManagerId.addItem(employee.getEmployeeId() + " - " + employee.getLast_name());
+            cbManagerId.addItem(employee.getEmployeeId() + " - " + employee.getLast_name());
         }
         for (models.Location location : lc.getAll("")) {
-            jComboBoxLocId.addItem(location.getId() + " - " + location.getAddress());
+            cbLocId.addItem(location.getId() + " - " + location.getAddress());
         }
     }
 
@@ -103,49 +104,49 @@ public class DepartmentView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        SearchData = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jTextDeptId = new javax.swing.JTextField();
-        jTextDeptName = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        lblDeptName = new javax.swing.JLabel();
+        lblDept = new javax.swing.JLabel();
+        lblManagerId = new javax.swing.JLabel();
+        tfSearch = new javax.swing.JTextField();
+        btDelete = new javax.swing.JButton();
+        lblLocationId = new javax.swing.JLabel();
+        tfDeptId = new javax.swing.JTextField();
+        tfDeptName = new javax.swing.JTextField();
+        btSave = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbDepartment = new javax.swing.JTable();
         comboSearch = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
+        lblDeptId = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jComboManagerId = new javax.swing.JComboBox<>();
-        jComboBoxLocId = new javax.swing.JComboBox<>();
+        btClear = new javax.swing.JButton();
+        btClose = new javax.swing.JButton();
+        cbManagerId = new javax.swing.JComboBox<>();
+        cbLocId = new javax.swing.JComboBox<>();
 
-        jLabel2.setText("Department Name");
+        lblDeptName.setText("Department Name");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel6.setText("Department");
+        lblDept.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblDept.setText("Department");
 
-        jLabel3.setText("Manager Id");
+        lblManagerId.setText("Manager Id");
 
-        jButton3.setText("Delete");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btDelete.setText("Delete");
+        btDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btDeleteActionPerformed(evt);
             }
         });
 
-        jLabel4.setText("Location Id");
+        lblLocationId.setText("Location Id");
 
-        jButton1.setText("Save");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btSave.setText("Save");
+        btSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btSaveActionPerformed(evt);
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbDepartment.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -156,12 +157,12 @@ public class DepartmentView extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbDepartment.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                tbDepartmentMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbDepartment);
 
         comboSearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Search", "Search By Id", "Show All" }));
         comboSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -170,27 +171,27 @@ public class DepartmentView extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setText("Deprartment id");
+        lblDeptId.setText("Deprartment id");
 
         jLabel5.setText("Search");
 
-        jButton2.setText("Clear");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btClear.setText("Clear");
+        btClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btClearActionPerformed(evt);
             }
         });
 
-        jButton4.setText("X");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btClose.setText("X");
+        btClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btCloseActionPerformed(evt);
             }
         });
 
-        jComboManagerId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cbManagerId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
-        jComboBoxLocId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cbLocId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -202,36 +203,35 @@ public class DepartmentView extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
+                            .addComponent(lblDeptId)
+                            .addComponent(lblDeptName)
+                            .addComponent(lblManagerId)
+                            .addComponent(lblLocationId))
                         .addGap(29, 119, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btSave, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
-                            .addComponent(jTextDeptName)
-                            .addComponent(jTextDeptId)
-                            .addComponent(jComboManagerId, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBoxLocId, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(btDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
+                            .addComponent(tfDeptName)
+                            .addComponent(tfDeptId)
+                            .addComponent(cbManagerId, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbLocId, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(SearchData, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(comboSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btClear, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel6)
+                                .addComponent(lblDept)
                                 .addGap(215, 215, 215)
-                                .addComponent(jButton4)))
+                                .addComponent(btClose)))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -239,42 +239,42 @@ public class DepartmentView extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jLabel6))
+                    .addComponent(btClose)
+                    .addComponent(lblDept))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextDeptId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SearchData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDeptId)
+                    .addComponent(tfDeptId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextDeptName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDeptName)
+                    .addComponent(tfDeptName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(jComboManagerId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton2))
+                        .addComponent(lblManagerId)
+                        .addComponent(cbManagerId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btClear))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jComboBoxLocId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbLocId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblLocationId))
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3))
+                    .addComponent(btSave)
+                    .addComponent(btDelete))
                 .addGap(13, 13, 13)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteActionPerformed
         // TODO add your handling code here:
-        String id = jTextDeptId.getText();
+        String id = tfDeptId.getText();
         if (id.equals("")) {
             JOptionPane.showMessageDialog(null, "Data tidak boleh kosong");
         } else {
@@ -291,20 +291,20 @@ public class DepartmentView extends javax.swing.JPanel {
             }
         }
         tableData(dc.getAll());
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btDeleteActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSaveActionPerformed
         // TODO add your handling code here:
         if (isEmpty()) {
-            JOptionPane.showMessageDialog(null, dc.insert(jTextDeptId.getText(), jTextDeptName.getText(),
-                    jComboManagerId.getSelectedItem().toString().split(" - ")[0], jComboBoxLocId.getSelectedItem().toString().split(" - ")[0]));
+            JOptionPane.showMessageDialog(null, dc.insert(tfDeptId.getText(), tfDeptName.getText(),
+                    cbManagerId.getSelectedItem().toString().split(" - ")[0], cbLocId.getSelectedItem().toString().split(" - ")[0]));
         } else {
             try {
                 int reply = JOptionPane.showConfirmDialog(null, "Anda yakin untuk melakukan perubahan data?",
                         "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (reply == JOptionPane.YES_OPTION) {
-                    JOptionPane.showMessageDialog(null, dc.update(jTextDeptId.getText(), jTextDeptName.getText(),
-                            jComboManagerId.getSelectedItem().toString().split(" - ")[0], jComboBoxLocId.getSelectedItem().toString().split(" - ")[0]));
+                    JOptionPane.showMessageDialog(null, dc.update(tfDeptId.getText(), tfDeptName.getText(),
+                            cbManagerId.getSelectedItem().toString().split(" - ")[0], cbLocId.getSelectedItem().toString().split(" - ")[0]));
 
                     clean();
                     tableData(dc.getAll());
@@ -315,31 +315,31 @@ public class DepartmentView extends javax.swing.JPanel {
         }
         clean();
         tableData(dc.getAll());
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btSaveActionPerformed
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    private void tbDepartmentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDepartmentMouseClicked
         // TODO add your handling code here:
-        jTextDeptId.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
-        jTextDeptName.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
+        tfDeptId.setText(tbDepartment.getValueAt(tbDepartment.getSelectedRow(), 1).toString());
+        tfDeptName.setText(tbDepartment.getValueAt(tbDepartment.getSelectedRow(), 2).toString());
 //        jTextDeptManagerId.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
-        for (int i = 0; i < jComboManagerId.getItemCount(); i++) {
-            if (jComboManagerId.getItemAt(i).split(" - ")[0].equals(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString())) {
-                jComboManagerId.setSelectedIndex(i);
+        for (int i = 0; i < cbManagerId.getItemCount(); i++) {
+            if (cbManagerId.getItemAt(i).split(" - ")[0].equals(tbDepartment.getValueAt(tbDepartment.getSelectedRow(), 3).toString())) {
+                cbManagerId.setSelectedIndex(i);
             }
         }
 //        jTextLocId.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
-        for (int i = 0; i < jComboBoxLocId.getItemCount(); i++) {
-            if (jComboBoxLocId.getItemAt(i).split(" - ")[0].equals(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString())) {
-                jComboBoxLocId.setSelectedIndex(i);
+        for (int i = 0; i < cbLocId.getItemCount(); i++) {
+            if (cbLocId.getItemAt(i).split(" - ")[0].equals(tbDepartment.getValueAt(tbDepartment.getSelectedRow(), 4).toString())) {
+                cbLocId.setSelectedIndex(i);
             }
         }
 
-        jTextDeptId.setEnabled(false);
-    }//GEN-LAST:event_jTable1MouseClicked
+        tfDeptId.setEnabled(false);
+    }//GEN-LAST:event_tbDepartmentMouseClicked
 
     private void comboSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboSearchActionPerformed
         // TODO add your handling code here:
-        String cari = SearchData.getText();
+        String cari = tfSearch.getText();
         if (cari != "" && comboSearch.getSelectedItem() == "Search By Id") {
             tableData(dc.getById(cari));
         } else if (cari != "" && comboSearch.getSelectedItem() == "Search") {
@@ -349,36 +349,36 @@ public class DepartmentView extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_comboSearchActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClearActionPerformed
         // TODO add your handling code here:
         clean();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btClearActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCloseActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btCloseActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField SearchData;
+    private javax.swing.JButton btClear;
+    private javax.swing.JButton btClose;
+    private javax.swing.JButton btDelete;
+    private javax.swing.JButton btSave;
+    private javax.swing.JComboBox<String> cbLocId;
+    private javax.swing.JComboBox<String> cbManagerId;
     private javax.swing.JComboBox<String> comboSearch;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBoxLocId;
-    private javax.swing.JComboBox<String> jComboManagerId;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextDeptId;
-    private javax.swing.JTextField jTextDeptName;
+    private javax.swing.JLabel lblDept;
+    private javax.swing.JLabel lblDeptId;
+    private javax.swing.JLabel lblDeptName;
+    private javax.swing.JLabel lblLocationId;
+    private javax.swing.JLabel lblManagerId;
+    private javax.swing.JTable tbDepartment;
+    private javax.swing.JTextField tfDeptId;
+    private javax.swing.JTextField tfDeptName;
+    private javax.swing.JTextField tfSearch;
     // End of variables declaration//GEN-END:variables
 
 }
