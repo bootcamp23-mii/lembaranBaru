@@ -28,7 +28,11 @@ public class DepartmentDAO {
         List<Department> listDepartment = new ArrayList<Department>();
         String query = "";
         if (isGetById) {
+<<<<<<< HEAD
             query = "SELECT * FROM DEPARTMENTS DEPARTMENT_ID LIKE '%" + keyword + "%'";
+=======
+            query = "SELECT * FROM DEPARTMENTS WHERE DEPARTMENT_ID= " + keyword;
+>>>>>>> ea129e10be4bfd331d40b201dc6027ce55874c7e
         } else {
             query = "SELECT * FROM DEPARTMENTS WHERE DEPARTMENT_ID LIKE '%" + keyword
                     + "%' OR DEPARTMENT_NAME like '%" + keyword + "%' OR MANAGER_ID LIKE '%" + keyword
@@ -52,9 +56,17 @@ public class DepartmentDAO {
         boolean result = false;
         String query = "";
         if (isInsert) {
+<<<<<<< HEAD
             query = "INSERT INTO DEPARTMENTS(DEPARTMENT_ID,DEPARTMENT_NAME,MANAGER_ID,LOCATION_ID) VALUES(?,?,?,?)";
         } else {
             query = "UPDATE DEPARTMENTS SET DEPARTMENT_NAME=? ,MANAGER_ID=? ,LOCATION_ID=? WHERE DEPARTMENT_ID=?";
+=======
+            query = "INSERT INTO DEPARTMENTS(DEPARTMENT_ID,DEPARTMENT_NAME,MANAGER_ID,LOCATION_ID) VALUES(" + d.getId() + ",'"
+                    + d.getName() + "'," + d.getManager_id() + "," + d.getLocation_id();
+        } else {
+            query = "UPDATE DEPARTMENTS SET DEPARTMENT_NAME='" + d.getName() + "',MANAGER_ID=" + d.getManager_id()
+                    + ",LOCATION_ID=" + d.getLocation_id() + "WHERE DEPARTMENT_ID=" + d.getId();
+>>>>>>> ea129e10be4bfd331d40b201dc6027ce55874c7e
         }
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
