@@ -89,38 +89,37 @@ public class LocationDAO {
         boolean result = false;
         String query = "";
         if (isInsert) {
-<<<<<<< HEAD
-            query = "INSERT INTO LOCATIONS(street_address, location_id, postal_code, city, state_province, country_id)"
-=======
+
+            query = "INSERT INTO LOCATIONS(street_address, location_id, postal_code, city, state_province, country_id)";
+
             query = "INSERT INTO LOCATIONS(street_address, postal_code, city, state_province, country_id, location_id)"
->>>>>>> ea129e10be4bfd331d40b201dc6027ce55874c7e
+
                     + "VALUES (?,?,?,?,?,?)";
         } else {
             System.out.println("UPDATE HARUSNYA MAH");
 //            query = update() + "=?";
-<<<<<<< HEAD
+
             query = "UPDATE LOCATIONS SET STREET_ADDRESS = ? WHERE LOCATION_ID = ?";
-=======
+
             query = "UPDATE LOCATIONS SET STREET_ADDRESS = ?, POSTAL_CODE = ?, CITY = ?, STATE_PROVINCE = ?, COUNTRY_ID =?, LOCATION_ID = ?  WHERE LOCATION_ID = ?";
->>>>>>> ea129e10be4bfd331d40b201dc6027ce55874c7e
+
         }
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, l.getAddress());
-<<<<<<< HEAD
+
             preparedStatement.setInt(2, l.getId());
             preparedStatement.setString(3, l.getPostal());
             preparedStatement.setString(4, l.getCity());
             preparedStatement.setString(5, l.getProvince());
             preparedStatement.setString(6, l.getCountry());
-=======
+
             preparedStatement.setString(2, l.getPostal());
             preparedStatement.setString(3, l.getCity());
             preparedStatement.setString(4, l.getProvince());
             preparedStatement.setString(5, l.getCountry());
             preparedStatement.setInt(6, l.getId());
->>>>>>> ea129e10be4bfd331d40b201dc6027ce55874c7e
             preparedStatement.executeQuery();
             result = true;
 

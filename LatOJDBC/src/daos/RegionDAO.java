@@ -37,6 +37,7 @@ public class RegionDAO {
     private List<Region> getAll() {
         List<Region> listRegion = new ArrayList<Region>();
         String query = "SELECT * FROM REGIONS ORDER BY 1";
+
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -146,7 +147,9 @@ public class RegionDAO {
      */
     private List<Region> getById(int id) {
         List<Region> listRegion = new ArrayList<Region>();
+
         String query = "SELECT * FROM REGIONS WHERE region_id =" + id+" ORDER BY 1";
+
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -170,7 +173,9 @@ public class RegionDAO {
      */
     private List<Region> searchById(String key) {
         List<Region> listRegion = new ArrayList<Region>();
+
         String query = "SELECT * FROM REGIONS WHERE region_id LIKE'%" + key + "%' or region_name LIKE'%" + key + "%' ORDER BY 1";
+
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -197,10 +202,13 @@ public class RegionDAO {
         List<Region> listRegion = new ArrayList<Region>();
         String query = "";
         if (isGetById) {
-            query = "SELECT * FROM REGIONS WHERE region_id =" + keyword +" ORDER BY 1";
+
+            query = "SELECT * FROM REGIONS WHERE region_id =" + keyword;
         } else {
-            query = "SELECT * FROM REGIONS WHERE region_id LIKE'%" + keyword + "%' or region_name LIKE'%" + keyword + "%' ORDER BY 1";
-        }
+            query = "SELECT * FROM REGIONS WHERE region_id LIKE'%" + keyword + "%' or region_name LIKE'%" + keyword + "%'";
+
+            query = "SELECT * FROM REGIONS WHERE region_id =" + keyword +" ORDER BY 1";
+        } 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
