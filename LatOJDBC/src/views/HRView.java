@@ -356,11 +356,6 @@ public class HRView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-<<<<<<< HEAD
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-=======
     private javax.swing.JButton bt_delete;
     private javax.swing.JButton bt_insert;
     private javax.swing.JButton bt_update;
@@ -403,11 +398,8 @@ public class HRView extends javax.swing.JFrame {
     private javax.swing.JPanel jPEmployeeMainNorth;
     private javax.swing.JPanel jPEmployeeMainSouth;
     private javax.swing.JPanel jPEmployeeMainWest;
->>>>>>> ea129e10be4bfd331d40b201dc6027ce55874c7e
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JMenuItem jobsframe;
-<<<<<<< HEAD
-=======
     private javax.swing.JMenuItem locationMenu;
     private javax.swing.JMenuItem regionMenuItem;
     private javax.swing.JComboBox<String> search;
@@ -416,6 +408,5 @@ public class HRView extends javax.swing.JFrame {
     private javax.swing.JTextField tf_minsal;
     private javax.swing.JTextField tf_search;
     private javax.swing.JTextField tf_title;
->>>>>>> ea129e10be4bfd331d40b201dc6027ce55874c7e
     // End of variables declaration//GEN-END:variables
 }
