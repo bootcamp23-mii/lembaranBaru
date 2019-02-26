@@ -6,8 +6,11 @@
 package tools;
 
 import controllers.LocationController;
+import controllers.UserController;
 import daos.LocationDAO;
+import daos.UserDAO;
 import models.Location;
+import models.User;
 
 /**
  *
@@ -22,11 +25,25 @@ public class LocationMain {
         // TODO code application logic here
         DBConnection connection = new DBConnection();
         System.out.println(connection.getConnection());
-
+        
         LocationDAO ldao = new LocationDAO(connection.getConnection());
-
         LocationController lc = new LocationController(connection.getConnection());
         
+        UserDAO udao = new UserDAO(connection.getConnection());
+        UserController uc  = new UserController(connection.getConnection());
+
+//        CREATE USER ON USERS DATABASE
+        System.out.println(udao.save(new User("pandu", "pandu"), true));
+        
+        
+//        for (Location location : ldao.getData("1001", true)) {
+//            System.out.println("ID              : " + location.getId());
+//            System.out.println("ADDRESS         : " + location.getAddress());
+//            System.out.println("POSTAL CODE     : " + location.getPostal());
+//            System.out.println("CITY            : " + location.getCity());
+//            System.out.println("PROVINCE        : " + location.getProvince());
+//            System.out.println("COUNTRY         : " + location.getCountry());   
+//        }
 
 //      GET DATA
 //        

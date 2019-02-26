@@ -10,8 +10,11 @@ import controllers.EmployeeController;
 import models.Employee;
 import tools.DBConnection;
 import controllers.JobController;
+import controllers.UserController;
 import daos.JobDAO;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,19 +30,25 @@ import models.Job;
  */
 public class HRView extends javax.swing.JFrame {
 
-   
+    Dimension dim=Toolkit.getDefaultToolkit().getScreenSize();
+    DBConnection connection = new DBConnection();
+    UserController uc = new UserController(connection.getConnection());
 
     /**
      * Creates new form NewJFrame
      */
     public HRView() {
         initComponents();
+        getMiddle();
     }
-
- 
-   
-
-   
+    
+    private void getMiddle(){
+        int frameWidth=((dim.width-this.getSize().width)/2);
+        int frameHeigth=((dim.height-this.getSize().height)/2);
+        this.setLocation(frameWidth, frameHeigth);
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,6 +59,12 @@ public class HRView extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanelMain = new javax.swing.JPanel();
+        jPanelLogin = new javax.swing.JPanel();
+        jLabelUsername = new javax.swing.JLabel();
+        jTextUsername = new javax.swing.JTextField();
+        jLabelPassword = new javax.swing.JLabel();
+        jButtonLogin = new javax.swing.JButton();
+        jPasswordField = new javax.swing.JPasswordField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -60,11 +75,58 @@ public class HRView extends javax.swing.JFrame {
         locationMenu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(500, 500));
 
         jPanelMain.setLayout(new javax.swing.OverlayLayout(jPanelMain));
 
+        jLabelUsername.setText("Username");
+
+        jLabelPassword.setText("Password");
+
+        jButtonLogin.setText("Login");
+        jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLoginActionPerformed(evt);
+            }
+        });
+
+        jPasswordField.setToolTipText("");
+
+        javax.swing.GroupLayout jPanelLoginLayout = new javax.swing.GroupLayout(jPanelLogin);
+        jPanelLogin.setLayout(jPanelLoginLayout);
+        jPanelLoginLayout.setHorizontalGroup(
+            jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLoginLayout.createSequentialGroup()
+                .addContainerGap(201, Short.MAX_VALUE)
+                .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelUsername)
+                    .addComponent(jLabelPassword))
+                .addGap(28, 28, 28)
+                .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonLogin)
+                    .addComponent(jTextUsername)
+                    .addComponent(jPasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))
+                .addGap(231, 231, 231))
+        );
+        jPanelLoginLayout.setVerticalGroup(
+            jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLoginLayout.createSequentialGroup()
+                .addGap(170, 170, 170)
+                .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelUsername))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelPassword)
+                    .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(47, 47, 47)
+                .addComponent(jButtonLogin)
+                .addContainerGap(178, Short.MAX_VALUE))
+        );
+
+        jPanelMain.add(jPanelLogin);
+
         jMenu1.setText("CRUD");
+        jMenu1.setEnabled(false);
 
         jMenuItem1.setText("Employees");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -122,11 +184,11 @@ public class HRView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, 682, Short.MAX_VALUE)
+            .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
+            .addComponent(jPanelMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -154,36 +216,7 @@ public class HRView extends javax.swing.JFrame {
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         // TODO add your handling code here:
-        String t_search = tf_search.getText();
-//        DefaultTableModel myTable = new DefaultTableModel();
-//        jTable1.setModel(myTable);
-//        myTable.addColumn("Job Id");
-//        myTable.addColumn("Job Title");
-//        myTable.addColumn("Minimal Salary");
-//        myTable.addColumn("Maximal Salary");
-        if (t_search != "" && search.getSelectedItem() == "Search By Id") {
-//            for (Job job : jc.getById(t_search)) {
-//                myTable.addRow(new Object[]{
-//                    job.getId(),
-//                    job.getName(),
-//                    job.getMin_salary(),
-//                    job.getMax_salary()
-//                });
-//            }
-//            tableData(jc.getById(t_search));
-//        } else if (t_search != "" && search.getSelectedItem() == "Search") {
-//            for (Job job : jc.searchBy(t_search)) {
-//                myTable.addRow(new Object[]{
-//                    job.getId(),
-//                    job.getName(),
-//                    job.getMin_salary(),
-//                    job.getMax_salary()
-//                });
-//            }
-//            tableData(jc.searchBy(t_search));
-//        } else {
-//            tableData(jc.getAll());
-        }
+       
     }//GEN-LAST:event_searchActionPerformed
 
     private void tf_minsalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_minsalActionPerformed
@@ -195,77 +228,15 @@ public class HRView extends javax.swing.JFrame {
     }//GEN-LAST:event_tf_maxsalActionPerformed
 
     private void bt_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_insertActionPerformed
-        // TODO add your handling code here:
-
-//        String id = tf_id.getText();
-//        String title = tf_title.getText();
-//        String minsal = tf_minsal.getText();
-//        String maxsal = tf_maxsal.getText();
-//        if (konfirmasi()) {
-//            if (isEmpty()) {
-//                JOptionPane.showMessageDialog(null, jc.insert(tf_id.getText(), tf_title.getText(), tf_minsal.getText(), tf_maxsal.getText()));
-//            } else {
-//                try {
-//                    int reply = JOptionPane.showConfirmDialog(null,
-//                            "Anda yakin akan melakukan perubahan data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
-//                    );
-//                    if (reply == JOptionPane.YES_OPTION) {
-//                        JOptionPane.showMessageDialog(null, jc.update(tf_id.getText(), tf_title.getText(), tf_minsal.getText(), tf_maxsal.getText()));
-//                        clean();
-//                        tableData(jc.getAll());
-//                    }
-//                } catch (Exception e) {
-//                   e.printStackTrace();//dispose();
-//                }
-//            }
-//            clean();
-//            tableData(jc.getAll());
-//        }
+      
     }//GEN-LAST:event_bt_insertActionPerformed
 
     private void bt_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_updateActionPerformed
-        // TODO add your handling code here:
-//        String id = tf_id.getText();
-//        String title = tf_title.getText();
-//        String minsal = tf_minsal.getText();
-//        String maxsal = tf_maxsal.getText();
-
-//        if (konfirmasi()) {
-//            try {
-//                int reply = JOptionPane.showConfirmDialog(null,
-//                        "Anda yakin akan melakukan perubahan data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
-//                );
-//                if (reply == JOptionPane.YES_OPTION) {
-//                    JOptionPane.showMessageDialog(null, jc.update(tf_id.getText(), tf_title.getText(), tf_minsal.getText(), tf_maxsal.getText()));
-//                    clean();
-//                    tableData(jc.getAll());
-//                }
-//            } catch (Exception e) {
-//                dispose();
-//            }
-//        }
-
+      
     }//GEN-LAST:event_bt_updateActionPerformed
 
     private void bt_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_deleteActionPerformed
-        // TODO add your handling code here:
-//        String id = tf_id.getText();
-//        if (id.equals("")) {
-//            JOptionPane.showMessageDialog(null, "Data tidak boleh kosong");
-//        } else {
-//            try {
-//                int reply = JOptionPane.showConfirmDialog(null,
-//                        "Anda yakin akan menghapus data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
-//                );
-//                if (reply == JOptionPane.YES_OPTION) {
-//                    JOptionPane.showMessageDialog(null, jc.delete(id));
-//                    clean();
-//                }
-//            } catch (Exception e) {
-//                dispose();
-//            }
-//        }
-//        tableData(jc.getAll());
+        
     }//GEN-LAST:event_bt_deleteActionPerformed
 
     private void tf_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_idActionPerformed
@@ -273,24 +244,16 @@ public class HRView extends javax.swing.JFrame {
     }//GEN-LAST:event_tf_idActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
-//        tf_id.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
-//        tf_title.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
-//        tf_minsal.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
-//        tf_maxsal.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
-//
-//        tf_id.setEnabled(false);
+        
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void tf_minsalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_minsalKeyTyped
         // TODO add your handling code here:
-//        filterhuruf(evt);
 
     }//GEN-LAST:event_tf_minsalKeyTyped
 
     private void tf_maxsalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_maxsalKeyTyped
         // TODO add your handling code here:
-//        filterhuruf(evt);
     }//GEN-LAST:event_tf_maxsalKeyTyped
 
     private void regionMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regionMenuItemActionPerformed
@@ -319,6 +282,22 @@ public class HRView extends javax.swing.JFrame {
        dv.setVisible(true);
     }//GEN-LAST:event_deptMenuItemActionPerformed
 
+    private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
+        String pass="";
+        for (char c : jPasswordField.getPassword())pass+=c;
+        if (uc.login(jTextUsername.getText(), pass))
+        {
+            JOptionPane.showMessageDialog(null, "Login Sukses.");
+//            jPanelLogin.setEnabled(false);
+            jPanelLogin.setVisible(false);
+            jMenu1.setEnabled(true);
+        }
+        else {
+            jTextUsername.setText("");jPasswordField.setText("");
+            JOptionPane.showMessageDialog(null, "Username atau Password salah.");
+        }
+    }//GEN-LAST:event_jButtonLoginActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -346,6 +325,8 @@ public class HRView extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -356,57 +337,20 @@ public class HRView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bt_delete;
-    private javax.swing.JButton bt_insert;
-    private javax.swing.JButton bt_update;
     private javax.swing.JMenuItem deptMenuItem;
-    private javax.swing.JButton jBEmployeeDelete;
-    private javax.swing.JButton jBEmployeeGetAll;
-    private javax.swing.JButton jBEmployeeInsert;
-    private javax.swing.JButton jBEmployeeSearch;
-    private javax.swing.JButton jBEmployeeUpdate;
-    private javax.swing.JCheckBox jCBEmployeeisGetById;
-    private javax.swing.JInternalFrame jIFEmployee;
-    private javax.swing.JInternalFrame jIFJob;
-    private javax.swing.JLabel jLEmployeeCommissionPct;
-    private javax.swing.JLabel jLEmployeeDepartmentId;
-    private javax.swing.JLabel jLEmployeeEmail;
-    private javax.swing.JLabel jLEmployeeEmployeeId;
-    private javax.swing.JLabel jLEmployeeFirstName;
-    private javax.swing.JLabel jLEmployeeHireDate;
-    private javax.swing.JLabel jLEmployeeJobId;
-    private javax.swing.JLabel jLEmployeeLastName;
-    private javax.swing.JLabel jLEmployeeManagerId;
-    private javax.swing.JLabel jLEmployeePhoneNumber;
-    private javax.swing.JLabel jLEmployeeSalary;
-    private javax.swing.JLabel jLEmployeeSearch;
-    private javax.swing.JLabel jLEmployeeTitle;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JButton jButtonLogin;
+    private javax.swing.JLabel jLabelPassword;
+    private javax.swing.JLabel jLabelUsername;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JPanel jPEmployeeMain;
-    private javax.swing.JPanel jPEmployeeMainCenter;
-    private javax.swing.JPanel jPEmployeeMainCenterContent1;
-    private javax.swing.JPanel jPEmployeeMainCenterContent2;
-    private javax.swing.JPanel jPEmployeeMainCenterContent3;
-    private javax.swing.JPanel jPEmployeeMainNorth;
-    private javax.swing.JPanel jPEmployeeMainSouth;
-    private javax.swing.JPanel jPEmployeeMainWest;
+    private javax.swing.JPanel jPanelLogin;
     private javax.swing.JPanel jPanelMain;
+    private javax.swing.JPasswordField jPasswordField;
+    private javax.swing.JTextField jTextUsername;
     private javax.swing.JMenuItem jobsframe;
     private javax.swing.JMenuItem locationMenu;
     private javax.swing.JMenuItem regionMenuItem;
-    private javax.swing.JComboBox<String> search;
-    private javax.swing.JTextField tf_id;
-    private javax.swing.JTextField tf_maxsal;
-    private javax.swing.JTextField tf_minsal;
-    private javax.swing.JTextField tf_search;
-    private javax.swing.JTextField tf_title;
     // End of variables declaration//GEN-END:variables
 }

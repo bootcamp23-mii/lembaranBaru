@@ -54,16 +54,14 @@ public class LocationDAO {
      */
     public List<Location> getData(Object keyword, boolean isGetById) {
         String query = "";
-        List<Location> listRegion = new ArrayList<>();
+        List<Location> listRegion = new ArrayList<Location>();
         if (isGetById) {
             query = "SELECT * FROM LOCATIONS WHERE LOCATION_ID =" + keyword;
         } else {
-            query = "SELECT * FROM LOCATIONS WHERE LOCATION_ID LIKE ? OR STREET_ADDRESS LIKE ?";
+            query = "SELECT * FROM LOCATIONS WHERE LOCATION_ID LIKE '%" + keyword + "%' OR STREET_ADDRESS LIKE '%" + keyword + "%'";
         }
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, "%" + keyword + "%");
-            preparedStatement.setString(2, "%" + keyword + "%");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 listRegion.add(new Location(
@@ -75,14 +73,14 @@ public class LocationDAO {
             e.printStackTrace();
         }
         return listRegion;
-
     }
 
     /**
      * This method use to save or insert some row to locations table
      *
      * @param l are the value of what you want to input
-     * @param isInsert are the value of boolean that to separate insert and update
+     * @param isInsert are the value of boolean that to separate insert and
+     * update
      * @return
      */
     public boolean save(Location l, boolean isInsert) {
@@ -90,31 +88,15 @@ public class LocationDAO {
         String query = "";
         if (isInsert) {
 
-            query = "INSERT INTO LOCATIONS(street_address, location_id, postal_code, city, state_province, country_id)";
-
             query = "INSERT INTO LOCATIONS(street_address, postal_code, city, state_province, country_id, location_id)"
-
                     + "VALUES (?,?,?,?,?,?)";
         } else {
-            System.out.println("UPDATE HARUSNYA MAH");
-//            query = update() + "=?";
-
-            query = "UPDATE LOCATIONS SET STREET_ADDRESS = ? WHERE LOCATION_ID = ?";
-
             query = "UPDATE LOCATIONS SET STREET_ADDRESS = ?, POSTAL_CODE = ?, CITY = ?, STATE_PROVINCE = ?, COUNTRY_ID =?, LOCATION_ID = ?  WHERE LOCATION_ID = ?";
 
         }
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, l.getAddress());
-
-            preparedStatement.setInt(2, l.getId());
-            preparedStatement.setString(3, l.getPostal());
-            preparedStatement.setString(4, l.getCity());
-            preparedStatement.setString(5, l.getProvince());
-            preparedStatement.setString(6, l.getCountry());
-
             preparedStatement.setString(2, l.getPostal());
             preparedStatement.setString(3, l.getCity());
             preparedStatement.setString(4, l.getProvince());
@@ -128,45 +110,6 @@ public class LocationDAO {
             e.printStackTrace();
         }
         return result;
-    }
-
-    public String update() {
-        System.out.println("THEN, WHAT YOU LIKE TO UPDATE");
-        System.out.println("1. Address \n 2. Postal \n 3. City \n 4. Province \n 5. Country");
-        String Snull = "";
-        Scanner mys = new Scanner(System.in);
-        String inputku = mys.nextLine();
-//        int x = mys.nextInt();
-        switch (inputku) {
-            case "satu":
-                System.out.println("Input Your Destination Address");
-                String add = mys.nextLine();
-                Snull = "UPDATE LOCATIONS SET STREET_ADDRESS = '" + add + "' WHERE LOCATION_ID";
-                break;
-            case "2":
-                System.out.println("Input Your Destination Postal Code");
-                String post = mys.nextLine();
-                Snull = "UPDATE LOCATIONS SET POSTAL_CODE = '" + post + "' WHERE LOCATION_ID";
-                break;
-            case "3":
-                System.out.println("Input Your Destination City");
-                String cit = mys.nextLine();
-                Snull = "UPDATE LOCATIONS SET CITY = '" + cit + "' WHERE LOCATION_ID";
-                break;
-            case "4":
-                System.out.println("Input Your Destination Province");
-                String prov = mys.nextLine();
-                Snull = "UPDATE LOCATIONS SET STATE_PROVINCE = '" + prov + "' WHERE LOCATION_ID";
-                break;
-            case "5":
-                System.out.println("Input Your Destination Country");
-                String coun = mys.nextLine();
-                Snull = "UPDATE LOCATIONS SET COUNTRY_ID = '" + coun + "' WHERE LOCATION_ID";
-                break;
-            default:
-                System.out.println("kok kuraaaang");
-        }
-        return Snull;
     }
 
 }
