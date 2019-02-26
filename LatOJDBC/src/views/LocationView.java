@@ -347,7 +347,7 @@ public class LocationView extends javax.swing.JPanel {
         } else {
             try {
                 int reply = JOptionPane.showConfirmDialog(null,
-                        "Anda yakin akan menghapus data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
+                        "Are You Sure ?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
                 );
                 if (reply == JOptionPane.YES_OPTION) {
                     JOptionPane.showMessageDialog(null, lc.delete(id));
