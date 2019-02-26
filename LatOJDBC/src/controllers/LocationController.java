@@ -27,40 +27,51 @@ public class LocationController {
         String result = "";
         if (ldao.save(new Location(Integer.parseInt(id), address, postal, city, province, country), true)) {
 
-            result = "YEAY";
+            result = "YEAY, your new data inserted into table";
         } else {
             result = "OUCH";
 
-            result = "YEAY, your new data inserted into table";
 //        } else {
 //            result = "Ouch, Sorry you might miss something";
         }
         return result;
     }
-    
+
     public String update(String id, String address, String postal, String city, String province, String country) {
         String result = "";
-        if (ldao.save(new Location(Integer.parseInt(id), address, postal, city, province,country), false)) {
+        if (ldao.save(new Location(Integer.parseInt(id), address, postal, city, province, country), false)) {
             result = "Data Changes Complete";
         } else {
             result = "Ouch, Sorry you might miss something";
         }
         return result;
     }
+//
+//    public List<Location> getAll(String keyword, boolean con) {
+//        List result;
+//        result = ldao.getData(keyword, con);
+//        return result;
+//    }
 
-    public List<Location> getAll(String keyword, boolean con) {
-        List result;
-        result = ldao.getData(keyword, con);
-        return result;
-    }
     public List<Location> getAll(String keyword) {
         List result;
         result = ldao.getData(keyword, false);
         return result;
     }
+
     public List<Location> getById(String keyword) {
         List result;
-        result = ldao.getData(keyword, true);
+        result = ldao.getData(keyword, false);
+        return result;
+    }
+
+    public String delete(String id) {
+        String result = "";
+        if (ldao.delete(Integer.parseInt(id))) {
+            result = "Data have been deleted";
+        } else {
+            result = "Ouch, Something Missing";
+        }
         return result;
     }
 }

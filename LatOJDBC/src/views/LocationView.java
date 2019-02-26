@@ -21,13 +21,12 @@ import tools.DBConnection;
  */
 public class LocationView extends javax.swing.JPanel {
 
-    
-    List<Location> listdata         = new ArrayList<Location>();
-    DBConnection connection         = new DBConnection();
+    List<Location> listdata = new ArrayList<Location>();
+    DBConnection connection = new DBConnection();
     private DefaultTableModel modelLocation = new DefaultTableModel();
     int x = 0;
-    LocationDAO ldao        = new LocationDAO(connection.getConnection());
-    LocationController lc   = new LocationController(connection.getConnection());
+    LocationDAO ldao = new LocationDAO(connection.getConnection());
+    LocationController lc = new LocationController(connection.getConnection());
 
     /**
      * Creates new form LocationView
@@ -36,32 +35,31 @@ public class LocationView extends javax.swing.JPanel {
         initComponents();
         tableData(lc.getAll(""));
     }
-    
-    
+
     private boolean confirm() {
-        if (fieldId.getText().equals("") 
-                || fieldAddress.getText().equals("") 
-                || fieldPostal.getText().equals("") 
-                || fieldCity.getText().equals("") 
+        if (fieldId.getText().equals("")
+                || fieldAddress.getText().equals("")
+                || fieldPostal.getText().equals("")
+                || fieldCity.getText().equals("")
                 || fieldProvince.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Data cannot be empty !");
             return false;
         }
         return true;
     }
-    
+
     private boolean isEmpty() {
         if (lc.getAll(fieldId.getText()).isEmpty()) {
             return true;
         }
         return false;
     }
-    
+
     private void tableData(List<models.Location> locs) {
-        
+
         Object[] columnNames = {"NO", "ID", "Street Address", "Postal Code", "City", "State province", "Country ID"};
         Object[][] data = new Object[locs.size()][columnNames.length];
-        
+
         for (int i = 0; i < data.length; i++) {
             data[i][0] = (i + 1);
             data[i][1] = locs.get(i).getId();
@@ -74,7 +72,7 @@ public class LocationView extends javax.swing.JPanel {
         modelLocation = new DefaultTableModel(data, columnNames);
         contentTable.setModel(modelLocation);
     }
-    
+
     private void clean() {
         fieldId.setEnabled(true);
         fieldAddress.setText("");
@@ -91,6 +89,7 @@ public class LocationView extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Pada Kolom Jumlah Hanya Bisa Memasukan Karakter Angka");
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -119,7 +118,9 @@ public class LocationView extends javax.swing.JPanel {
         contentTable = new javax.swing.JTable();
         resetButton = new javax.swing.JButton();
         comboCountry = new javax.swing.JComboBox<>();
+        searchCombo = new javax.swing.JComboBox<>();
 
+        jInternalFrame1.setClosable(true);
         jInternalFrame1.setVisible(true);
 
         idLabel.setText("Location ID");
@@ -182,6 +183,8 @@ public class LocationView extends javax.swing.JPanel {
 
         comboCountry.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AR", "AU", "BE", "BR", "CA", "CH", "CN", "DE", "DK", "EG", "FR", "IL", "IN", "IT", "JP", "KW", "ML", "MX", "NG", "NL", "SG", "UK", "US", "ZM", "ZW" }));
 
+        searchCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SEARCH", "BY ID", " " }));
+
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
         jInternalFrame1Layout.setHorizontalGroup(
@@ -208,17 +211,18 @@ public class LocationView extends javax.swing.JPanel {
                             .addComponent(fieldAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(64, 64, 64)
+                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                                        .addGap(64, 64, 64)
                                         .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(cityLabel)
                                             .addComponent(countryLabel)
                                             .addComponent(deleteButton))
                                         .addGap(24, 24, 24))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(provinceLabel)
+                                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(searchCombo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(provinceLabel))
                                         .addGap(18, 18, 18)))
                                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(fieldCity, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
@@ -267,7 +271,9 @@ public class LocationView extends javax.swing.JPanel {
                         .addGap(136, 136, 136)
                         .addComponent(countryLabel)))
                 .addGap(38, 38, 38)
-                .addComponent(resetButton)
+                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(resetButton)
+                    .addComponent(searchCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveButton)
@@ -295,21 +301,21 @@ public class LocationView extends javax.swing.JPanel {
         if (confirm()) {
             if (isEmpty()) {
                 JOptionPane.showMessageDialog(null, lc.insert(
-                        fieldId.getText(), fieldAddress.getText(), 
+                        fieldId.getText(), fieldAddress.getText(),
                         fieldPostal.getText(), fieldCity.getText(),
                         fieldProvince.getText(), comboCountry.getSelectedItem().toString()));
 //                        fieldProvince.getText(), fieldCountry.getText()));
             } else {
                 try {
                     int reply = JOptionPane.showConfirmDialog(null,
-                            "Confirm your Action ?", 
+                            "Confirm your Action ?",
                             "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
                     );
                     if (reply == JOptionPane.YES_OPTION) {
                         JOptionPane.showMessageDialog(null, lc.update(
-                            fieldId.getText(), fieldAddress.getText(), 
-                            fieldPostal.getText(), fieldCity.getText(),
-                            fieldProvince.getText(), comboCountry.getSelectedItem().toString()));
+                                fieldId.getText(), fieldAddress.getText(),
+                                fieldPostal.getText(), fieldCity.getText(),
+                                fieldProvince.getText(), comboCountry.getSelectedItem().toString()));
 //                            fieldProvince.getText(), fieldCountry.getText()));
                         clean();
                         tableData(lc.getAll(""));
@@ -321,19 +327,37 @@ public class LocationView extends javax.swing.JPanel {
             clean();
             tableData(lc.getAll(""));
         }
-        
-        String id           = fieldId.getText();
-        String address      = fieldAddress.getText();
-        String postalCode   = fieldPostal.getText();
-        String city         = fieldCity.getText();
-        String state        = fieldProvince.getText();
-        String countryId    = comboCountry.getSelectedItem().toString();
+
+        String id = fieldId.getText();
+        String address = fieldAddress.getText();
+        String postalCode = fieldPostal.getText();
+        String city = fieldCity.getText();
+        String state = fieldProvince.getText();
+        String countryId = comboCountry.getSelectedItem().toString();
         lc.insert(id, address, postalCode, city, state, countryId);
-        
+
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
+        String id = fieldId.getText();
+        if (id.equals("")) {
+            JOptionPane.showMessageDialog(null, "Data tidak boleh kosong");
+        } else {
+            try {
+                int reply = JOptionPane.showConfirmDialog(null,
+                        "Are You Sure ?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
+                );
+                if (reply == JOptionPane.YES_OPTION) {
+                    JOptionPane.showMessageDialog(null, lc.delete(id));
+                    clean();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        tableData(lc.getAll(""));
+
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void contentTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contentTableMouseClicked
@@ -342,9 +366,9 @@ public class LocationView extends javax.swing.JPanel {
         fieldAddress.setText(contentTable.getValueAt(contentTable.getSelectedRow(), 2).toString());
         fieldPostal.setText(contentTable.getValueAt(contentTable.getSelectedRow(), 3).toString());
         fieldCity.setText(contentTable.getValueAt(contentTable.getSelectedRow(), 4).toString());
-        fieldProvince.setText(contentTable.getValueAt(contentTable.getSelectedRow(), 5).toString());
+        fieldProvince.setText(String.valueOf(contentTable.getValueAt(contentTable.getSelectedRow(), 5)));
 //        fieldCountry.setText(contentTable.getValueAt(contentTable.getSelectedRow(), 6).toString());
-        comboCountry.setSelectedItem(contentTable.getValueAt(contentTable.getSelectedRow(),6).toString());
+        comboCountry.setSelectedItem(contentTable.getValueAt(contentTable.getSelectedRow(), 6).toString());
         fieldId.setEnabled(false);
     }//GEN-LAST:event_contentTableMouseClicked
 
@@ -357,25 +381,34 @@ public class LocationView extends javax.swing.JPanel {
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
-        String searchString = fieldId.getText();
-        String keyword = "";
-        if (searchString != "") {
-            tableData(lc.getById(""));
-        } else if (searchString != "") {
-            keyword = searchString;
-            tableData(lc.getAll(searchString));
-        } else if(fieldAddress.getText() != ""){
-            keyword = fieldAddress.getText();
-            tableData(lc.getAll(keyword));
-        } else if(fieldPostal.getText() != ""){
-            keyword = fieldPostal.getText();
-            tableData(lc.getAll(keyword));
-        } else if(fieldCity.getText() != ""){
-            keyword = fieldCity.getText();
-            tableData(lc.getAll(keyword));
-        } else if(fieldProvince.getText() != ""){
-            keyword = fieldProvince.getText();
-            tableData(lc.getAll(keyword));
+//        String searchString = fieldId.getText();
+//        String keyword = "";
+//        if (searchString != "") {
+//            tableData(lc.getById(""));
+//        } else if (searchString != "") {
+//            keyword = searchString;
+//            tableData(lc.getAll(searchString));
+//        } else if(fieldAddress.getText() != ""){
+//            keyword = fieldAddress.getText();
+//            tableData(lc.getAll(keyword));
+//        } else if(fieldPostal.getText() != ""){
+//            keyword = fieldPostal.getText();
+//            tableData(lc.getAll(keyword));
+//        } else if(fieldCity.getText() != ""){
+//            keyword = fieldCity.getText();
+//            tableData(lc.getAll(keyword));
+//        } else if(fieldProvince.getText() != ""){
+//            keyword = fieldProvince.getText();
+//            tableData(lc.getAll(keyword));
+//        } else {
+//            tableData(lc.getAll(""));
+//        }
+
+        String id = fieldId.getText();
+        if (id != "" && searchCombo.getSelectedItem().equals("BY ID")) {
+            tableData(lc.getById(id));
+        } else if (id != "" && searchCombo.getSelectedItem().equals("SEARCH")) {
+            tableData(lc.getAll(id));
         } else {
             tableData(lc.getAll(""));
         }
@@ -402,5 +435,6 @@ public class LocationView extends javax.swing.JPanel {
     private javax.swing.JButton resetButton;
     private javax.swing.JButton saveButton;
     private javax.swing.JButton searchButton;
+    private javax.swing.JComboBox<String> searchCombo;
     // End of variables declaration//GEN-END:variables
 }
