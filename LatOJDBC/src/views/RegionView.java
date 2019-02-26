@@ -106,16 +106,12 @@ public class RegionView extends javax.swing.JInternalFrame {
         jCheckBox1 = new javax.swing.JCheckBox();
         bSearch = new javax.swing.JButton();
 
+        setClosable(true);
+
         topPanel.setLayout(new java.awt.GridLayout(2, 2, 0, 5));
 
         idLabel.setText("Id");
         topPanel.add(idLabel);
-
-        idTextField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                idTextFieldKeyTyped(evt);
-            }
-        });
         topPanel.add(idTextField);
 
         namaLabel.setText("Nama");
@@ -278,6 +274,7 @@ public class RegionView extends javax.swing.JInternalFrame {
 
     private void bClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bClearActionPerformed
         // TODO add your handling code here:
+        idTextField.setEnabled(true);
         idTextField.setText("");
         namaTextField.setText("");
         TampilData(rc.getAllData());
@@ -325,6 +322,7 @@ public class RegionView extends javax.swing.JInternalFrame {
             int row = jTable2.getSelectedRow();
             idTextField.setText(jTable2.getValueAt(row, 1).toString());
             namaTextField.setText(jTable2.getValueAt(row, 2).toString());
+            idTextField.setEnabled(false);
         }
     }//GEN-LAST:event_jTable2MouseClicked
 

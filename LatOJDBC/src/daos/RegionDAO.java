@@ -203,11 +203,11 @@ public class RegionDAO {
         String query = "";
         if (isGetById) {
 
-            query = "SELECT * FROM REGIONS WHERE region_id =" + keyword;
-        } else {
-            query = "SELECT * FROM REGIONS WHERE region_id LIKE'%" + keyword + "%' or region_name LIKE'%" + keyword + "%'";
-
             query = "SELECT * FROM REGIONS WHERE region_id =" + keyword +" ORDER BY 1";
+        } else {
+            query = "SELECT * FROM REGIONS WHERE region_id LIKE'%" + keyword + "%' or region_name LIKE'%" + keyword + "%' ORDER BY 1";
+
+            
         } 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
