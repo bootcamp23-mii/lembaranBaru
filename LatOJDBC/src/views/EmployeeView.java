@@ -61,7 +61,10 @@ public class EmployeeView extends javax.swing.JInternalFrame {
     }
     
     private boolean isEmpty() {
-        return jc.getById(jTFEmployeeEmployeeId.getText()).isEmpty();
+        if (ec.searchData(jTFEmployeeEmployeeId.getText(),true).isEmpty()) {
+            return true;
+        }
+        return false;
     }
     
     private void setComboBox(){
@@ -363,8 +366,14 @@ public class EmployeeView extends javax.swing.JInternalFrame {
 
     private void jBEmployeeInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEmployeeInsertActionPerformed
 //        ec.insert(jTFEmployeeEmployeeId.getText(), jTFEmployeeFirstName.getText(), jTFEmployeeLastName.getText(), jTFEmployeeEmail.getText(), jTFEmployeePhoneNumber.getText(), jTFEmployeeHireDate.getText(), jTFEmployeeJobId.getText(), jTFEmployeeSalary.getText(), jTFEmployeeCommissionPct.getText(), jTFEmployeeManagerId.getText(), jTFEmployeeDepartmentId.getText());
-        if (konfirmasi())
-            if (isEmpty())JOptionPane.showMessageDialog(null, ec.insert(jTFEmployeeEmployeeId.getText(), jTFEmployeeFirstName.getText(), jTFEmployeeLastName.getText(), jTFEmployeeEmail.getText(), jTFEmployeePhoneNumber.getText(), jTFEmployeeHireDate.getText(), jCBEmployeeJobId.getSelectedItem().toString(), jTFEmployeeSalary.getText(), jTFEmployeeCommissionPct.getText(), jCBEmployeeManagerId.getSelectedItem().toString(), jCBEmployeeDepartmentId.getSelectedItem().toString()));
+        if (konfirmasi()){
+            if (isEmpty())JOptionPane.showMessageDialog(null, ec.insert(
+                    jTFEmployeeEmployeeId.getText(), jTFEmployeeFirstName.getText(), jTFEmployeeLastName.getText(), 
+                    jTFEmployeeEmail.getText(), jTFEmployeePhoneNumber.getText(), jTFEmployeeHireDate.getText(), 
+                    jCBEmployeeJobId.getSelectedItem().toString().split(" - ")[0], jTFEmployeeSalary.getText(), 
+                    jTFEmployeeCommissionPct.getText(), 
+                    jCBEmployeeManagerId.getSelectedItem().toString().split(" - ")[0], 
+                    jCBEmployeeDepartmentId.getSelectedItem().toString().split(" - ")[0]));
             else 
             {
                 try {
@@ -372,13 +381,20 @@ public class EmployeeView extends javax.swing.JInternalFrame {
                             "Anda yakin akan melakukan perubahan data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
                     );
                     if (reply == JOptionPane.YES_OPTION) {
-                        JOptionPane.showMessageDialog(null, ec.update(jTFEmployeeEmployeeId.getText(), jTFEmployeeFirstName.getText(), jTFEmployeeLastName.getText(), jTFEmployeeEmail.getText(), jTFEmployeePhoneNumber.getText(), jTFEmployeeHireDate.getText(), jCBEmployeeJobId.getSelectedItem().toString(), jTFEmployeeSalary.getText(), jTFEmployeeCommissionPct.getText(), jCBEmployeeManagerId.getSelectedItem().toString(), jCBEmployeeDepartmentId.getSelectedItem().toString()));
+                        JOptionPane.showMessageDialog(null, ec.update(jTFEmployeeEmployeeId.getText(), jTFEmployeeFirstName.getText(), 
+                                jTFEmployeeLastName.getText(), jTFEmployeeEmail.getText(), jTFEmployeePhoneNumber.getText(), 
+                                jTFEmployeeHireDate.getText(), jCBEmployeeJobId.getSelectedItem().toString().split(" - ")[0], 
+                                jTFEmployeeSalary.getText(), jTFEmployeeCommissionPct.getText(), 
+                                jCBEmployeeManagerId.getSelectedItem().toString().split(" - ")[0], 
+                                jCBEmployeeDepartmentId.getSelectedItem().toString().split(" - ")[0]));
                         showAllEmployeeTable(ec.getAllData());
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
+            showAllEmployeeTable(ec.getAllData());
+        }
     }//GEN-LAST:event_jBEmployeeInsertActionPerformed
 
     private void jBEmployeeDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEmployeeDeleteActionPerformed
@@ -399,6 +415,7 @@ public class EmployeeView extends javax.swing.JInternalFrame {
                 e.printStackTrace();
             }
         }
+        showAllEmployeeTable(ec.getAllData());
     }//GEN-LAST:event_jBEmployeeDeleteActionPerformed
 
     private void jBEmployeeSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEmployeeSearchActionPerformed

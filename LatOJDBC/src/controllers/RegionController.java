@@ -51,15 +51,15 @@ public class RegionController {
         return result;
     }
     
-    public List<Region> getById(String key, boolean s){
+    public List<Region> getById(String key){
         List result = new ArrayList();
-        result = rdao.getData(key, s);
+        result = rdao.getData(key, true);
         return result;        
     }
     
-    public List<Region> searchBy(String key, boolean s){
+    public List<Region> searchBy(String key){
         List result = new ArrayList();
-        result = rdao.getData(key, s);
+        result = rdao.getData(key, false);
         return result;        
     }
     

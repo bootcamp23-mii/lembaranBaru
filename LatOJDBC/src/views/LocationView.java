@@ -5,7 +5,6 @@
  */
 package views;
 
-import controllers.EmployeeController;
 import controllers.LocationController;
 import daos.LocationDAO;
 import java.awt.event.KeyEvent;
@@ -38,13 +37,13 @@ public class LocationView extends javax.swing.JPanel {
         tableData(lc.getAll(""));
     }
     
+    
     private boolean confirm() {
         if (fieldId.getText().equals("") 
                 || fieldAddress.getText().equals("") 
                 || fieldPostal.getText().equals("") 
                 || fieldCity.getText().equals("") 
-                || fieldProvince.getText().equals("") 
-                || fieldCountry.getText().equals("")) {
+                || fieldProvince.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Data cannot be empty !");
             return false;
         }
@@ -82,7 +81,8 @@ public class LocationView extends javax.swing.JPanel {
         fieldPostal.setText("");
         fieldCity.setText("");
         fieldProvince.setText("");
-        fieldCountry.setText("");
+//        fieldCountry.setText("");
+        comboCountry.setSelectedIndex(1);
     }
 
     void filterhuruf(KeyEvent a) {
@@ -111,7 +111,6 @@ public class LocationView extends javax.swing.JPanel {
         fieldPostal = new javax.swing.JTextField();
         fieldAddress = new javax.swing.JTextField();
         fieldProvince = new javax.swing.JTextField();
-        fieldCountry = new javax.swing.JTextField();
         fieldCity = new javax.swing.JTextField();
         saveButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
@@ -119,6 +118,7 @@ public class LocationView extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         contentTable = new javax.swing.JTable();
         resetButton = new javax.swing.JButton();
+        comboCountry = new javax.swing.JComboBox<>();
 
         jInternalFrame1.setVisible(true);
 
@@ -149,6 +149,11 @@ public class LocationView extends javax.swing.JPanel {
         });
 
         searchButton.setText("SEARCH");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
 
         contentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -174,6 +179,8 @@ public class LocationView extends javax.swing.JPanel {
                 resetButtonActionPerformed(evt);
             }
         });
+
+        comboCountry.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AR", "AU", "BE", "BR", "CA", "CH", "CN", "DE", "DK", "EG", "FR", "IL", "IN", "IT", "JP", "KW", "ML", "MX", "NG", "NL", "SG", "UK", "US", "ZM", "ZW" }));
 
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
@@ -213,10 +220,10 @@ public class LocationView extends javax.swing.JPanel {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(provinceLabel)
                                         .addGap(18, 18, 18)))
-                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(fieldCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(fieldCity, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(fieldProvince, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(fieldCity, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                                    .addComponent(fieldProvince, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                                    .addComponent(comboCountry, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
                                 .addGap(218, 218, 218)
                                 .addComponent(searchButton))))
@@ -230,33 +237,36 @@ public class LocationView extends javax.swing.JPanel {
                     .addGroup(jInternalFrame1Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jInternalFrame1Layout.createSequentialGroup()
-                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(fieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(idLabel))
+                            .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jInternalFrame1Layout.createSequentialGroup()
+                                    .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(fieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(idLabel))
+                                    .addGap(28, 28, 28)
+                                    .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(fieldAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(addressLabel)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jInternalFrame1Layout.createSequentialGroup()
+                                    .addGap(100, 100, 100)
+                                    .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(fieldPostal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(postalLabel))))
+                            .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(fieldCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cityLabel))
+                                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                                        .addGap(52, 52, 52)
+                                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(fieldProvince, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(provinceLabel))))
                                 .addGap(28, 28, 28)
-                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(fieldAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(addressLabel)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jInternalFrame1Layout.createSequentialGroup()
-                                .addGap(100, 100, 100)
-                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(fieldPostal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(postalLabel)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(fieldCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cityLabel))))
+                                .addComponent(comboCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(fieldCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(countryLabel)))
-                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(fieldProvince, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(provinceLabel))))
-                .addGap(32, 32, 32)
+                        .addGap(136, 136, 136)
+                        .addComponent(countryLabel)))
+                .addGap(38, 38, 38)
                 .addComponent(resetButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -265,7 +275,7 @@ public class LocationView extends javax.swing.JPanel {
                     .addComponent(searchButton))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -287,7 +297,8 @@ public class LocationView extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, lc.insert(
                         fieldId.getText(), fieldAddress.getText(), 
                         fieldPostal.getText(), fieldCity.getText(),
-                        fieldProvince.getText(), fieldCountry.getText()));
+                        fieldProvince.getText(), comboCountry.getSelectedItem().toString()));
+//                        fieldProvince.getText(), fieldCountry.getText()));
             } else {
                 try {
                     int reply = JOptionPane.showConfirmDialog(null,
@@ -298,7 +309,8 @@ public class LocationView extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(null, lc.update(
                             fieldId.getText(), fieldAddress.getText(), 
                             fieldPostal.getText(), fieldCity.getText(),
-                            fieldProvince.getText(), fieldCountry.getText()));
+                            fieldProvince.getText(), comboCountry.getSelectedItem().toString()));
+//                            fieldProvince.getText(), fieldCountry.getText()));
                         clean();
                         tableData(lc.getAll(""));
                     }
@@ -315,7 +327,7 @@ public class LocationView extends javax.swing.JPanel {
         String postalCode   = fieldPostal.getText();
         String city         = fieldCity.getText();
         String state        = fieldProvince.getText();
-        String countryId    = fieldCountry.getText();
+        String countryId    = comboCountry.getSelectedItem().toString();
         lc.insert(id, address, postalCode, city, state, countryId);
         
     }//GEN-LAST:event_saveButtonActionPerformed
@@ -331,8 +343,8 @@ public class LocationView extends javax.swing.JPanel {
         fieldPostal.setText(contentTable.getValueAt(contentTable.getSelectedRow(), 3).toString());
         fieldCity.setText(contentTable.getValueAt(contentTable.getSelectedRow(), 4).toString());
         fieldProvince.setText(contentTable.getValueAt(contentTable.getSelectedRow(), 5).toString());
-        fieldCountry.setText(contentTable.getValueAt(contentTable.getSelectedRow(), 6).toString());
-
+//        fieldCountry.setText(contentTable.getValueAt(contentTable.getSelectedRow(), 6).toString());
+        comboCountry.setSelectedItem(contentTable.getValueAt(contentTable.getSelectedRow(),6).toString());
         fieldId.setEnabled(false);
     }//GEN-LAST:event_contentTableMouseClicked
 
@@ -343,16 +355,42 @@ public class LocationView extends javax.swing.JPanel {
         clean();
     }//GEN-LAST:event_resetButtonActionPerformed
 
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        // TODO add your handling code here:
+        String searchString = fieldId.getText();
+        String keyword = "";
+        if (searchString != "") {
+            tableData(lc.getById(""));
+        } else if (searchString != "") {
+            keyword = searchString;
+            tableData(lc.getAll(searchString));
+        } else if(fieldAddress.getText() != ""){
+            keyword = fieldAddress.getText();
+            tableData(lc.getAll(keyword));
+        } else if(fieldPostal.getText() != ""){
+            keyword = fieldPostal.getText();
+            tableData(lc.getAll(keyword));
+        } else if(fieldCity.getText() != ""){
+            keyword = fieldCity.getText();
+            tableData(lc.getAll(keyword));
+        } else if(fieldProvince.getText() != ""){
+            keyword = fieldProvince.getText();
+            tableData(lc.getAll(keyword));
+        } else {
+            tableData(lc.getAll(""));
+        }
+    }//GEN-LAST:event_searchButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addressLabel;
     private javax.swing.JLabel cityLabel;
+    private javax.swing.JComboBox<String> comboCountry;
     private javax.swing.JTable contentTable;
     private javax.swing.JLabel countryLabel;
     private javax.swing.JButton deleteButton;
     private javax.swing.JTextField fieldAddress;
     private javax.swing.JTextField fieldCity;
-    private javax.swing.JTextField fieldCountry;
     private javax.swing.JTextField fieldId;
     private javax.swing.JTextField fieldPostal;
     private javax.swing.JTextField fieldProvince;
