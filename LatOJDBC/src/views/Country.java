@@ -7,14 +7,12 @@ package views;
 
 import controllers.CountryController;
 import javax.swing.table.DefaultTableModel;
-import tools.DBConnection;
 
 /**
  *
  * @author gerydanu
  */
 public class Country extends javax.swing.JInternalFrame {
-    DBConnection connection = new DBConnection();
 
     CountryController cc = new CountryController(connection.getConnection());
     
@@ -194,11 +192,11 @@ public class Country extends javax.swing.JInternalFrame {
         DefaultTableModel tabelCountries = (DefaultTableModel) jTableCountries.getModel();
         tabelCountries.setRowCount(0);
         int hitung = 1;
-//        for (Country values : cc.getAllData()) {
-//            Object[] data = {hitung, values.getCountry_id(), values.getCountry_name(), values.getRegion_id()};
-//            tabelCountries.addRow(data);
-//            hitung++;
-//        }
+        for (Country values : cc.getAllData()) {
+            Object[] data = {hitung, values.getCountry_id(), values.getCountry_name(), values.getRegion_id()};
+            tabelCountries.addRow(data);
+            hitung++;
+        }
         
     }
 
