@@ -82,7 +82,8 @@ public class LocationDAO {
      * This method use to save or insert some row to locations table
      *
      * @param l are the value of what you want to input
-     * @param isInsert are the value of boolean that to separate insert and update
+     * @param isInsert are the value of boolean that to separate insert and
+     * update
      * @return
      */
     public boolean save(Location l, boolean isInsert) {
@@ -90,17 +91,11 @@ public class LocationDAO {
         String query = "";
         if (isInsert) {
 
-            query = "INSERT INTO LOCATIONS(street_address, location_id, postal_code, city, state_province, country_id)";
-
             query = "INSERT INTO LOCATIONS(street_address, postal_code, city, state_province, country_id, location_id)"
-
                     + "VALUES (?,?,?,?,?,?)";
         } else {
             System.out.println("UPDATE HARUSNYA MAH");
 //            query = update() + "=?";
-
-            query = "UPDATE LOCATIONS SET STREET_ADDRESS = ? WHERE LOCATION_ID = ?";
-
             query = "UPDATE LOCATIONS SET STREET_ADDRESS = ?, POSTAL_CODE = ?, CITY = ?, STATE_PROVINCE = ?, COUNTRY_ID =?, LOCATION_ID = ?  WHERE LOCATION_ID = ?";
 
         }
