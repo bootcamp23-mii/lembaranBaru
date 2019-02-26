@@ -5,6 +5,7 @@
  */
 package views;
 
+
 import controllers.EmployeeController;
 import models.Employee;
 import tools.DBConnection;
@@ -26,83 +27,19 @@ import models.Job;
  */
 public class HRView extends javax.swing.JFrame {
 
-    DBConnection connection = new DBConnection();
-
-    EmployeeController ec = new EmployeeController(connection.getConnection());
-
-//    JobDAO rdao = new JobDAO(connection.getConnection());
-    JobController jc = new JobController(connection.getConnection());
-    DefaultTableModel myTable = new DefaultTableModel();
-    List<Job> jobs = new ArrayList<Job>();
+   
 
     /**
      * Creates new form NewJFrame
      */
     public HRView() {
         initComponents();
-        tableData(jc.getAll());
-        jIFJob.setVisible(false);
     }
 
-    private boolean konfirmasi() {
-        if (tf_id.getText().equals("") || tf_title.getText().equals("") || tf_minsal.getText().equals("") || tf_maxsal.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Data tidak boleh kosong");
-            return false;
-        }
-        return true;
-    }
+ 
+   
 
-    private boolean isEmpty() {
-        if (jc.getById(tf_id.getText()).isEmpty()) {
-            return true;
-        }
-        return false;
-    }
-
-    private void tableData(List<Job> jobs) {
-//        jobs = jc.getAll();
-        Object[] columnNames = {"Nomor", "Job Id", "Job Title", "Minimal Salary", "Maximal Salary"};
-        Object[][] data = new Object[jobs.size()][columnNames.length];
-//        jTable1.setModel(myTable);
-//        myTable.addColumn("Job Id");
-//        myTable.addColumn("Job Title");
-//        myTable.addColumn("Minimal Salary");
-//        myTable.addColumn("Maximal Salary");
-//        for (Job job : jc.searchBy("")) {
-//            myTable.addRow(new Object[]{
-//                job.getId(),
-//                job.getName(),
-//                job.getMin_salary(),
-//                job.getMax_salary()
-//            });
-//        }
-
-        for (int i = 0; i < data.length; i++) {
-            data[i][0] = (i + 1);
-            data[i][1] = jobs.get(i).getId();
-            data[i][2] = jobs.get(i).getName();
-            data[i][3] = jobs.get(i).getMin_salary();
-            data[i][4] = jobs.get(i).getMax_salary();
-        }
-        myTable = new DefaultTableModel(data, columnNames);
-        jTable1.setModel(myTable);
-    }
-
-    private void clean() {
-        tf_id.setEnabled(true);
-        tf_id.setText("");
-        tf_title.setText("");
-        tf_minsal.setText("");
-        tf_maxsal.setText("");
-    }
-
-    void filterhuruf(KeyEvent a) {
-        if (Character.isAlphabetic(a.getKeyChar())) {
-            a.consume();
-            JOptionPane.showMessageDialog(null, "Pada Kolom Jumlah Hanya Bisa Memasukan Karakter Angka");
-        }
-    }
-
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -113,68 +50,6 @@ public class HRView extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanelMain = new javax.swing.JPanel();
-        jIFEmployee = new javax.swing.JInternalFrame();
-        jPEmployeeMain = new javax.swing.JPanel();
-        jPEmployeeMainNorth = new javax.swing.JPanel();
-        jLEmployeeTitle = new javax.swing.JLabel();
-        jPEmployeeMainWest = new javax.swing.JPanel();
-        jLEmployeeEmployeeId = new javax.swing.JLabel();
-        jLEmployeeFirstName = new javax.swing.JLabel();
-        jLEmployeeLastName = new javax.swing.JLabel();
-        jLEmployeeEmail = new javax.swing.JLabel();
-        jLEmployeePhoneNumber = new javax.swing.JLabel();
-        jLEmployeeHireDate = new javax.swing.JLabel();
-        jLEmployeeJobId = new javax.swing.JLabel();
-        jLEmployeeSalary = new javax.swing.JLabel();
-        jLEmployeeCommissionPct = new javax.swing.JLabel();
-        jLEmployeeManagerId = new javax.swing.JLabel();
-        jLEmployeeDepartmentId = new javax.swing.JLabel();
-        jSEmployees1 = new javax.swing.JSeparator();
-        jLEmployeeSearch = new javax.swing.JLabel();
-        jPEmployeeMainCenter = new javax.swing.JPanel();
-        jTFEmployeeEmployeeId = new javax.swing.JTextField();
-        jTFEmployeeFirstName = new javax.swing.JTextField();
-        jTFEmployeeLastName = new javax.swing.JTextField();
-        jTFEmployeeEmail = new javax.swing.JTextField();
-        jTFEmployeePhoneNumber = new javax.swing.JTextField();
-        jTFEmployeeHireDate = new javax.swing.JTextField();
-        jTFEmployeeJobId = new javax.swing.JTextField();
-        jTFEmployeeSalary = new javax.swing.JTextField();
-        jTFEmployeeCommissionPct = new javax.swing.JTextField();
-        jTFEmployeeManagerId = new javax.swing.JTextField();
-        jTFEmployeeDepartmentId = new javax.swing.JTextField();
-        jPEmployeeMainCenterContent1 = new javax.swing.JPanel();
-        jBEmployeeInsert = new javax.swing.JButton();
-        jBEmployeeUpdate = new javax.swing.JButton();
-        jPEmployeeMainCenterContent2 = new javax.swing.JPanel();
-        jTFEmployeeSearch = new javax.swing.JTextField();
-        jPEmployeeMainCenterContent3 = new javax.swing.JPanel();
-        jBEmployeeDelete = new javax.swing.JButton();
-        jSEmployees2 = new javax.swing.JSeparator();
-        jBEmployeeSearch = new javax.swing.JButton();
-        jCBEmployeeisGetById = new javax.swing.JCheckBox();
-        jSEmployees3 = new javax.swing.JSeparator();
-        jBEmployeeGetAll = new javax.swing.JButton();
-        jPEmployeeMainSouth = new javax.swing.JPanel();
-        jSPEmployee = new javax.swing.JScrollPane();
-        jTEmployee = new javax.swing.JTable();
-        jIFJob = new javax.swing.JInternalFrame();
-        tf_search = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        tf_title = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        search = new javax.swing.JComboBox<>();
-        tf_minsal = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        tf_maxsal = new javax.swing.JTextField();
-        bt_insert = new javax.swing.JButton();
-        bt_update = new javax.swing.JButton();
-        bt_delete = new javax.swing.JButton();
-        tf_id = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -185,354 +60,9 @@ public class HRView extends javax.swing.JFrame {
         locationMenu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(500, 500));
 
         jPanelMain.setLayout(new javax.swing.OverlayLayout(jPanelMain));
-
-        jIFEmployee.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jIFEmployee.setClosable(true);
-        jIFEmployee.setMinimumSize(new java.awt.Dimension(200, 200));
-        jIFEmployee.setNormalBounds(new java.awt.Rectangle(0, 0, 200, 200));
-        jIFEmployee.setVisible(false);
-
-        jPEmployeeMain.setLayout(new java.awt.BorderLayout(1, 1));
-
-        jLEmployeeTitle.setText("EMPLOYEES");
-        jPEmployeeMainNorth.add(jLEmployeeTitle);
-
-        jPEmployeeMain.add(jPEmployeeMainNorth, java.awt.BorderLayout.PAGE_START);
-
-        jPEmployeeMainWest.setLayout(new java.awt.GridLayout(14, 1));
-
-        jLEmployeeEmployeeId.setText("Employee ID");
-        jPEmployeeMainWest.add(jLEmployeeEmployeeId);
-
-        jLEmployeeFirstName.setText("First Name");
-        jPEmployeeMainWest.add(jLEmployeeFirstName);
-
-        jLEmployeeLastName.setText("Last Name");
-        jPEmployeeMainWest.add(jLEmployeeLastName);
-
-        jLEmployeeEmail.setText("Email");
-        jPEmployeeMainWest.add(jLEmployeeEmail);
-
-        jLEmployeePhoneNumber.setText("Phone Number");
-        jPEmployeeMainWest.add(jLEmployeePhoneNumber);
-
-        jLEmployeeHireDate.setText("Hire Date");
-        jPEmployeeMainWest.add(jLEmployeeHireDate);
-
-        jLEmployeeJobId.setText("Job Id");
-        jPEmployeeMainWest.add(jLEmployeeJobId);
-
-        jLEmployeeSalary.setText("Salary");
-        jPEmployeeMainWest.add(jLEmployeeSalary);
-
-        jLEmployeeCommissionPct.setText("Commission Pct");
-        jPEmployeeMainWest.add(jLEmployeeCommissionPct);
-
-        jLEmployeeManagerId.setText("Manager Id");
-        jPEmployeeMainWest.add(jLEmployeeManagerId);
-
-        jLEmployeeDepartmentId.setText("Department Id");
-        jPEmployeeMainWest.add(jLEmployeeDepartmentId);
-        jPEmployeeMainWest.add(jSEmployees1);
-
-        jLEmployeeSearch.setText("Search/Delete");
-        jPEmployeeMainWest.add(jLEmployeeSearch);
-
-        jPEmployeeMain.add(jPEmployeeMainWest, java.awt.BorderLayout.LINE_START);
-
-        jPEmployeeMainCenter.setLayout(new java.awt.GridLayout(14, 1));
-
-        jTFEmployeeEmployeeId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFEmployeeEmployeeIdActionPerformed(evt);
-            }
-        });
-        jPEmployeeMainCenter.add(jTFEmployeeEmployeeId);
-        jPEmployeeMainCenter.add(jTFEmployeeFirstName);
-        jPEmployeeMainCenter.add(jTFEmployeeLastName);
-        jPEmployeeMainCenter.add(jTFEmployeeEmail);
-        jPEmployeeMainCenter.add(jTFEmployeePhoneNumber);
-        jPEmployeeMainCenter.add(jTFEmployeeHireDate);
-        jPEmployeeMainCenter.add(jTFEmployeeJobId);
-        jPEmployeeMainCenter.add(jTFEmployeeSalary);
-        jPEmployeeMainCenter.add(jTFEmployeeCommissionPct);
-        jPEmployeeMainCenter.add(jTFEmployeeManagerId);
-        jPEmployeeMainCenter.add(jTFEmployeeDepartmentId);
-
-        jPEmployeeMainCenterContent1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
-        jBEmployeeInsert.setText("Insert");
-        jBEmployeeInsert.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEmployeeInsertActionPerformed(evt);
-            }
-        });
-        jPEmployeeMainCenterContent1.add(jBEmployeeInsert);
-
-        jBEmployeeUpdate.setText("Update");
-        jBEmployeeUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEmployeeUpdateActionPerformed(evt);
-            }
-        });
-        jPEmployeeMainCenterContent1.add(jBEmployeeUpdate);
-
-        jPEmployeeMainCenter.add(jPEmployeeMainCenterContent1);
-
-        jPEmployeeMainCenterContent2.setLayout(new java.awt.GridLayout(1, 0));
-        jPEmployeeMainCenterContent2.add(jTFEmployeeSearch);
-
-        jPEmployeeMainCenter.add(jPEmployeeMainCenterContent2);
-
-        jPEmployeeMainCenterContent3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
-        jBEmployeeDelete.setText("Delete by ID");
-        jPEmployeeMainCenterContent3.add(jBEmployeeDelete);
-        jPEmployeeMainCenterContent3.add(jSEmployees2);
-
-        jBEmployeeSearch.setText("Search");
-        jBEmployeeSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEmployeeSearchActionPerformed(evt);
-            }
-        });
-        jPEmployeeMainCenterContent3.add(jBEmployeeSearch);
-
-        jCBEmployeeisGetById.setText("Get By ID");
-        jCBEmployeeisGetById.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBEmployeeisGetByIdActionPerformed(evt);
-            }
-        });
-        jPEmployeeMainCenterContent3.add(jCBEmployeeisGetById);
-        jPEmployeeMainCenterContent3.add(jSEmployees3);
-
-        jBEmployeeGetAll.setText("Get All Data");
-        jBEmployeeGetAll.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEmployeeGetAllActionPerformed(evt);
-            }
-        });
-        jPEmployeeMainCenterContent3.add(jBEmployeeGetAll);
-
-        jPEmployeeMainCenter.add(jPEmployeeMainCenterContent3);
-
-        jPEmployeeMain.add(jPEmployeeMainCenter, java.awt.BorderLayout.CENTER);
-
-        jTEmployee.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Employee ID", "First Name", "Last Name", "Email", "Phone Number", "Hire Date", "Job ID", "Salary", "Commission Pct", "Manager ID", "Department ID"
-            }
-        ));
-        jSPEmployee.setViewportView(jTEmployee);
-
-        javax.swing.GroupLayout jPEmployeeMainSouthLayout = new javax.swing.GroupLayout(jPEmployeeMainSouth);
-        jPEmployeeMainSouth.setLayout(jPEmployeeMainSouthLayout);
-        jPEmployeeMainSouthLayout.setHorizontalGroup(
-            jPEmployeeMainSouthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSPEmployee, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
-        );
-        jPEmployeeMainSouthLayout.setVerticalGroup(
-            jPEmployeeMainSouthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPEmployeeMainSouthLayout.createSequentialGroup()
-                .addComponent(jSPEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        jPEmployeeMain.add(jPEmployeeMainSouth, java.awt.BorderLayout.PAGE_END);
-
-        javax.swing.GroupLayout jIFEmployeeLayout = new javax.swing.GroupLayout(jIFEmployee.getContentPane());
-        jIFEmployee.getContentPane().setLayout(jIFEmployeeLayout);
-        jIFEmployeeLayout.setHorizontalGroup(
-            jIFEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPEmployeeMain, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        jIFEmployeeLayout.setVerticalGroup(
-            jIFEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPEmployeeMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        jPanelMain.add(jIFEmployee);
-
-        jIFJob.setClosable(true);
-        jIFJob.setVisible(true);
-
-        tf_search.setText("Search");
-
-        jLabel1.setText("Job Id");
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setText("JOBS");
-
-        jLabel2.setText("Job Title");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
-
-        jLabel3.setText("Minimal Salary");
-
-        search.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Search", "Search By Id", "Show All" }));
-        search.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchActionPerformed(evt);
-            }
-        });
-
-        tf_minsal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_minsalActionPerformed(evt);
-            }
-        });
-        tf_minsal.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tf_minsalKeyTyped(evt);
-            }
-        });
-
-        jLabel4.setText("Maximal Salary");
-
-        tf_maxsal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_maxsalActionPerformed(evt);
-            }
-        });
-        tf_maxsal.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tf_maxsalKeyTyped(evt);
-            }
-        });
-
-        bt_insert.setText("Insert");
-        bt_insert.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_insertActionPerformed(evt);
-            }
-        });
-
-        bt_update.setText("Update");
-        bt_update.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_updateActionPerformed(evt);
-            }
-        });
-
-        bt_delete.setText("Delete");
-        bt_delete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_deleteActionPerformed(evt);
-            }
-        });
-
-        tf_id.setName(""); // NOI18N
-        tf_id.setOpaque(false);
-        tf_id.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_idActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jIFJobLayout = new javax.swing.GroupLayout(jIFJob.getContentPane());
-        jIFJob.getContentPane().setLayout(jIFJobLayout);
-        jIFJobLayout.setHorizontalGroup(
-            jIFJobLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jIFJobLayout.createSequentialGroup()
-                .addGroup(jIFJobLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jIFJobLayout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addGroup(jIFJobLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jIFJobLayout.createSequentialGroup()
-                                .addGroup(jIFJobLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel1))
-                                .addGap(34, 34, 34)
-                                .addGroup(jIFJobLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tf_id)
-                                    .addComponent(tf_title)
-                                    .addComponent(tf_minsal)
-                                    .addComponent(tf_maxsal, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
-                                .addGap(107, 107, 107)
-                                .addGroup(jIFJobLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jIFJobLayout.createSequentialGroup()
-                                .addComponent(bt_insert)
-                                .addGap(18, 18, 18)
-                                .addComponent(bt_update)
-                                .addGap(18, 18, 18)
-                                .addComponent(bt_delete))))
-                    .addGroup(jIFJobLayout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jIFJobLayout.createSequentialGroup()
-                        .addGap(268, 268, 268)
-                        .addComponent(jLabel5)))
-                .addContainerGap(62, Short.MAX_VALUE))
-        );
-        jIFJobLayout.setVerticalGroup(
-            jIFJobLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jIFJobLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel5)
-                .addGap(29, 29, 29)
-                .addGroup(jIFJobLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jIFJobLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(tf_title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jIFJobLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_minsal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jIFJobLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(tf_maxsal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jIFJobLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bt_insert)
-                    .addComponent(bt_update)
-                    .addComponent(bt_delete))
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
-        );
-
-        jPanelMain.add(jIFJob);
 
         jMenu1.setText("CRUD");
 
@@ -592,7 +122,7 @@ public class HRView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, 682, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -603,6 +133,7 @@ public class HRView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+
         EmployeeView ev = new EmployeeView();
         jPanelMain.add(ev);
         ev.setVisible(true);
@@ -610,58 +141,16 @@ public class HRView extends javax.swing.JFrame {
         ev.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         ev.revalidate();
 //        jPanel1.add(jInternalFrame1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jBEmployeeInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEmployeeInsertActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBEmployeeInsertActionPerformed
-
-    private void jBEmployeeUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEmployeeUpdateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBEmployeeUpdateActionPerformed
-
-    private void jTFEmployeeEmployeeIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFEmployeeEmployeeIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFEmployeeEmployeeIdActionPerformed
-
-    private void jCBEmployeeisGetByIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBEmployeeisGetByIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCBEmployeeisGetByIdActionPerformed
-
-    private void jBEmployeeGetAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEmployeeGetAllActionPerformed
-        DefaultTableModel tableModelEmployee = (DefaultTableModel) jTEmployee.getModel();
-        tableModelEmployee.setRowCount(0);
-        for (Employee value : ec.getAllData()) {
-            Object[] data = {value.getEmployeeId(), value.getFirst_name(),
-                value.getLast_name(), value.getEmail(), value.getPhone_number(),
-                value.getHire_date(), value.getJob_id(), value.getSalary(),
-                value.getCommission_pct(), value.getManager_id(), value.getDepartment_id()
-            };
-            tableModelEmployee.addRow(data);
-        }
-
-    }//GEN-LAST:event_jBEmployeeGetAllActionPerformed
-
-    private void jBEmployeeSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEmployeeSearchActionPerformed
-        DefaultTableModel tableModelEmployee = (DefaultTableModel) jTEmployee.getModel();
-        tableModelEmployee.setRowCount(0);
-        for (Employee value : ec.searchData(jTFEmployeeSearch.getText().toString(), jCBEmployeeisGetById.isSelected())) {
-            Object[] data = {value.getEmployeeId(), value.getFirst_name(),
-                value.getLast_name(), value.getEmail(), value.getPhone_number(),
-                value.getHire_date(), value.getJob_id(), value.getSalary(),
-                value.getCommission_pct(), value.getManager_id(), value.getDepartment_id()
-            };
-            tableModelEmployee.addRow(data);
-        }
-    }//GEN-LAST:event_jBEmployeeSearchActionPerformed
-
     private void jobsframeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jobsframeActionPerformed
-        // TODO add your handling code here:
-        jIFJob.setVisible(true);
-//        jIFEmployee.setBounds(5, 5, 200, 300);
-        jIFJob.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        jIFJob.revalidate();
+       JobView n = new JobView();
+       jPanelMain.add(n);
+       n.setVisible(true);
+       
     }//GEN-LAST:event_jobsframeActionPerformed
+
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         // TODO add your handling code here:
@@ -681,8 +170,8 @@ public class HRView extends javax.swing.JFrame {
 //                    job.getMax_salary()
 //                });
 //            }
-            tableData(jc.getById(t_search));
-        } else if (t_search != "" && search.getSelectedItem() == "Search") {
+//            tableData(jc.getById(t_search));
+//        } else if (t_search != "" && search.getSelectedItem() == "Search") {
 //            for (Job job : jc.searchBy(t_search)) {
 //                myTable.addRow(new Object[]{
 //                    job.getId(),
@@ -691,9 +180,9 @@ public class HRView extends javax.swing.JFrame {
 //                    job.getMax_salary()
 //                });
 //            }
-            tableData(jc.searchBy(t_search));
-        } else {
-            tableData(jc.getAll());
+//            tableData(jc.searchBy(t_search));
+//        } else {
+//            tableData(jc.getAll());
         }
     }//GEN-LAST:event_searchActionPerformed
 
@@ -712,26 +201,26 @@ public class HRView extends javax.swing.JFrame {
 //        String title = tf_title.getText();
 //        String minsal = tf_minsal.getText();
 //        String maxsal = tf_maxsal.getText();
-        if (konfirmasi()) {
-            if (isEmpty()) {
-                JOptionPane.showMessageDialog(null, jc.insert(tf_id.getText(), tf_title.getText(), tf_minsal.getText(), tf_maxsal.getText()));
-            } else {
-                try {
-                    int reply = JOptionPane.showConfirmDialog(null,
-                            "Anda yakin akan melakukan perubahan data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
-                    );
-                    if (reply == JOptionPane.YES_OPTION) {
-                        JOptionPane.showMessageDialog(null, jc.update(tf_id.getText(), tf_title.getText(), tf_minsal.getText(), tf_maxsal.getText()));
-                        clean();
-                        tableData(jc.getAll());
-                    }
-                } catch (Exception e) {
-                   e.printStackTrace();//dispose();
-                }
-            }
-            clean();
-            tableData(jc.getAll());
-        }
+//        if (konfirmasi()) {
+//            if (isEmpty()) {
+//                JOptionPane.showMessageDialog(null, jc.insert(tf_id.getText(), tf_title.getText(), tf_minsal.getText(), tf_maxsal.getText()));
+//            } else {
+//                try {
+//                    int reply = JOptionPane.showConfirmDialog(null,
+//                            "Anda yakin akan melakukan perubahan data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
+//                    );
+//                    if (reply == JOptionPane.YES_OPTION) {
+//                        JOptionPane.showMessageDialog(null, jc.update(tf_id.getText(), tf_title.getText(), tf_minsal.getText(), tf_maxsal.getText()));
+//                        clean();
+//                        tableData(jc.getAll());
+//                    }
+//                } catch (Exception e) {
+//                   e.printStackTrace();//dispose();
+//                }
+//            }
+//            clean();
+//            tableData(jc.getAll());
+//        }
     }//GEN-LAST:event_bt_insertActionPerformed
 
     private void bt_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_updateActionPerformed
@@ -741,42 +230,42 @@ public class HRView extends javax.swing.JFrame {
 //        String minsal = tf_minsal.getText();
 //        String maxsal = tf_maxsal.getText();
 
-        if (konfirmasi()) {
-            try {
-                int reply = JOptionPane.showConfirmDialog(null,
-                        "Anda yakin akan melakukan perubahan data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
-                );
-                if (reply == JOptionPane.YES_OPTION) {
-                    JOptionPane.showMessageDialog(null, jc.update(tf_id.getText(), tf_title.getText(), tf_minsal.getText(), tf_maxsal.getText()));
-                    clean();
-                    tableData(jc.getAll());
-                }
-            } catch (Exception e) {
-                dispose();
-            }
-        }
+//        if (konfirmasi()) {
+//            try {
+//                int reply = JOptionPane.showConfirmDialog(null,
+//                        "Anda yakin akan melakukan perubahan data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
+//                );
+//                if (reply == JOptionPane.YES_OPTION) {
+//                    JOptionPane.showMessageDialog(null, jc.update(tf_id.getText(), tf_title.getText(), tf_minsal.getText(), tf_maxsal.getText()));
+//                    clean();
+//                    tableData(jc.getAll());
+//                }
+//            } catch (Exception e) {
+//                dispose();
+//            }
+//        }
 
     }//GEN-LAST:event_bt_updateActionPerformed
 
     private void bt_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_deleteActionPerformed
         // TODO add your handling code here:
-        String id = tf_id.getText();
-        if (id.equals("")) {
-            JOptionPane.showMessageDialog(null, "Data tidak boleh kosong");
-        } else {
-            try {
-                int reply = JOptionPane.showConfirmDialog(null,
-                        "Anda yakin akan menghapus data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
-                );
-                if (reply == JOptionPane.YES_OPTION) {
-                    JOptionPane.showMessageDialog(null, jc.delete(id));
-                    clean();
-                }
-            } catch (Exception e) {
-                dispose();
-            }
-        }
-        tableData(jc.getAll());
+//        String id = tf_id.getText();
+//        if (id.equals("")) {
+//            JOptionPane.showMessageDialog(null, "Data tidak boleh kosong");
+//        } else {
+//            try {
+//                int reply = JOptionPane.showConfirmDialog(null,
+//                        "Anda yakin akan menghapus data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
+//                );
+//                if (reply == JOptionPane.YES_OPTION) {
+//                    JOptionPane.showMessageDialog(null, jc.delete(id));
+//                    clean();
+//                }
+//            } catch (Exception e) {
+//                dispose();
+//            }
+//        }
+//        tableData(jc.getAll());
     }//GEN-LAST:event_bt_deleteActionPerformed
 
     private void tf_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_idActionPerformed
@@ -785,23 +274,23 @@ public class HRView extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-        tf_id.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
-        tf_title.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
-        tf_minsal.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
-        tf_maxsal.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
-
-        tf_id.setEnabled(false);
+//        tf_id.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
+//        tf_title.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
+//        tf_minsal.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
+//        tf_maxsal.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
+//
+//        tf_id.setEnabled(false);
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void tf_minsalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_minsalKeyTyped
         // TODO add your handling code here:
-        filterhuruf(evt);
+//        filterhuruf(evt);
 
     }//GEN-LAST:event_tf_minsalKeyTyped
 
     private void tf_maxsalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_maxsalKeyTyped
         // TODO add your handling code here:
-        filterhuruf(evt);
+//        filterhuruf(evt);
     }//GEN-LAST:event_tf_maxsalKeyTyped
 
     private void regionMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regionMenuItemActionPerformed
@@ -867,6 +356,11 @@ public class HRView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+<<<<<<< HEAD
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+=======
     private javax.swing.JButton bt_delete;
     private javax.swing.JButton bt_insert;
     private javax.swing.JButton bt_update;
@@ -909,27 +403,11 @@ public class HRView extends javax.swing.JFrame {
     private javax.swing.JPanel jPEmployeeMainNorth;
     private javax.swing.JPanel jPEmployeeMainSouth;
     private javax.swing.JPanel jPEmployeeMainWest;
+>>>>>>> ea129e10be4bfd331d40b201dc6027ce55874c7e
     private javax.swing.JPanel jPanelMain;
-    private javax.swing.JSeparator jSEmployees1;
-    private javax.swing.JSeparator jSEmployees2;
-    private javax.swing.JSeparator jSEmployees3;
-    private javax.swing.JScrollPane jSPEmployee;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTEmployee;
-    private javax.swing.JTextField jTFEmployeeCommissionPct;
-    private javax.swing.JTextField jTFEmployeeDepartmentId;
-    private javax.swing.JTextField jTFEmployeeEmail;
-    private javax.swing.JTextField jTFEmployeeEmployeeId;
-    private javax.swing.JTextField jTFEmployeeFirstName;
-    private javax.swing.JTextField jTFEmployeeHireDate;
-    private javax.swing.JTextField jTFEmployeeJobId;
-    private javax.swing.JTextField jTFEmployeeLastName;
-    private javax.swing.JTextField jTFEmployeeManagerId;
-    private javax.swing.JTextField jTFEmployeePhoneNumber;
-    private javax.swing.JTextField jTFEmployeeSalary;
-    private javax.swing.JTextField jTFEmployeeSearch;
-    private javax.swing.JTable jTable1;
     private javax.swing.JMenuItem jobsframe;
+<<<<<<< HEAD
+=======
     private javax.swing.JMenuItem locationMenu;
     private javax.swing.JMenuItem regionMenuItem;
     private javax.swing.JComboBox<String> search;
@@ -938,5 +416,6 @@ public class HRView extends javax.swing.JFrame {
     private javax.swing.JTextField tf_minsal;
     private javax.swing.JTextField tf_search;
     private javax.swing.JTextField tf_title;
+>>>>>>> ea129e10be4bfd331d40b201dc6027ce55874c7e
     // End of variables declaration//GEN-END:variables
 }

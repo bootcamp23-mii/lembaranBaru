@@ -5,6 +5,19 @@
  */
 package views;
 
+import controllers.EmployeeController;
+import models.Employee;
+import tools.DBConnection;
+import controllers.JobController;
+import daos.JobDAO;
+import java.awt.Component;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import models.Job;
 import controllers.JobController;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -16,20 +29,32 @@ import tools.DBConnection;
  *
  * @author Lusiana
  */
-public class Job extends javax.swing.JInternalFrame {
+public class JobView extends javax.swing.JInternalFrame {
 
-    DefaultTableModel myTable = new DefaultTableModel();
     DBConnection connection = new DBConnection();
 
+    EmployeeController ec = new EmployeeController(connection.getConnection());
+
+//    JobDAO rdao = new JobDAO(connection.getConnection());
     JobController jc = new JobController(connection.getConnection());
+    DefaultTableModel myTable = new DefaultTableModel();
+//    List<Job> jobs = new ArrayList<Job>();
 
     /**
      * Creates new form Job
      */
-    public Job() {
-        initComponents();
-    }
 
+    /**
+     * Creates new form Job
+     */
+    
+    
+    public JobView() {
+        initComponents();
+        tableData(jc.getAll());
+    }
+    
+    
     private boolean konfirmasi() {
         if (tf_id.getText().equals("") || tf_title.getText().equals("") || tf_minsal.getText().equals("") || tf_maxsal.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Data tidak boleh kosong");
@@ -45,7 +70,7 @@ public class Job extends javax.swing.JInternalFrame {
         return false;
     }
 
-    private void tableData(List<models.Job> jobs) {
+    private void tableData(List<Job> jobs) {
 //        jobs = jc.getAll();
         Object[] columnNames = {"Nomor", "Job Id", "Job Title", "Minimal Salary", "Maximal Salary"};
         Object[][] data = new Object[jobs.size()][columnNames.length];
@@ -74,6 +99,7 @@ public class Job extends javax.swing.JInternalFrame {
         jTable1.setModel(myTable);
     }
 
+
     private void clean() {
         tf_id.setEnabled(true);
         tf_id.setText("");
@@ -88,6 +114,7 @@ public class Job extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Pada Kolom Jumlah Hanya Bisa Memasukan Karakter Angka");
         }
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -114,6 +141,11 @@ public class Job extends javax.swing.JInternalFrame {
         bt_update = new javax.swing.JButton();
         bt_delete = new javax.swing.JButton();
         tf_id = new javax.swing.JTextField();
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
 
         tf_search.setText("Search");
 
