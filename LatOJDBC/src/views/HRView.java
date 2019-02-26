@@ -14,6 +14,7 @@ import java.awt.Component;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -178,6 +179,10 @@ public class HRView extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jobsframe = new javax.swing.JMenuItem();
+        regionMenuItem = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        deptMenuItem = new javax.swing.JMenuItem();
+        locationMenu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -547,6 +552,38 @@ public class HRView extends javax.swing.JFrame {
         });
         jMenu1.add(jobsframe);
 
+        regionMenuItem.setText("Regions");
+        regionMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regionMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(regionMenuItem);
+
+        jMenuItem2.setText("Countries");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
+        deptMenuItem.setText("Department");
+        deptMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deptMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(deptMenuItem);
+
+        locationMenu.setText("Location");
+        locationMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                locationMenuActionPerformed(evt);
+            }
+        });
+        jMenu1.add(locationMenu);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -566,10 +603,12 @@ public class HRView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        jIFEmployee.setVisible(true);
+        EmployeeView ev = new EmployeeView();
+        jPanelMain.add(ev);
+        ev.setVisible(true);
 //        jIFEmployee.setBounds(5, 5, 200, 300);
-        jIFEmployee.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        jIFEmployee.revalidate();
+        ev.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        ev.revalidate();
 //        jPanel1.add(jInternalFrame1, javax.swing.JLayeredPane.DEFAULT_LAYER);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -765,6 +804,34 @@ public class HRView extends javax.swing.JFrame {
         filterhuruf(evt);
     }//GEN-LAST:event_tf_maxsalKeyTyped
 
+    private void regionMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regionMenuItemActionPerformed
+        // TODO add your handling code here:
+        RegionView rv = new RegionView();
+        jPanelMain.add(rv);
+        rv.setVisible(true);
+    }//GEN-LAST:event_regionMenuItemActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        CountryView cv = new CountryView();
+        jPanelMain.add(cv);
+        cv.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void locationMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locationMenuActionPerformed
+        // TODO add your handling code here:
+        LocationView lv = new LocationView();
+        jPanelMain.add(lv);
+        lv.setVisible(true);
+    }//GEN-LAST:event_locationMenuActionPerformed
+
+    private void deptMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deptMenuItemActionPerformed
+        // TODO add your handling code here:
+                deptMenuItem.setVisible(true);
+//        jIFEmployee.setBounds(5, 5, 200, 300);
+        jIFJob.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        jIFJob.revalidate();
+    }//GEN-LAST:event_deptMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -805,6 +872,7 @@ public class HRView extends javax.swing.JFrame {
     private javax.swing.JButton bt_delete;
     private javax.swing.JButton bt_insert;
     private javax.swing.JButton bt_update;
+    private javax.swing.JMenuItem deptMenuItem;
     private javax.swing.JButton jBEmployeeDelete;
     private javax.swing.JButton jBEmployeeGetAll;
     private javax.swing.JButton jBEmployeeInsert;
@@ -834,6 +902,7 @@ public class HRView extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPEmployeeMain;
     private javax.swing.JPanel jPEmployeeMainCenter;
     private javax.swing.JPanel jPEmployeeMainCenterContent1;
@@ -863,6 +932,8 @@ public class HRView extends javax.swing.JFrame {
     private javax.swing.JTextField jTFEmployeeSearch;
     private javax.swing.JTable jTable1;
     private javax.swing.JMenuItem jobsframe;
+    private javax.swing.JMenuItem locationMenu;
+    private javax.swing.JMenuItem regionMenuItem;
     private javax.swing.JComboBox<String> search;
     private javax.swing.JTextField tf_id;
     private javax.swing.JTextField tf_maxsal;

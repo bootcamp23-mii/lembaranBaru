@@ -43,7 +43,7 @@ public class CountryDAO {
             PreparedStatement prepareStatment = connection.prepareStatement(query);
             ResultSet resultSet = prepareStatment.executeQuery();
             while (resultSet.next()) {
-                listCountry.add(new Country(resultSet.getString(1), resultSet.getString(2)));
+                listCountry.add(new Country(resultSet.getString(1), resultSet.getString(2), resultSet.getInt(3)));
             }
         } catch (Exception e) {
             e.printStackTrace();
