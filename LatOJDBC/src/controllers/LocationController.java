@@ -46,23 +46,13 @@ public class LocationController {
         }
         return result;
     }
-//
-//    public List<Location> getAll(String keyword, boolean con) {
-//        List result;
-//        result = ldao.getData(keyword, con);
-//        return result;
-//    }
 
     public List<Location> getAll(String keyword) {
-        List result;
-        result = ldao.getData(keyword, false);
-        return result;
+        return ldao.getData(keyword, false);
     }
 
     public List<Location> getById(String keyword) {
-        List result;
-        result = ldao.getData(keyword, false);
-        return result;
+        return ldao.getData(keyword, true);
     }
 
     public String delete(String id) {
