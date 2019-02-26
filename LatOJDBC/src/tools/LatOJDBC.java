@@ -2,6 +2,7 @@
 
 
 import controllers.EmployeeController;
+import controllers.UserController;
 import daos.DepartmentDAO;
 import daos.RegionDAO;
 import models.Region;
@@ -21,6 +22,7 @@ public class LatOJDBC {
         //System.out.println(connection.getConnection());
         DepartmentDAO ddao= new DepartmentDAO(connection.getConnection());
         RegionDAO rdao = new RegionDAO(connection.getConnection());
+        UserController uc = new UserController(connection.getConnection());
         //dengan constructor
         Region r= new Region();
         //tanpa constructor
@@ -38,8 +40,8 @@ public class LatOJDBC {
 //            System.out.println("Name    : " + region.getName());
 //        }
         EmployeeController ec = new EmployeeController(connection.getConnection());
-        System.out.println(ec.delete("210"));
-        
+//        System.out.println(ec.delete("210"));
+        System.out.println(uc.login("admin", "admin"));
     }
 }
 

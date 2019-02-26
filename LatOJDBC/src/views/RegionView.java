@@ -23,38 +23,27 @@ public class RegionView extends javax.swing.JInternalFrame {
 
     List<Region> listdata = new ArrayList<Region>();
     int x = 0;
-    DefaultTableModel model = new DefaultTableModel();;
+    DefaultTableModel model = new DefaultTableModel();
     DBConnection connection = new DBConnection();
     RegionController rc = new RegionController(connection.getConnection());
 
-    /**
-     * Creates new form Region
-     */
     public RegionView() {
         initComponents();
         TampilData(rc.getAllData());
     }
 
-
     private void TampilData(List<Region> listdata) {
-        Object[] columnNames ={"No","Id","Nama"};
+        Object[] columnNames = {"No", "Id", "Nama"};
         Object[][] data = new Object[listdata.size()][columnNames.length];
-//        for (Region region : rc.getById("",false)) {
-//            Object[] data = new Object[2];
-//            data [0]= region.getId();
-//            data [1]= region.getId();
-//            model.addColumn(data);
-//            System.out.println(data);
-//        }
         for (int i = 0; i < data.length; i++) {
             data[i][0] = (i + 1);
             data[i][1] = listdata.get(i).getId();
             data[i][2] = listdata.get(i).getName();
         }
-        model = new DefaultTableModel(data,columnNames);
+        model = new DefaultTableModel(data, columnNames);
         jTable2.setModel(model);
     }
-    
+
     private boolean konfirmasi() {
         if (idTextField.getText().equals("") || namaTextField.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Data tidak boleh kosong");
@@ -63,19 +52,26 @@ public class RegionView extends javax.swing.JInternalFrame {
         return true;
     }
 
-    
     private boolean isEmpty() {
-        if (rc.getById(idTextField.getText()).isEmpty()) {
+        if (rc.getById(idTextField.getText()).equals("")) {
             return true;
         }
         return false;
     }
 
-    void filterhuruf(KeyEvent a) {
+    private void filterhuruf(KeyEvent a) {
         if (Character.isAlphabetic(a.getKeyChar())) {
             a.consume();
-            JOptionPane.showMessageDialog(null,"Hanya Bisa Memasukan Karakter Angka");
+            JOptionPane.showMessageDialog(null, "Hanya Bisa Memasukan Karakter Angka");
         }
+    }
+
+    private void clearing() {
+        idTextField.setEnabled(true);
+        idTextField.setText("");
+        namaTextField.setText("");
+        searchTextField.setText("");
+        jCheckBox1.setSelected(false);
     }
 
     /**
@@ -273,15 +269,11 @@ public class RegionView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bClearActionPerformed
-        // TODO add your handling code here:
-        idTextField.setEnabled(true);
-        idTextField.setText("");
-        namaTextField.setText("");
+        clearing();
         TampilData(rc.getAllData());
     }//GEN-LAST:event_bClearActionPerformed
 
     private void bInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bInsertActionPerformed
-        // TODO add your handling code here:
         if (konfirmasi()) {
             if (isEmpty()) {
                 JOptionPane.showMessageDialog(null, rc.insert(idTextField.getText(), namaTextField.getText()));
@@ -292,11 +284,10 @@ public class RegionView extends javax.swing.JInternalFrame {
                     );
                     if (reply == JOptionPane.YES_OPTION) {
                         JOptionPane.showMessageDialog(null, rc.update(idTextField.getText(), namaTextField.getText()));
-                        
                         TampilData(rc.getAllData());
                     }
                 } catch (Exception e) {
-                   e.printStackTrace();//dispose();
+                    e.printStackTrace();
                 }
             }
             TampilData(rc.getAllData());
@@ -304,19 +295,14 @@ public class RegionView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bInsertActionPerformed
 
     private void bDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeleteActionPerformed
-        // TODO add your handling code here:
-        int row = jTable2.getSelectedRow();
-        String idhapus = jTable2.getValueAt(row, 1).toString();
         int confirm = JOptionPane.showConfirmDialog(null, "Anda Yakin?", "", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
-            rc.delete(idhapus);
+            rc.delete(idTextField.getText().toString());
             TampilData(rc.getAllData());
         }
-
     }//GEN-LAST:event_bDeleteActionPerformed
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
-        // TODO add your handling code here:
         if (jTable2.getSelectedColumnCount() == 1) {
             bDelete.setEnabled(true);
             int row = jTable2.getSelectedRow();
@@ -332,15 +318,18 @@ public class RegionView extends javax.swing.JInternalFrame {
 
     private void bSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSearchActionPerformed
         // TODO add your handling code here:
-        String key = searchTextField.getText().toString().trim();
+        String key = searchTextField.getText().toString();
         boolean cb = jCheckBox1.isSelected();
         if (!cb) {
-            
+
             TampilData(rc.searchBy(key));
         } else {
-            
-            TampilData(rc.getById(key));
+            Region tampungan = rc.getById(key);
+            idTextField.setText(tampungan.getId() + "");
+            namaTextField.setText(tampungan.getName());
         }
+        bDelete.setEnabled(true);
+        idTextField.setEnabled(false);
     }//GEN-LAST:event_bSearchActionPerformed
 
     private void idTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idTextFieldKeyTyped
