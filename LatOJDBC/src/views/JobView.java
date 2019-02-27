@@ -56,7 +56,7 @@ public class JobView extends javax.swing.JInternalFrame {
     
     
     private boolean konfirmasi() {
-        if (tf_id.getText().equals("") || tf_title.getText().equals("") || tf_minsal.getText().equals("") || tf_maxsal.getText().equals("")) {
+        if (tfId.getText().equals("") || tfTitle.getText().equals("") || tfMinsal.getText().equals("") || tfMaxsal.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Data tidak boleh kosong");
             return false;
         }
@@ -64,7 +64,7 @@ public class JobView extends javax.swing.JInternalFrame {
     }
 
     private boolean isEmpty() {
-        if (jc.getById(tf_id.getText()).isEmpty()) {
+        if (jc.getById(tfId.getText()).isEmpty()) {
             return true;
         }
         return false;
@@ -96,16 +96,16 @@ public class JobView extends javax.swing.JInternalFrame {
             data[i][4] = jobs.get(i).getMax_salary();
         }
         myTable = new DefaultTableModel(data, columnNames);
-        jTable1.setModel(myTable);
+        tbShow.setModel(myTable);
     }
 
 
     private void clean() {
-        tf_id.setEnabled(true);
-        tf_id.setText("");
-        tf_title.setText("");
-        tf_minsal.setText("");
-        tf_maxsal.setText("");
+        tfId.setEnabled(true);
+        tfId.setText("");
+        tfTitle.setText("");
+        tfMinsal.setText("");
+        tfMaxsal.setText("");
     }
 
     void filterhuruf(KeyEvent a) {
@@ -126,21 +126,20 @@ public class JobView extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         tf_search = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblId = new javax.swing.JLabel();
+        lblFormtitle = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        tf_title = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        search = new javax.swing.JComboBox<>();
-        tf_minsal = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        tf_maxsal = new javax.swing.JTextField();
-        bt_insert = new javax.swing.JButton();
-        bt_update = new javax.swing.JButton();
-        bt_delete = new javax.swing.JButton();
-        tf_id = new javax.swing.JTextField();
+        tbShow = new javax.swing.JTable();
+        tfTitle = new javax.swing.JTextField();
+        lblMinsal = new javax.swing.JLabel();
+        cbSearch = new javax.swing.JComboBox<>();
+        tfMinsal = new javax.swing.JTextField();
+        lblMaxsal = new javax.swing.JLabel();
+        tfMaxsal = new javax.swing.JTextField();
+        btInsert = new javax.swing.JButton();
+        btDelete = new javax.swing.JButton();
+        tfId = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -149,14 +148,14 @@ public class JobView extends javax.swing.JInternalFrame {
 
         tf_search.setText("Search");
 
-        jLabel1.setText("Job Id");
+        lblId.setText("Job Id");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setText("JOBS");
+        lblFormtitle.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblFormtitle.setText("JOBS");
 
-        jLabel2.setText("Job Title");
+        lblTitle.setText("Job Title");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbShow.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -167,78 +166,71 @@ public class JobView extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbShow.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                tbShowMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbShow);
 
-        tf_title.addActionListener(new java.awt.event.ActionListener() {
+        tfTitle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_titleActionPerformed(evt);
+                tfTitleActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("Minimal Salary");
+        lblMinsal.setText("Minimum Salary");
 
-        search.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Search", "Search By Id", "Show All" }));
-        search.addActionListener(new java.awt.event.ActionListener() {
+        cbSearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Search", "Search By Id", "Show All" }));
+        cbSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchActionPerformed(evt);
+                cbSearchActionPerformed(evt);
             }
         });
 
-        tf_minsal.addActionListener(new java.awt.event.ActionListener() {
+        tfMinsal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_minsalActionPerformed(evt);
+                tfMinsalActionPerformed(evt);
             }
         });
-        tf_minsal.addKeyListener(new java.awt.event.KeyAdapter() {
+        tfMinsal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                tf_minsalKeyTyped(evt);
+                tfMinsalKeyTyped(evt);
             }
         });
 
-        jLabel4.setText("Maximal Salary");
+        lblMaxsal.setText("Maximum Salary");
 
-        tf_maxsal.addActionListener(new java.awt.event.ActionListener() {
+        tfMaxsal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_maxsalActionPerformed(evt);
+                tfMaxsalActionPerformed(evt);
             }
         });
-        tf_maxsal.addKeyListener(new java.awt.event.KeyAdapter() {
+        tfMaxsal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                tf_maxsalKeyTyped(evt);
+                tfMaxsalKeyTyped(evt);
             }
         });
 
-        bt_insert.setText("Insert");
-        bt_insert.addActionListener(new java.awt.event.ActionListener() {
+        btInsert.setText("Insert");
+        btInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_insertActionPerformed(evt);
+                btInsertActionPerformed(evt);
             }
         });
 
-        bt_update.setText("Update");
-        bt_update.addActionListener(new java.awt.event.ActionListener() {
+        btDelete.setText("Delete");
+        btDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_updateActionPerformed(evt);
+                btDeleteActionPerformed(evt);
             }
         });
 
-        bt_delete.setText("Delete");
-        bt_delete.addActionListener(new java.awt.event.ActionListener() {
+        tfId.setName(""); // NOI18N
+        tfId.setOpaque(false);
+        tfId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_deleteActionPerformed(evt);
-            }
-        });
-
-        tf_id.setName(""); // NOI18N
-        tf_id.setOpaque(false);
-        tf_id.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_idActionPerformed(evt);
+                tfIdActionPerformed(evt);
             }
         });
 
@@ -247,87 +239,86 @@ public class JobView extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btInsert)
+                                .addGap(18, 18, 18)
+                                .addComponent(btDelete)
+                                .addGap(144, 144, 144))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(70, 70, 70)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel1))
+                                    .addComponent(lblMaxsal)
+                                    .addComponent(lblTitle)
+                                    .addComponent(lblMinsal)
+                                    .addComponent(lblId))
                                 .addGap(34, 34, 34)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tf_id)
-                                    .addComponent(tf_title)
-                                    .addComponent(tf_minsal)
-                                    .addComponent(tf_maxsal, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
-                                .addGap(107, 107, 107)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(bt_insert)
-                                .addGap(18, 18, 18)
-                                .addComponent(bt_update)
-                                .addGap(18, 18, 18)
-                                .addComponent(bt_delete))))
+                                    .addComponent(tfId)
+                                    .addComponent(tfTitle)
+                                    .addComponent(tfMinsal)
+                                    .addComponent(tfMaxsal, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
+                                .addGap(107, 107, 107)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(56, 56, 56)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(268, 268, 268)
-                        .addComponent(jLabel5)))
+                        .addComponent(lblFormtitle)))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jLabel5)
+                .addComponent(lblFormtitle)
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
+                    .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblId)
                     .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(tf_title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblTitle)
+                    .addComponent(tfTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_minsal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(tfMinsal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMinsal))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(tf_maxsal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblMaxsal)
+                    .addComponent(tfMaxsal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bt_insert)
-                    .addComponent(bt_update)
-                    .addComponent(bt_delete))
+                    .addComponent(btInsert)
+                    .addComponent(btDelete))
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    private void tbShowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbShowMouseClicked
         // TODO add your handling code here:
-        tf_id.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
-        tf_title.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
-        tf_minsal.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
-        tf_maxsal.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
+        tfId.setText(tbShow.getValueAt(tbShow.getSelectedRow(), 1).toString());
+        tfTitle.setText(tbShow.getValueAt(tbShow.getSelectedRow(), 2).toString());
+        tfMinsal.setText(tbShow.getValueAt(tbShow.getSelectedRow(), 3).toString());
+        tfMaxsal.setText(tbShow.getValueAt(tbShow.getSelectedRow(), 4).toString());
 
-        tf_id.setEnabled(false);
-    }//GEN-LAST:event_jTable1MouseClicked
+        tfId.setEnabled(false);
+    }//GEN-LAST:event_tbShowMouseClicked
 
-    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+    private void cbSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSearchActionPerformed
         // TODO add your handling code here:
         String t_search = tf_search.getText();
         //        DefaultTableModel myTable = new DefaultTableModel();
@@ -336,7 +327,7 @@ public class JobView extends javax.swing.JInternalFrame {
         //        myTable.addColumn("Job Title");
         //        myTable.addColumn("Minimal Salary");
         //        myTable.addColumn("Maximal Salary");
-        if (t_search != "" && search.getSelectedItem() == "Search By Id") {
+        if (t_search != "" && cbSearch.getSelectedItem() == "Search By Id") {
             //            for (Job job : jc.getById(t_search)) {
             //                myTable.addRow(new Object[]{
             //                    job.getId(),
@@ -346,7 +337,7 @@ public class JobView extends javax.swing.JInternalFrame {
             //                });
             //            }
             tableData(jc.getById(t_search));
-        } else if (t_search != "" && search.getSelectedItem() == "Search") {
+        } else if (t_search != "" && cbSearch.getSelectedItem() == "Search") {
             //            for (Job job : jc.searchBy(t_search)) {
             //                myTable.addRow(new Object[]{
             //                    job.getId(),
@@ -359,27 +350,27 @@ public class JobView extends javax.swing.JInternalFrame {
         } else {
             tableData(jc.getAll());
         }
-    }//GEN-LAST:event_searchActionPerformed
+    }//GEN-LAST:event_cbSearchActionPerformed
 
-    private void tf_minsalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_minsalActionPerformed
+    private void tfMinsalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfMinsalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf_minsalActionPerformed
+    }//GEN-LAST:event_tfMinsalActionPerformed
 
-    private void tf_minsalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_minsalKeyTyped
-        // TODO add your handling code here:
-        filterhuruf(evt);
-    }//GEN-LAST:event_tf_minsalKeyTyped
-
-    private void tf_maxsalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_maxsalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_maxsalActionPerformed
-
-    private void tf_maxsalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_maxsalKeyTyped
+    private void tfMinsalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfMinsalKeyTyped
         // TODO add your handling code here:
         filterhuruf(evt);
-    }//GEN-LAST:event_tf_maxsalKeyTyped
+    }//GEN-LAST:event_tfMinsalKeyTyped
 
-    private void bt_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_insertActionPerformed
+    private void tfMaxsalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfMaxsalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfMaxsalActionPerformed
+
+    private void tfMaxsalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfMaxsalKeyTyped
+        // TODO add your handling code here:
+        filterhuruf(evt);
+    }//GEN-LAST:event_tfMaxsalKeyTyped
+
+    private void btInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInsertActionPerformed
         // TODO add your handling code here:
 
         //        String id = tf_id.getText();
@@ -388,14 +379,14 @@ public class JobView extends javax.swing.JInternalFrame {
         //        String maxsal = tf_maxsal.getText();
         if (konfirmasi()) {
             if (isEmpty()) {
-                JOptionPane.showMessageDialog(null, jc.insert(tf_id.getText(), tf_title.getText(), tf_minsal.getText(), tf_maxsal.getText()));
+                JOptionPane.showMessageDialog(null, jc.insert(tfId.getText(), tfTitle.getText(), tfMinsal.getText(), tfMaxsal.getText()));
             } else {
                 try {
                     int reply = JOptionPane.showConfirmDialog(null,
                             "Anda yakin akan melakukan perubahan data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
                     );
                     if (reply == JOptionPane.YES_OPTION) {
-                        JOptionPane.showMessageDialog(null, jc.update(tf_id.getText(), tf_title.getText(), tf_minsal.getText(), tf_maxsal.getText()));
+                        JOptionPane.showMessageDialog(null, jc.update(tfId.getText(), tfTitle.getText(), tfMinsal.getText(), tfMaxsal.getText()));
                         clean();
                         tableData(jc.getAll());
                     }
@@ -406,34 +397,11 @@ public class JobView extends javax.swing.JInternalFrame {
             clean();
             tableData(jc.getAll());
         }
-    }//GEN-LAST:event_bt_insertActionPerformed
+    }//GEN-LAST:event_btInsertActionPerformed
 
-    private void bt_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_updateActionPerformed
+    private void btDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteActionPerformed
         // TODO add your handling code here:
-        //        String id = tf_id.getText();
-        //        String title = tf_title.getText();
-        //        String minsal = tf_minsal.getText();
-        //        String maxsal = tf_maxsal.getText();
-
-        if (konfirmasi()) {
-            try {
-                int reply = JOptionPane.showConfirmDialog(null,
-                        "Anda yakin akan melakukan perubahan data?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
-                );
-                if (reply == JOptionPane.YES_OPTION) {
-                    JOptionPane.showMessageDialog(null, jc.update(tf_id.getText(), tf_title.getText(), tf_minsal.getText(), tf_maxsal.getText()));
-                    clean();
-                    tableData(jc.getAll());
-                }
-            } catch (Exception e) {
-                dispose();
-            }
-        }
-    }//GEN-LAST:event_bt_updateActionPerformed
-
-    private void bt_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_deleteActionPerformed
-        // TODO add your handling code here:
-        String id = tf_id.getText();
+        String id = tfId.getText();
         if (id.equals("")) {
             JOptionPane.showMessageDialog(null, "Data tidak boleh kosong");
         } else {
@@ -450,33 +418,32 @@ public class JobView extends javax.swing.JInternalFrame {
             }
         }
         tableData(jc.getAll());
-    }//GEN-LAST:event_bt_deleteActionPerformed
+    }//GEN-LAST:event_btDeleteActionPerformed
 
-    private void tf_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_idActionPerformed
+    private void tfIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf_idActionPerformed
+    }//GEN-LAST:event_tfIdActionPerformed
 
-    private void tf_titleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_titleActionPerformed
+    private void tfTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTitleActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf_titleActionPerformed
+    }//GEN-LAST:event_tfTitleActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bt_delete;
-    private javax.swing.JButton bt_insert;
-    private javax.swing.JButton bt_update;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JButton btDelete;
+    private javax.swing.JButton btInsert;
+    private javax.swing.JComboBox<String> cbSearch;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JComboBox<String> search;
-    private javax.swing.JTextField tf_id;
-    private javax.swing.JTextField tf_maxsal;
-    private javax.swing.JTextField tf_minsal;
+    private javax.swing.JLabel lblFormtitle;
+    private javax.swing.JLabel lblId;
+    private javax.swing.JLabel lblMaxsal;
+    private javax.swing.JLabel lblMinsal;
+    private javax.swing.JLabel lblTitle;
+    private javax.swing.JTable tbShow;
+    private javax.swing.JTextField tfId;
+    private javax.swing.JTextField tfMaxsal;
+    private javax.swing.JTextField tfMinsal;
+    private javax.swing.JTextField tfTitle;
     private javax.swing.JTextField tf_search;
-    private javax.swing.JTextField tf_title;
     // End of variables declaration//GEN-END:variables
 }

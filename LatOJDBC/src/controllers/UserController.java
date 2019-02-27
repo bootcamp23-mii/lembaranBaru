@@ -32,4 +32,31 @@ public class UserController {
         return false;
     }
     
+    public List<User> getById(String key) {
+        List result;
+        result = udao.getData(key, true);
+        return result;
+    }
+    
+    
+//    public String insert(String id, String nama) {
+//        String result = "";
+//        if (rdao.save(new Region(Integer.parseInt(id), nama), true)){
+//            result = "Data berhasil disimpan";            
+//        }else{
+//            result = "Maaf data gagal disimpan";
+//        }
+//        return result;
+//    }
+    
+    public String register(String username, String password){
+        String result = "";
+        if (udao.insert(new User(username, password), true)){
+            result = "Registrasi Berhasil";            
+        }else{
+            result = "Maaf registrasi gagal";
+        }
+        return result;
+    }
+    
 }
