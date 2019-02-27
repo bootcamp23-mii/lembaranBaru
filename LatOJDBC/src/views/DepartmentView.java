@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import models.Department;
 import models.Employee;
 import tools.DBConnection;
 
@@ -50,7 +51,7 @@ public class DepartmentView extends javax.swing.JPanel {
     }
 
     private boolean isEmpty() {
-        if (dc.getById(tfDeptId.getText()).isEmpty()) {
+         if (dc.getById(tfDeptId.getText()).equals("")) {
             return true;
         }
         return false;
@@ -341,7 +342,13 @@ public class DepartmentView extends javax.swing.JPanel {
         // TODO add your handling code here:
         String cari = tfSearch.getText();
         if (cari != "" && comboSearch.getSelectedItem() == "Search By Id") {
-            tableData(dc.getById(cari));
+            //tableData(dc.getById(cari));
+            Department tampungan = dc.getById(cari);
+            tfDeptId.setText(tampungan.getId() + "");
+            tfDeptName.setText(tampungan.getName());
+            cbManagerId.setSelectedItem(tampungan.getManager_id());
+            
+            cbLocId.setSelectedItem(tampungan.getLocation_id());
         } else if (cari != "" && comboSearch.getSelectedItem() == "Search") {
             tableData(dc.seachBy(cari));
         } else {

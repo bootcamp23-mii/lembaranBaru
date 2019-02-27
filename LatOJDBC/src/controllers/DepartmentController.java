@@ -86,10 +86,8 @@ public class DepartmentController {
         return result;
     }
 
-    public List<Department> getById(String key) {
-        List result;
-        result = ddao.getData(key, true);
-        return result;
+    public Department getById(String key) {
+        return ddao.getData(key, true).get(0);
     }
 
     public List<Department> seachBy(String key) {
