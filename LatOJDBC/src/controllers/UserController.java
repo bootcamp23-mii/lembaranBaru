@@ -51,7 +51,7 @@ public class UserController {
     
     public String register(String username, String password){
         String result = "";
-        if (udao.insert(new User(username, password), true)){
+        if (udao.save(new User(username, password), true)){
             result = "Registrasi Berhasil";            
         }else{
             result = "Maaf registrasi gagal";
